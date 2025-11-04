@@ -84,7 +84,7 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 - [ ] Create landing page and onboarding forms
 - [x] Set up ci/cd
 - [x] Set up coderabbit for PR reviews and code quality
-- [ ] Set up typescript
+- [x] Set up typescript
 
 ## Frontend tasks
 

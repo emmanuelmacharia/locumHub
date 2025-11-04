@@ -3,7 +3,7 @@
         <p class="font-bold text-green-600 text-3xl"> Hello Vue
         </p>
         <div>
-            <UiButton variant="secondary">Click me</UiButton>
+            <UiButton variant="default">Click me</UiButton>
         </div>
     </div>
 </template>

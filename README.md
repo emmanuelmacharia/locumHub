@@ -78,13 +78,13 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 ### Platform Setup
 
-- [ ] Make it deployment
+- [x] Make it deployment
 - [ ] Set up Tailwind for styling
 - [ ] Set up shadcn for nuxt
 - [ ] Create landing page and onboarding forms
-- [ ] Set up ci/cd
-- [ ] Set up coderabbit for PR reviews and code quality
-- [ ] Set up typescript
+- [x] Set up ci/cd
+- [x] Set up coderabbit for PR reviews and code quality
+- [x] Set up typescript
 
 ## Frontend tasks
 

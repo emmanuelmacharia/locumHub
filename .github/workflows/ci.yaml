@@ -18,9 +18,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-        # TODO: Enable typechecking when we install typescript to the app
-      #   - name: Typecheck
-      #     run: pnpm run typecheck
+      - name: Typecheck
+        run: pnpm typecheck
 
       - name: Lint
         run: pnpm lint

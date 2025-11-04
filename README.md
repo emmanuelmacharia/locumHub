@@ -73,3 +73,29 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## TODO:
+
+### Platform Setup
+
+- [ ] Make it deployment
+- [ ] Set up Tailwind for styling
+- [ ] Set up shadcn for nuxt
+- [ ] Create landing page and onboarding forms
+- [ ] Set up ci/cd
+- [ ] Set up coderabbit for PR reviews and code quality
+
+## Frontend tasks
+
+- [ ] Build out landing page
+- [ ] Build out onboarding forms
+- [ ] Build out registration and login screens
+
+## Backend tasks
+
+- [ ] Evaluate backend options - convex
+- [ ] Set up database schema
+- [ ] Evaluate Auth providers: We'll go with the 2 step approach we saw with WorkOS
+- [ ] Figure out user roles, constraints and permissions
+- [ ] Evaluate browserbase for verifying pharmacist ids
+- [ ] Set up email service for onboarding and notifications

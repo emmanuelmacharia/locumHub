@@ -79,8 +79,8 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 ### Platform Setup
 
 - [x] Make it deployment
-- [ ] Set up Tailwind for styling
-- [ ] Set up shadcn for nuxt
+- [x] Set up Tailwind for styling
+- [x] Set up shadcn for nuxt
 - [ ] Create landing page and onboarding forms
 - [x] Set up ci/cd
 - [x] Set up coderabbit for PR reviews and code quality

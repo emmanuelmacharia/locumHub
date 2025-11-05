@@ -49,15 +49,14 @@ const features: { title: string, href: string, description: string }[] = [
 </script>
 <template>
     <header
-        className="sticky top-0 z-50 w-full border-b bg-background/95 h-16 backdrop-blur supports-backdrop-filter:bg-background/60 flex justify-between space-x-2.5 px-4 sm:px-6 lg:px-8">
+        class="sticky top-0 z-50 w-full border-b bg-background/95 h-16 backdrop-blur supports-backdrop-filter:bg-background/60 flex justify-between space-x-2.5 px-4 sm:px-6 lg:px-8">
         <NavigationMenu>
             <NavigationMenuList>
                 <div class="flex items-center gap-3">
                     <NavigationMenuItem>
-                        <NavigationMenuLink href="/docs/introduction" :class="navigationMenuTriggerStyle()"
-                            class="flex flex-row items-center justify-center w-8 h-8 bg-gradient-primary rounded-lg">
+                        <NavigationMenuLink href="/docs/introduction" :class="navigationMenuTriggerStyle()">
                             <div class="flex items-center gap-3">
-                                <div class="flex items-center justify-center w-8 h-8 bg-gradient-primary rounded-lg">
+                                <div class=" w-8 h-8 bg-gradient-primary rounded-lg items-center justify-center flex">
                                     <Icon name="lucide:stethoscope" class="h-5 w-5 text-white" />
                                 </div>
                                 <p class=" text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">LocumHub

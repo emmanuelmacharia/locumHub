@@ -40,13 +40,4 @@ export const buttonVariants = cva(
   }
 );
 
-export const debugButtonVariants = (
-  ...args: Parameters<typeof buttonVariants>
-) => {
-  const result = buttonVariants(...args);
-  console.log("Button Variants Input:", args);
-  console.log("Button Variants Output:", result);
-  return result;
-};
-
 export type ButtonVariants = VariantProps<typeof buttonVariants>;

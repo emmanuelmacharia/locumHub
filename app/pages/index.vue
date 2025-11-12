@@ -66,7 +66,7 @@ definePageMeta({
                     <h2 class="text-3xl font-bold sm:text-4xl mb-4">
                         Why choose Pharmify?
                     </h2>
-                    <p class="text-xl text-muted-forground max-w-2xl mx-auto">
+                    <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
                         Built specifically for the pharmaceutical industry with compliance and quality at the forefront.
                     </p>
                 </div>

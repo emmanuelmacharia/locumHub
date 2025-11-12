@@ -53,21 +53,18 @@ const features: { title: string, href: string, description: string }[] = [
         <div class="mx-auto max-w-7xl flex items-center justify-between h-16">
             <NavigationMenu>
                 <NavigationMenuList>
-                    <div class="flex items-center gap-3">
-                        <NavigationMenuItem>
-                            <NavigationMenuLink href="/docs/introduction" :class="navigationMenuTriggerStyle()">
-                                <div class="flex items-center gap-3">
-                                    <div
-                                        class=" w-8 h-8 bg-gradient-primary rounded-lg items-center justify-center flex">
-                                        <Icon name="lucide:stethoscope" class="h-5 w-5 text-white" />
-                                    </div>
-                                    <p class=" text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                                        Pharmify
-                                    </p>
+                    <NavigationMenuItem class="flex items-center gap-3">
+                        <NavigationMenuLink href="/docs/introduction" :class="navigationMenuTriggerStyle()">
+                            <div class="flex items-center gap-3">
+                                <div class=" w-8 h-8 bg-gradient-primary rounded-lg items-center justify-center flex">
+                                    <Icon name="lucide:stethoscope" class="h-5 w-5 text-white" />
                                 </div>
-                            </NavigationMenuLink>
-                        </NavigationMenuItem>
-                    </div>
+                                <p class=" text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                                    Pharmify
+                                </p>
+                            </div>
+                        </NavigationMenuLink>
+                    </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
             <NavigationMenu>

@@ -49,7 +49,7 @@ definePageMeta({
             <div class="relative grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 my-5 mx-auto max-w-6xl px-6">
                 <AppStats header="2,500+" sub-header="Verified Pharmacists" icon="lucide:users" />
                 <AppStats header="1,200+" sub-header="Pharmacies" icon="lucide:shield-check" />
-                <AppStats header="24/7" sub-header="Shifts Filled" icon="lucide:clock" />
+                <AppStats header="10,000+" sub-header="Shifts Filled" icon="lucide:clock" />
                 <AppStats header="4.2" sub-header="Compliance Rate" icon="lucide:star" />
             </div>
         </section>

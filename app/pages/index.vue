@@ -50,7 +50,7 @@ definePageMeta({
                 <AppStats header="2,500+" sub-header="Verified Pharmacists" icon="lucide:users" />
                 <AppStats header="1,200+" sub-header="Pharmacies" icon="lucide:shield-check" />
                 <AppStats header="10,000+" sub-header="Shifts Filled" icon="lucide:clock" />
-                <AppStats header="4.2" sub-header="Compliance Rate" icon="lucide:star" />
+                <AppStats header="4.2" sub-header="Compliance Rating" icon="lucide:star" />
             </div>
         </section>
         <!-- Featured sections -->

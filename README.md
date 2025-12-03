@@ -81,16 +81,16 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 - [x] Make it deployment
 - [x] Set up Tailwind for styling
 - [x] Set up shadcn for nuxt
-- [ ] Create landing page and onboarding forms
+- [x] Create landing page
 - [x] Set up ci/cd
 - [x] Set up coderabbit for PR reviews and code quality
 - [x] Set up typescript
 
 ## Frontend tasks
 
-- [ ] Build out landing page
+- [x] Build out landing page
 - [ ] Build out onboarding forms
-- [ ] Build out registration and login screens
+- [ ] Build out  login screens
 
 ## Backend tasks
 

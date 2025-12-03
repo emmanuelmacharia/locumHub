@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { api } from "../../convex/_generated/api";
 definePageMeta({
     layout: "landing-page",
 })
+const { data: tasks } = useConvexQuery(api.tasks.get);
 </script>
 <template>
     <main>

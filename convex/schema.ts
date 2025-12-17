@@ -480,11 +480,11 @@ const applicationTables = {
       v.literal("direct_offer"),
       v.literal("recurring")
     ),
-    targetLocumId: v.optional(v.id("locumStaff")),
+    targetLocumId: v.optional(v.id("locumProfiles")),
     recurringTemplateId: v.optional(v.id("recurringShiftTemplates")),
 
     // Assignment
-    assignedLocumId: v.optional(v.id("locumStaff")),
+    assignedLocumId: v.optional(v.id("locumProfiles")),
     assignedLocumName: v.optional(v.string()),
     assignedAt: v.optional(v.number()),
     confirmedAt: v.optional(v.number()),
@@ -542,8 +542,7 @@ const applicationTables = {
 
   shiftApplications: defineTable({
     shiftRequestId: v.id("shiftRequests"),
-    locumId: v.id("locumStaff"),
-
+    locumId: v.id("locumProfiles"),
     // Denormalized
     locumName: v.string(),
     locumRating: v.number(),
@@ -595,7 +594,7 @@ const applicationTables = {
     // Auto-posting
     autoPost: v.boolean(),
     autoPostDaysAhead: v.number(),
-    preferredLocumId: v.optional(v.id("locumStaff")),
+    preferredLocumId: v.optional(v.id("locumProfiles")),
     postingType: v.union(v.literal("broadcast"), v.literal("direct_offer")),
 
     isActive: v.boolean(),

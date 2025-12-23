@@ -124,7 +124,7 @@ const applicationTables = {
     // isPlatformAdmin: v.boolean()
   })
     .index("by_email", ["email"])
-    .index("by_id", ["userid"]),
+    .index("by_user_id", ["userid"]),
 
   userProfiles: defineTable({
     userId: v.id("users"),

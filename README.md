@@ -90,13 +90,15 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 - [x] Build out landing page
 - [ ] Build out onboarding forms
-- [ ] Build out  login screens
+- [ ] Build out login screens
 
 ## Backend tasks
 
-- [ ] Evaluate backend options - convex
-- [ ] Set up database schema
-- [ ] Evaluate Auth providers: We'll go with the 2 step approach we saw with WorkOS
+- [x] Evaluate backend options - convex
+- [x] Set up database schema
+- [ ] Evaluate Auth providers: We'll go with the 2 step approach we saw with WorkOS; We'll have to use clerk because of single tenancy limitations with WorkOS
+- [ ] Set up authentication and user management
+- [ ] Set up API endpoints for onboarding flow
 - [ ] Figure out user roles, constraints and permissions
 - [ ] Evaluate browserbase for verifying pharmacist ids
 - [ ] Set up email service for onboarding and notifications

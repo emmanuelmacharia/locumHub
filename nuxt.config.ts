@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "shadcn-nuxt",
     "convex-nuxt",
+    "@clerk/nuxt",
   ],
   css: ["./app/assets/css/main.css"],
   // vite plugin for tailwindcss has a type issue; so we cast it to any

@@ -34,7 +34,9 @@ definePageMeta({
                     </UICardHeader>
 
                     <UICardContent>
-                        <form action="" />
+                        <form>
+                            <!-- Form fields will be added here -->
+                        </form>
                     </UICardContent>
                 </UICard>
             </div>

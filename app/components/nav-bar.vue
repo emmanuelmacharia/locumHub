@@ -140,7 +140,7 @@ const features: { title: string, href: string, description: string }[] = [
                         <SignedIn>
                             <UserButton class="hover:cursor-pointer" />
                         </SignedIn>
-                    </Navigationmenuitem>
+                    </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
         </div>

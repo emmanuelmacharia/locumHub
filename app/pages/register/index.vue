@@ -66,7 +66,7 @@ const handleSelect = (type: string) => {
                                     </li>
                                 </ul>
                                 <UIButton variant="default" class="w-full mt-4 bg-gradient-primary cursor-pointer"
-                                    @click="handleSelect('pharmacy')">
+                                    @click.stop="handleSelect('pharmacy')">
                                     Continue as Pharmacy
                                     <Icon name="lucide:arrow-right" class="h-4 w-4 ml-2" />
                                 </UIButton>
@@ -74,7 +74,7 @@ const handleSelect = (type: string) => {
                         </UICardHeader>
                     </UICard>
                     <UICard
-                        :class="`cursor-pointer transition-all hover:border-accent-highlight/50 hover:shadow-lg ${selectedType === 'pharmacy' ? 'border-accent-highlight ring-2 ring-primary/20' : 'border-border/50'}`"
+                        :class="`cursor-pointer transition-all hover:border-accent-highlight/50 hover:shadow-lg ${selectedType === 'staff' ? 'border-accent-highlight ring-2 ring-primary/20' : 'border-border/50'}`"
                         @click="handleSelect('staff')">
                         <UICardHeader class="text-center pb-4">
                             <div
@@ -102,7 +102,7 @@ const handleSelect = (type: string) => {
                                 </ul>
                                 <UIButton variant="default"
                                     class="w-full mt-4 bg-linear-to-r from-emerald-500 to-teal-600 hover:opacity-90 text-white cursor-pointer"
-                                    @click="handleSelect('staff')">
+                                    @click.stop="handleSelect('staff')">
                                     Continue as Pharmacist
                                     <Icon name="lucide:arrow-right" class="h-4 w-4 ml-2" />
                                 </UIButton>

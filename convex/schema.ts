@@ -611,7 +611,7 @@ const applicationTables = {
    */
   shiftActivities: defineTable({
     shiftRequestId: v.id("shiftRequests"),
-    locumId: v.id("locumStaff"),
+    locumId: v.id("locumProfiles"),
     pharmacyId: v.id("pharmacies"),
 
     category: v.union(
@@ -649,10 +649,9 @@ const applicationTables = {
     .index("by_pharmacy_category", ["pharmacyId", "category"])
     .index("by_locum", ["locumId", "loggedAt"])
     .index("by_incident", ["category", "severity"]),
-
   shiftReports: defineTable({
     shiftRequestId: v.id("shiftRequests"),
-    locumId: v.id("locumStaff"),
+    locumId: v.id("locumProfiles"),
     pharmacyId: v.id("pharmacies"),
 
     // Summary Stats
@@ -842,6 +841,15 @@ const applicationTables = {
   })
     .index("by_participants", ["participantIds"])
     .index("by_shift", ["shiftRequestId"]),
+
+  conversationParticipants: defineTable({
+    conversationId: v.id("conversations"),
+    userId: v.id("users"),
+    joinedAt: v.number(),
+    lastReadAt: v.optional(v.number()),
+  })
+    .index("by_conversation", ["conversationId"])
+    .index("by_user", ["userId"]),
 
   messages: defineTable({
     conversationId: v.id("conversations"),

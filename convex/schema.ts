@@ -705,7 +705,7 @@ const applicationTables = {
    * Payments and Billing
    */
   locumPaymentPreferences: defineTable({
-    locumId: v.id("locumStaff"),
+    locumId: v.id("locumProfiles"),
 
     // Preferred method
     preferredMethod: paymentMethodType,

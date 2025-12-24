@@ -96,7 +96,7 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 - [x] Evaluate backend options - convex
 - [x] Set up database schema
-- [ ] Evaluate Auth providers: We'll go with the 2 step approach we saw with WorkOS; We'll have to use clerk because of single tenancy limitations with WorkOS
+- [x] Evaluate Auth providers: We'll go with the 2-step approach we saw with WorkOS; We'll have to use clerk because of single tenancy limitations with WorkOS
 - [ ] Set up authentication and user management
 - [ ] Set up API endpoints for onboarding flow
 - [ ] Figure out user roles, constraints and permissions

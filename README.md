@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/16104ee6-362b-486f-97d8-3b5041145fd6/deploy-status)](https://app.netlify.com/projects/locumhub/deploys)
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

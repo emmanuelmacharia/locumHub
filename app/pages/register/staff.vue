@@ -23,7 +23,7 @@ definePageMeta({
                     <UICardHeader class="text-center">
                         <div
                             class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-primary">
-                            <Icon name="lucide:building-2" class="text-white" />
+                            <Icon name="lucide:user-check" class="text-white" />
                         </div>
                         <UICardTitle class="text-2xl">
                             Register as a Pharmacist

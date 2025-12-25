@@ -53,11 +53,11 @@ const features: { title: string, href: string, description: string }[] = [
         <div class="mx-auto max-w-7xl flex items-center justify-between h-16">
             <NavigationMenu>
                 <NavigationMenuList>
-                    <NavigationMenuItem class="flex items-center gap-3">
-                        <NavigationMenuLink href="/docs/introduction" :class="navigationMenuTriggerStyle()">
+                    <NavigationMenuItem class="flex items-center gap-4">
+                        <NavigationMenuLink href="/" :class="navigationMenuTriggerStyle()">
                             <div class="flex items-center gap-3">
-                                <div class=" w-8 h-8 bg-gradient-primary rounded-lg items-center justify-center flex">
-                                    <Icon name="lucide:stethoscope" class="h-5 w-5 text-white" />
+                                <div class="w-10 h-10 rounded-lg items-center justify-center flex">
+                                    <img src="~/assets/images/logo.svg" alt="Pharmify Logo">
                                 </div>
                                 <p class=" text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                                     Pharmify
@@ -124,24 +124,22 @@ const features: { title: string, href: string, description: string }[] = [
                     </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
-            <NavigationMenu>
+            <NavigationMenu class="flex flex-row gap-4 ">
                 <NavigationMenuList>
-
                     <NavigationMenuItem>
-                        <NavigationMenuLink href="/docs/introduction" :class="navigationMenuTriggerStyle()">
-                            <div class="flex items-center gap-3">
-                                <Icon name="lucide:user" />
-                                Sign in
-                            </div>
-                        </NavigationMenuLink>
+                        <SignedOut>
+                            <SignUpButton class="hover:cursor-pointer" />
+                        </SignedOut>
                     </NavigationMenuItem>
+                </NavigationMenuList>
+                <NavigationMenuList>
                     <NavigationMenuItem>
-                        <NavigationMenuLink href="/docs/introduction" :class="navigationMenuTriggerStyle()">
-                            <div class="flex items-center gap-3">
-                                <Icon name="lucide:user-plus" />
-                                Sign up
-                            </div>
-                        </NavigationMenuLink>
+                        <SignedOut>
+                            <SignInButton class="hover:cursor-pointer" />
+                        </SignedOut>
+                        <SignedIn>
+                            <UserButton class="hover:cursor-pointer" />
+                        </SignedIn>
                     </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>

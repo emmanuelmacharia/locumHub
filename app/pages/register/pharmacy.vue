@@ -68,6 +68,10 @@ const form = useForm({
     validators: {
         onSubmit: formSchema,
     },
+    onSubmit: async (values) => {
+        console.log("Form Submitted:", values);
+        // Handle form submission logic here
+    },
 });
 </script>
 

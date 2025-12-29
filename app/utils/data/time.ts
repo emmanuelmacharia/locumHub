@@ -6,6 +6,7 @@ export const days = [
   "Friday",
   "Saturday",
   "Sunday",
+  "Holidays",
 ];
 
 export const timeOptions = [

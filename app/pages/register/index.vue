@@ -76,7 +76,7 @@ const handleSelect = (type: string) => {
                     </UICard>
                     <UICard
                         :class="`cursor-pointer transition-all hover:border-accent-highlight/50 hover:shadow-lg ${selectedType === 'staff' ? 'border-accent-highlight ring-2 ring-primary/20' : 'border-border/50'}`"
-                        role="button" tabindex="1" @click="handleSelect('staff')" @keydown.enter="handleSelect('staff')"
+                        role="button" tabindex="0" @click="handleSelect('staff')" @keydown.enter="handleSelect('staff')"
                         @keydown.space.prevent="handleSelect('staff')">
                         <UICardHeader class="text-center pb-4">
                             <div

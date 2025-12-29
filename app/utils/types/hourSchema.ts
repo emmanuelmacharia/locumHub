@@ -69,7 +69,6 @@ export interface OperatingHours {
 }
 
 export const formatTime = (time: string) => {
-  const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
   if (!timeRegex.test(time)) {
     throw new Error(`Invalid time format: ${time}. Expected HH:MM (24-hour)`);
   }

@@ -5,6 +5,7 @@ import { hoursSchema } from "~/utils/types/hourSchema";
 import { cities, countries } from "~/utils/data/locations";
 import { days, timeOptions } from "~/utils/data/time";
 import pharmacyServices from "~/utils/data/services.json";
+import type { is } from "zod/v4/locales";
 
 definePageMeta({
     layout: "landing-page",
@@ -247,7 +248,7 @@ const form = useForm({
                                                 class="flex flex-row items-center gap-4 py-2 border-b border-border/50 last:border-0">
                                                 <div class="flex items-center gap-2 lg:w-[25%] w-[35%]">
                                                     <UISwitch
-                                                        :model-value="!!(field.state.value[day.toLowerCase() as keyof typeof field.state.value]?.open)"
+                                                        :model-value="!!(field.state.value[day.toLowerCase() as keyof typeof field.state.value])"
                                                         @update:model-value="(enabled: boolean) => {
                                                             const dayKey = day.toLowerCase() as keyof typeof field.state.value;
                                                             const updatedHours = { ...field.state.value };
@@ -270,9 +271,15 @@ const form = useForm({
                                                                     const dayKey = day.toLowerCase() as keyof typeof
                                                                         field.state.value;
                                                                     const updatedHours = { ...field.state.value };
-                                                                    updatedHours[dayKey] = value
-                                                                        ? { open: '00:00', close: '23:59', is24Hours: value, enabled: value }
-                                                                        : { open: '09:00', close: '17:00', is24Hours: value, enabled: true };
+                                                                    const currentDay = updatedHours[dayKey];
+                                                                    if (currentDay) {
+                                                                        updatedHours[dayKey] = {
+                                                                            ...currentDay,
+                                                                            is24Hours: value,
+                                                                            open: value ? '00:00' : currentDay.open || '09:00',
+                                                                            close: value ? '23:59' : currentDay.close || '17:00',
+                                                                        };
+                                                                    }
                                                                     field.handleChange(updatedHours);
                                                                 }" />
                                                         <span className="text-sm text-muted-foreground">24 hrs</span>

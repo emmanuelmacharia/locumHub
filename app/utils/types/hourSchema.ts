@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { days } from "../data/time";
 
 const dayEnum = z.enum([
   "monday",
@@ -47,3 +48,35 @@ export const hoursSchema = z.object({
   sunday: dayHoursSchema,
   holidays: dayHoursSchema,
 });
+
+export interface DaySchedule {
+  enabled: boolean;
+  is24Hours: boolean;
+  openTime: string;
+  closeTime: string;
+}
+
+export interface OperatingHours {
+  [key: string]: DaySchedule;
+}
+
+export const formatTime = (time: string) => {
+  const [hours, minutes] = time.split(":") as [string, string];
+  const hour = parseInt(hours);
+  const ampm = hour >= 12 ? "PM" : "AM";
+  const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+  return `${displayHour}:${minutes} ${ampm}`;
+};
+
+export const getDefaultOperatingHours = (): OperatingHours => {
+  const hours: OperatingHours = {};
+  days.forEach((day) => {
+    hours[day] = {
+      enabled: day !== "Sunday",
+      is24Hours: false,
+      openTime: "09:00",
+      closeTime: "18:00",
+    };
+  });
+  return hours;
+};

@@ -4,6 +4,7 @@ import { useForm } from '@tanstack/vue-form'
 import { z } from "zod";
 import { hoursSchema } from "~/utils/types/hourSchema";
 import { cities, countries } from "~/utils/data/locations";
+import { days, timeOptions } from '~/utils/data/time';
 
 definePageMeta({
     layout: "landing-page",
@@ -59,6 +60,8 @@ const form = useForm({
         onSubmit: formSchema
     }
 });
+
+
 </script>
 
 <template>
@@ -103,7 +106,6 @@ const form = useForm({
                                                 placeholder="Enter pharmacy name" autocomplete="off"
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
-                                            <FieldInfo :field="field" />
                                         </UIfield>
                                     </template>
                                 </form.Field>
@@ -115,7 +117,6 @@ const form = useForm({
                                                 placeholder="Enter pharmacy license number" autocomplete="off"
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
-                                            <FieldInfo :field="field" />
                                         </UIfield>
                                     </template>
                                 </form.Field>
@@ -127,7 +128,6 @@ const form = useForm({
                                                 placeholder="Enter phone number" autocomplete="off"
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
-                                            <FieldInfo :field="field" />
                                         </UIfield>
                                     </template>
                                 </form.Field>
@@ -139,7 +139,6 @@ const form = useForm({
                                                 placeholder="Enter Email Address" autocomplete="off"
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
-                                            <FieldInfo :field="field" />
                                         </UIfield>
                                     </template>
                                 </form.Field>
@@ -159,7 +158,6 @@ const form = useForm({
                                             <UIInput v-model="field.state.value" :name="field.name" type="text"
                                                 placeholder="Enter address" autocomplete="off" @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
-                                            <FieldInfo :field="field" />
                                         </UIfield>
                                     </template>
                                 </form.Field>
@@ -177,7 +175,6 @@ const form = useForm({
                                                         :value="city.name">{{ city.name }}</UISelectItem>
                                                 </UISelectContent>
                                             </UISelect>
-                                            <FieldInfo :field="field" />
                                         </UIfield>
                                     </template>
                                 </form.Field>
@@ -188,7 +185,6 @@ const form = useForm({
                                             <UIInput v-model="field.state.value" :name="field.name" type="text"
                                                 placeholder="Enter postcode" autocomplete="off" @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
-                                            <FieldInfo :field="field" />
                                         </UIfield>
                                     </template>
                                 </form.Field>
@@ -211,6 +207,81 @@ const form = useForm({
                                     </template>
                                 </form.Field>
                             </UIFieldGroup>
+                            <div class="my-8">
+                                <div class="flex items-center space-x-2">
+                                    <Icon name="lucide:calendar-cog" class="h-12 w-12 text-muted-foreground" />
+                                    <UILabel class="text-lg font-medium">Schedule</UILabel>
+                                </div>
+                            </div>
+                            <UILabel class="my-4">Operating Hours</UILabel>
+                            <div class="space-y-3">
+                                <div class="space-y-2 rounded-lg border border-border p-4 bg-muted/30">
+                                    <form.Field name="operatingHours">
+                                        <template #default="{ field }">
+                                            <div v-for="day in days" :key="day"
+                                                class="flex items-center gap-4 py-2 border-b border-border/50 last:border-0">
+                                                <div class="flex items-center gap-2 w-28">
+                                                    <UISwitch
+                                                        :model-value="!!(field.state.value[day.toLowerCase() as keyof typeof field.state.value]?.open)"
+                                                        @update:model-value="(value: boolean) => {
+                                                            const dayKey = day.toLowerCase() as keyof typeof field.state.value;
+                                                            const updatedHours = { ...field.state.value };
+                                                            // if (updatedHours[dayKey]) {
+                                                            //     updatedHours[dayKey] = value ? { open: '09:00', close: '17:00' } : { open: '', close: '' };
+                                                            // }
+                                                            field.handleChange(updatedHours);
+                                                        }" />
+                                                    <span className="text-sm font-medium">{{ day.slice(0, 3) }}</span>
+                                                </div>
+
+                                                <div class="flex items-center gap-2 w-30">
+                                                    <UISwitch
+                                                        :model-value="!!(field.state.value[day.toLowerCase() as keyof typeof field.state.value]?.open)"
+                                                        @update:model-value="(value: boolean) => {
+                                                            const dayKey = day.toLowerCase() as keyof typeof field.state.value;
+                                                            const updatedHours = { ...field.state.value };
+                                                            // if (updatedHours[dayKey]) {
+                                                            //     updatedHours[dayKey] = value ? { open: '09:00', close: '17:00' } : { open: '', close: '' };
+                                                            // }
+                                                            field.handleChange(updatedHours);
+                                                        }" />
+                                                    <span className="text-sm font-medium">24 hrs</span>
+                                                </div>
+
+                                                <div class="flex items-center gap-3 w-full">
+                                                    <UISelect>
+                                                        <UISelectTrigger class="w-30">
+                                                            <UISelectValue placeholder="09:00" />
+                                                        </UISelectTrigger>
+                                                        <UISelectContent>
+                                                            <UISelectItem v-for="hour in timeOptions"
+                                                                :key="`open-${hour}`" :value="hour">
+                                                                {{ hour }} </UISelectItem>
+                                                        </UISelectContent>
+                                                    </UISelect>
+
+                                                    <span class="text-sm text-muted-foreground">to</span>
+                                                    <UISelect>
+                                                        <UISelectTrigger class="w-30">
+                                                            <UISelectValue placeholder="06:00" />
+                                                        </UISelectTrigger>
+                                                        <UISelectContent>
+                                                            <UISelectItem v-for="hour in timeOptions"
+                                                                :key="`open-${hour}`" :value="hour">
+                                                                {{ hour }}</UISelectItem>
+                                                        </UISelectContent>
+                                                    </UISelect>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </form.field>
+                                </div>
+                            </div>
+                            <div class="flex justify-center">
+                                <UIButton type="submit" class="w-[90%] mt-8 bg-gradient-primary">Register
+                                    Pharmacy
+                                </UIButton>
+                            </div>
                         </form>
                     </UICardContent>
                 </UICard>

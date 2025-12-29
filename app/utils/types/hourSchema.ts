@@ -12,14 +12,23 @@ const dayEnum = z.enum([
   "holidays",
 ]);
 
+const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+const timeSchema = z
+  .string()
+  .regex(timeRegex, "Invalid time format. Expected HH:MM (24-hour)");
+
 export const hourSchemav1 = z.array(
   z.discriminatedUnion("type", [
-    z.object({
-      type: z.literal("regular"),
-      days: z.array(dayEnum),
-      open: z.string(),
-      close: z.string(),
-    }),
+    z
+      .object({
+        type: z.literal("regular"),
+        days: z.array(dayEnum),
+        open: timeSchema,
+        close: timeSchema,
+      })
+      .refine((data) => data.close > data.open, {
+        message: "Close time must be after open time",
+      }),
     z.object({
       type: z.literal("24hours"),
       days: z.array(dayEnum),
@@ -30,11 +39,10 @@ export const hourSchemav1 = z.array(
     }),
   ])
 );
-
 const dayHoursSchema = z
   .object({
-    open: z.string(),
-    close: z.string(),
+    open: timeSchema,
+    close: timeSchema,
   })
   .nullable();
 
@@ -61,8 +69,12 @@ export interface OperatingHours {
 }
 
 export const formatTime = (time: string) => {
+  const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+  if (!timeRegex.test(time)) {
+    throw new Error(`Invalid time format: ${time}. Expected HH:MM (24-hour)`);
+  }
   const [hours, minutes] = time.split(":") as [string, string];
-  const hour = parseInt(hours);
+  const hour = parseInt(hours, 10);
   const ampm = hour >= 12 ? "PM" : "AM";
   const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
   return `${displayHour}:${minutes} ${ampm}`;

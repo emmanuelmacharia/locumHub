@@ -5,6 +5,7 @@ import { z } from "zod";
 import { hoursSchema } from "~/utils/types/hourSchema";
 import { cities, countries } from "~/utils/data/locations";
 import { days, timeOptions } from '~/utils/data/time';
+import pharmacyServices from '~/utils/data/services.json';
 
 definePageMeta({
     layout: "landing-page",
@@ -13,7 +14,7 @@ definePageMeta({
 const formSchema = z.object({
     // id data
     pharmacyName: z.string().min(2, "Pharmacy name must be at least 2 characters long"),
-    licenseNumber: z.string().min(5, "Pharmacy license number must be at least 8 characters long"),
+    licenseNumber: z.string().min(8, "Pharmacy license number must be at least 8 characters long"),
     phoneNumber: z.string().min(10, "Phone number must be at least 10 characters long"),
     email: z.email("Invalid email address"),
     // location data
@@ -62,6 +63,7 @@ const form = useForm({
 });
 
 
+
 </script>
 
 <template>
@@ -106,7 +108,7 @@ const form = useForm({
                                                 placeholder="Enter pharmacy name" autocomplete="off"
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
-                                        </UIfield>
+                                        </UIField>
                                     </template>
                                 </form.Field>
                                 <form.Field name="licenseNumber">
@@ -117,7 +119,7 @@ const form = useForm({
                                                 placeholder="Enter pharmacy license number" autocomplete="off"
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
-                                        </UIfield>
+                                        </UIField>
                                     </template>
                                 </form.Field>
                                 <form.Field name="phoneNumber">
@@ -128,7 +130,7 @@ const form = useForm({
                                                 placeholder="Enter phone number" autocomplete="off"
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
-                                        </UIfield>
+                                        </UIField>
                                     </template>
                                 </form.Field>
                                 <form.Field name="email">
@@ -139,7 +141,7 @@ const form = useForm({
                                                 placeholder="Enter Email Address" autocomplete="off"
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
-                                        </UIfield>
+                                        </UIField>
                                     </template>
                                 </form.Field>
                             </UIFieldGroup>
@@ -158,7 +160,7 @@ const form = useForm({
                                             <UIInput v-model="field.state.value" :name="field.name" type="text"
                                                 placeholder="Enter address" autocomplete="off" @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
-                                        </UIfield>
+                                        </UIField>
                                     </template>
                                 </form.Field>
                                 <form.Field name="city">
@@ -175,7 +177,7 @@ const form = useForm({
                                                         :value="city.name">{{ city.name }}</UISelectItem>
                                                 </UISelectContent>
                                             </UISelect>
-                                        </UIfield>
+                                        </UIField>
                                     </template>
                                 </form.Field>
                                 <form.Field name="postcode">
@@ -185,7 +187,7 @@ const form = useForm({
                                             <UIInput v-model="field.state.value" :name="field.name" type="text"
                                                 placeholder="Enter postcode" autocomplete="off" @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
-                                        </UIfield>
+                                        </UIField>
                                     </template>
                                 </form.Field>
                                 <form.Field name="country">
@@ -203,17 +205,37 @@ const form = useForm({
                                                         {{ country.name }}</UISelectItem>
                                                 </UISelectContent>
                                             </UISelect>
-                                        </UIfield>
+                                        </UIField>
                                     </template>
                                 </form.Field>
                             </UIFieldGroup>
                             <div class="my-8">
                                 <div class="flex items-center space-x-2">
-                                    <Icon name="lucide:calendar-cog" class="h-12 w-12 text-muted-foreground" />
-                                    <UILabel class="text-lg font-medium">Schedule</UILabel>
+                                    <Icon name="lucide:cog" class="h-12 w-12 text-muted-foreground" />
+                                    <UILabel class="text-lg font-medium">Operations</UILabel>
                                 </div>
                             </div>
-                            <UILabel class="my-4">Operating Hours</UILabel>
+                            <UILabel class="mt-4">Services Offered</UILabel>
+                            <form.Field name="services" class="my-4">
+                                <template #default="{ field }">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-3">
+                                        <div v-for="service of pharmacyServices.pharmacyServices" :key="service.id"
+                                            class="flex items-center space-x-2">
+                                            <UICheckbox :value="service.id"
+                                                :checked="field.state.value.includes(service.name)" @update:checked="(checked: boolean) => {
+                                                    const updatedServices = checked
+                                                        ? [...field.state.value, service.name]
+                                                        : field.state.value.filter(s => s !== service.name);
+                                                    field.handleChange(updatedServices);
+                                                }" />
+                                            <UILabel class="text-sm text-muted-foreground">
+                                                {{ service.name }}
+                                            </UILabel>
+                                        </div>
+                                    </div>
+                                </template>
+                            </form.Field>
+                            <UILabel class="mt-8 mb-4">Operating Hours</UILabel>
                             <div class="space-y-3">
                                 <div class="space-y-2 rounded-lg border border-border p-4 bg-muted/30">
                                     <form.Field name="operatingHours">
@@ -264,7 +286,7 @@ const form = useForm({
                                                         </UISelectTrigger>
                                                         <UISelectContent>
                                                             <UISelectItem v-for="hour in timeOptions"
-                                                                :key="`open-${hour}`" :value="hour">
+                                                                :key="`close-${hour}`" :value="hour">
                                                                 {{ hour }}</UISelectItem>
                                                         </UISelectContent>
                                                     </UISelect>

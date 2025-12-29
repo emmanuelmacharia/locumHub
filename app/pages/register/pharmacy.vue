@@ -1,25 +1,33 @@
 <script setup lang="ts">
-
-import { useForm } from '@tanstack/vue-form'
+import { useForm } from "@tanstack/vue-form";
 import { z } from "zod";
 import { hoursSchema } from "~/utils/types/hourSchema";
 import { cities, countries } from "~/utils/data/locations";
-import { days, timeOptions } from '~/utils/data/time';
-import pharmacyServices from '~/utils/data/services.json';
+import { days, timeOptions } from "~/utils/data/time";
+import pharmacyServices from "~/utils/data/services.json";
 
 definePageMeta({
     layout: "landing-page",
-})
+});
 
 const formSchema = z.object({
     // id data
-    pharmacyName: z.string().min(2, "Pharmacy name must be at least 2 characters long"),
-    licenseNumber: z.string().min(8, "Pharmacy license number must be at least 8 characters long"),
-    phoneNumber: z.string().min(10, "Phone number must be at least 10 characters long"),
+    pharmacyName: z
+        .string()
+        .min(2, "Pharmacy name must be at least 2 characters long"),
+    licenseNumber: z
+        .string()
+        .min(8, "Pharmacy license number must be at least 8 characters long"),
+    phoneNumber: z
+        .string()
+        .min(10, "Phone number must be at least 10 characters long"),
     email: z.email("Invalid email address"),
     // location data
     isChain: z.boolean(),
-    locationName: z.string().min(2, "Location name must be at least 2 characters long").default(""),
+    locationName: z
+        .string()
+        .min(2, "Location name must be at least 2 characters long")
+        .default(""),
     address: z.string().min(10, "Address must be at least 10 characters long"),
     postcode: z.string().min(4, "Postcode must be at least 4 characters long"),
     isPrimaryLocation: z.boolean(),
@@ -58,12 +66,9 @@ const form = useForm({
         services: [] as string[],
     } as FormInput,
     validators: {
-        onSubmit: formSchema
-    }
+        onSubmit: formSchema,
+    },
 });
-
-
-
 </script>
 
 <template>
@@ -83,9 +88,7 @@ const form = useForm({
                             class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-primary">
                             <Icon name="lucide:building-2" class="text-white" />
                         </div>
-                        <UICardTitle class="text-2xl">
-                            Register as a Pharmacy
-                        </UICardTitle>
+                        <UICardTitle class="text-2xl"> Register as a Pharmacy </UICardTitle>
                         <p class="text-muted-foreground">
                             Join thousands of professionals already on our platform
                         </p>
@@ -241,57 +244,93 @@ const form = useForm({
                                     <form.Field name="operatingHours">
                                         <template #default="{ field }">
                                             <div v-for="day in days" :key="day"
-                                                class="flex items-center gap-4 py-2 border-b border-border/50 last:border-0">
-                                                <div class="flex items-center gap-2 w-28">
+                                                class="flex flex-row items-center gap-4 py-2 border-b border-border/50 last:border-0">
+                                                <div class="flex items-center gap-2 lg:w-[25%] w-[35%]">
                                                     <UISwitch
                                                         :model-value="!!(field.state.value[day.toLowerCase() as keyof typeof field.state.value]?.open)"
-                                                        @update:model-value="(value: boolean) => {
+                                                        @update:model-value="(enabled: boolean) => {
                                                             const dayKey = day.toLowerCase() as keyof typeof field.state.value;
                                                             const updatedHours = { ...field.state.value };
-                                                            // if (updatedHours[dayKey]) {
-                                                            //     updatedHours[dayKey] = value ? { open: '09:00', close: '17:00' } : { open: '', close: '' };
-                                                            // }
+                                                            console.log('Enabled:', enabled, updatedHours);
+                                                            updatedHours[dayKey] = enabled
+                                                                ? { open: '09:00', close: '17:00', enabled, is24Hours: false }
+                                                                : null;
                                                             field.handleChange(updatedHours);
                                                         }" />
-                                                    <span className="text-sm font-medium">{{ day.slice(0, 3) }}</span>
+                                                    <span className="text-sm font-medium">{{ day }}</span>
                                                 </div>
 
-                                                <div class="flex items-center gap-2 w-30">
-                                                    <UISwitch :model-value="field.state.value[day.toLowerCase() as keyof typeof
-                                                        field.state.value]?.open === '00:00' &&
-                                                        field.state.value[day.toLowerCase() as keyof typeof
-                                                            field.state.value]?.close === '23:59'" @update:model-value="
+                                                <div v-if="field.state.value[day.toLowerCase() as keyof typeof field.state.value]"
+                                                    class="flex flex-col items-center md:flex-row gap-4 md:w-[400px] w-full">
+                                                    <div class="flex items-center gap-2 md:w-[200px]">
+                                                        <UISwitch :model-value="field.state.value[day.toLowerCase() as keyof typeof
+                                                            field.state.value]?.is24Hours || false"
+                                                            @update:model-value="
                                                                 (value: boolean) => {
                                                                     const dayKey = day.toLowerCase() as keyof typeof
                                                                         field.state.value;
                                                                     const updatedHours = { ...field.state.value };
+                                                                    updatedHours[dayKey] = value
+                                                                        ? { open: '00:00', close: '23:59', is24Hours: value, enabled: value }
+                                                                        : { open: '09:00', close: '17:00', is24Hours: value, enabled: true };
                                                                     field.handleChange(updatedHours);
                                                                 }" />
-                                                    <span className="text-sm font-medium">24 hrs</span>
+                                                        <span className="text-sm text-muted-foreground">24 hrs</span>
+                                                    </div>
+                                                    <div v-if="!field.state.value[day.toLowerCase() as keyof typeof field.state.value]?.is24Hours"
+                                                        class="flex md:items-center justify-center flex-col md:flex-row gap-1 md:gap-3">
+                                                        <UISelect>
+                                                            <UISelectTrigger class="w-30">
+                                                                <UISelectValue
+                                                                    :placeholder="field.state.value[day.toLowerCase() as keyof typeof field.state.value]?.open" />
+                                                            </UISelectTrigger>
+                                                            <UISelectContent>
+                                                                <UISelectItem v-for="hour in timeOptions"
+                                                                    :key="`open-${hour}`" :value="hour"
+                                                                    @update:model-value="(value: string) => {
+                                                                        const dayKey = day.toLowerCase() as keyof typeof
+                                                                            field.state.value;
+                                                                        const currentState = field.state.value[dayKey];
+                                                                        const updatedHours = { ...field.state.value };
+                                                                        if (!updatedHours[dayKey]) {
+                                                                            updatedHours[dayKey] = { open: '', close: currentState!.close, is24Hours: false, enabled: true };
+                                                                        }
+                                                                        updatedHours[dayKey].open = value
+                                                                        field.handleChange(updatedHours);
+                                                                    }">
+                                                                    {{ hour }}</UISelectItem>
+                                                            </UISelectContent>
+                                                        </UISelect>
+                                                        <p class="text-sm text-muted-foreground">to</p>
+                                                        <UISelect>
+                                                            <UISelectTrigger class="w-30">
+                                                                <UISelectValue
+                                                                    :placeholder="field.state.value[day.toLowerCase() as keyof typeof field.state.value]?.close"
+                                                                    @update:model-value="(value: string) => {
+                                                                        const dayKey = day.toLowerCase() as keyof typeof
+                                                                            field.state.value;
+                                                                        const currentState = field.state.value[dayKey];
+                                                                        const updatedHours = { ...field.state.value };
+                                                                        if (!updatedHours[dayKey]) {
+                                                                            updatedHours[dayKey] = { open: currentState!.open, close: field.state.value[dayKey]?.close || '', is24Hours: false, enabled: true };
+                                                                        }
+                                                                        updatedHours[dayKey].close = value
+                                                                        field.handleChange(updatedHours);
+                                                                    }" />
+                                                            </UISelectTrigger>
+                                                            <UISelectContent>
+                                                                <UISelectItem v-for="hour in timeOptions"
+                                                                    :key="`close-${hour}`" :value="hour">
+                                                                    {{ hour }}</UISelectItem>
+                                                            </UISelectContent>
+                                                        </UISelect>
+                                                    </div>
+                                                    <div v-else class="text-sm text-muted-foreground align-center">
+                                                        Open 24 Hours
+                                                    </div>
                                                 </div>
-
-                                                <div class="flex items-center gap-3 w-full">
-                                                    <UISelect>
-                                                        <UISelectTrigger class="w-30">
-                                                            <UISelectValue placeholder="06:00" />
-                                                        </UISelectTrigger>
-                                                        <UISelectContent>
-                                                            <UISelectItem v-for="hour in timeOptions"
-                                                                :key="`close-${hour}`" :value="hour">
-                                                                {{ hour }}</UISelectItem>
-                                                        </UISelectContent>
-                                                    </UISelect>
-                                                    <span class="text-sm text-muted-foreground">to</span>
-                                                    <UISelect>
-                                                        <UISelectTrigger class="w-30">
-                                                            <UISelectValue placeholder="06:00" />
-                                                        </UISelectTrigger>
-                                                        <UISelectContent>
-                                                            <UISelectItem v-for="hour in timeOptions"
-                                                                :key="`close-${hour}`" :value="hour">
-                                                                {{ hour }}</UISelectItem>
-                                                        </UISelectContent>
-                                                    </UISelect>
+                                                <div v-else class="text-sm text-muted-foreground">
+                                                    Closed
                                                 </div>
                                             </div>
                                         </template>
@@ -299,8 +338,7 @@ const form = useForm({
                                 </div>
                             </div>
                             <div class="flex justify-center">
-                                <UIButton type="submit" class="w-[90%] mt-8 bg-gradient-primary">Register
-                                    Pharmacy
+                                <UIButton type="submit" class="w-[90%] mt-8 bg-gradient-primary">Register Pharmacy
                                 </UIButton>
                             </div>
                         </form>

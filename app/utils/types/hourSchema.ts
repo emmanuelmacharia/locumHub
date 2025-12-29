@@ -10,6 +10,8 @@ const dayHoursSchema = z
   .object({
     open: timeSchema,
     close: timeSchema,
+    is24Hours: z.boolean(),
+    enabled: z.boolean(),
   })
   .nullable();
 

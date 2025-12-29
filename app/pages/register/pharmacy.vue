@@ -240,9 +240,6 @@ const form = useForm({
                                                         @update:model-value="(value: boolean) => {
                                                             const dayKey = day.toLowerCase() as keyof typeof field.state.value;
                                                             const updatedHours = { ...field.state.value };
-                                                            // if (updatedHours[dayKey]) {
-                                                            //     updatedHours[dayKey] = value ? { open: '09:00', close: '17:00' } : { open: '', close: '' };
-                                                            // }
                                                             field.handleChange(updatedHours);
                                                         }" />
                                                     <span className="text-sm font-medium">24 hrs</span>

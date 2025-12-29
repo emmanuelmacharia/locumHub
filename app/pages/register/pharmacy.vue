@@ -5,7 +5,6 @@ import { hoursSchema } from "~/utils/types/hourSchema";
 import { cities, countries } from "~/utils/data/locations";
 import { days, timeOptions } from "~/utils/data/time";
 import pharmacyServices from "~/utils/data/services.json";
-import type { is } from "zod/v4/locales";
 
 definePageMeta({
     layout: "landing-page",

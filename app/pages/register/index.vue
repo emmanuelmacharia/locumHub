@@ -20,7 +20,8 @@ const handleSelect = (type: string) => {
         <div class="py-12">
             <div class="max-w-3xl mx-auto">
                 <div class="mb-8">
-                    <NuxtLink to="/"
+                    <NuxtLink
+to="/"
                         class="inline-flex items-center text-sm text-muted-foreground hover:text-primary no-underline">
                         <Icon name="lucide:arrow-left" class="h-4 w-4 mr-2" />
                         Back to Home
@@ -67,7 +68,8 @@ const handleSelect = (type: string) => {
                                     Manage staffing needs
                                 </li>
                             </ul>
-                            <UIButton variant="default" class="w-full mt-4 bg-gradient-primary cursor-pointer"
+                            <UIButton
+variant="default" class="w-full mt-4 bg-gradient-primary cursor-pointer"
                                 @click.stop="handleSelect('pharmacy')">
                                 Continue as Pharmacy
                                 <Icon name="lucide:arrow-right" class="h-4 w-4 ml-2" />
@@ -103,7 +105,8 @@ const handleSelect = (type: string) => {
                                     Build your professional profile
                                 </li>
                             </ul>
-                            <UIButton variant="default"
+                            <UIButton
+variant="default"
                                 class="w-full mt-4 bg-linear-to-r from-emerald-500 to-teal-600 hover:opacity-90 text-white cursor-pointer"
                                 @click.stop="handleSelect('staff')">
                                 Continue as Pharmacist

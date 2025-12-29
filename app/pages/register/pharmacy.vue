@@ -4,7 +4,7 @@ import { z } from "zod";
 import { hoursSchema } from "~/utils/types/hourSchema";
 import { cities, countries } from "~/utils/data/locations";
 import { days, timeOptions } from "~/utils/data/time";
-import pharmacyServices from "~/utils/data/services.json";
+import services from "~/utils/data/services.json";
 
 definePageMeta({
     layout: "landing-page",
@@ -23,11 +23,11 @@ const formSchema = z.object({
         .min(10, "Phone number must be at least 10 characters long"),
     email: z.email("Invalid email address"),
     // location data
-    isChain: z.boolean(),
-    locationName: z
-        .string()
-        .min(2, "Location name must be at least 2 characters long")
-        .default(""),
+    // isChain: z.boolean(),
+    // locationName: z
+    //     .string()
+    //     .min(2, "Location name must be at least 2 characters long")
+    //     .default(""),
     address: z.string().min(10, "Address must be at least 10 characters long"),
     postcode: z.string().min(4, "Postcode must be at least 4 characters long"),
     isPrimaryLocation: z.boolean(),
@@ -46,8 +46,8 @@ const form = useForm({
         licenseNumber: "",
         phoneNumber: "",
         email: "",
-        isChain: false,
-        locationName: "",
+        // isChain: false,
+        // locationName: "",
         address: "",
         postcode: "",
         isPrimaryLocation: true,
@@ -68,11 +68,23 @@ const form = useForm({
     validators: {
         onSubmit: formSchema,
     },
-    onSubmit: async (values) => {
-        console.log("Form Submitted:", values);
+    onSubmit: async ({ value }) => {
+        console.log("Form Submitted:", value);
         // Handle form submission logic here
     },
+    onSubmitInvalid: ({ value, formApi }) => {
+        console.log("Validation failed:", formApi.state.errors);
+        console.log("Current values:", value);
+    },
 });
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const displayErrorMessage = (fieldError: any[]) => {
+    const messages: string[] = [
+        ...fieldError.map((err) => err.message),
+    ]
+    return messages
+}
 </script>
 
 <template>
@@ -99,7 +111,7 @@ const form = useForm({
                     </UICardHeader>
 
                     <UICardContent>
-                        <form id="pharmacy-registration-form" @submit.prevent="form.handleSubmit">
+                        <form id="pharmacy-registration-form" @submit.prevent.stop="form.handleSubmit()">
                             <div class="my-8">
                                 <div class="flex items-center space-x-2">
                                     <Icon name="lucide:file-text" class="h-12 w-12 text-muted-foreground" />
@@ -113,12 +125,17 @@ const form = useForm({
                                             <UIFieldLabel>Pharmacy Name</UIFieldLabel>
                                             <UIInput v-model="field.state.value" :name="field.name" type="text"
                                                 placeholder="Enter pharmacy name" autocomplete="off"
-                                                @blur="field.handleBlur"
-                                                @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
+                                                @blur="field.handleBlur" @input="(e: Event) => {
+                                                    field.handleChange((e.target as HTMLInputElement).value)
+                                                }" />
 
-                                            <UIFieldError v-if="field.state.meta.errors.length">
-                                                {{ field.state.meta.errors.join(', ') }}
-                                            </UIFieldError>
+                                            <div v-if="field.state.meta.errors.length">
+                                                <UIFieldError
+                                                    v-for="message in displayErrorMessage(field.state.meta.errors)"
+                                                    :key="message">
+                                                    {{ message }}
+                                                </UIFieldError>
+                                            </div>
                                         </UIField>
                                     </template>
                                 </form.Field>
@@ -131,9 +148,13 @@ const form = useForm({
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
 
-                                            <UIFieldError v-if="field.state.meta.errors.length">
-                                                {{ field.state.meta.errors.join(', ') }}
-                                            </UIFieldError>
+                                            <div v-if="field.state.meta.errors.length">
+                                                <UIFieldError
+                                                    v-for="message in displayErrorMessage(field.state.meta.errors)"
+                                                    :key="message">
+                                                    {{ message }}
+                                                </UIFieldError>
+                                            </div>
                                         </UIField>
                                     </template>
                                 </form.Field>
@@ -146,9 +167,13 @@ const form = useForm({
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
 
-                                            <UIFieldError v-if="field.state.meta.errors.length">
-                                                {{ field.state.meta.errors.join(', ') }}
-                                            </UIFieldError>
+                                            <div v-if="field.state.meta.errors.length">
+                                                <UIFieldError
+                                                    v-for="message in displayErrorMessage(field.state.meta.errors)"
+                                                    :key="message">
+                                                    {{ message }}
+                                                </UIFieldError>
+                                            </div>
                                         </UIField>
                                     </template>
                                 </form.Field>
@@ -161,9 +186,13 @@ const form = useForm({
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
 
-                                            <UIFieldError v-if="field.state.meta.errors.length">
-                                                {{ field.state.meta.errors.join(', ') }}
-                                            </UIFieldError>
+                                            <div v-if="field.state.meta.errors.length">
+                                                <UIFieldError
+                                                    v-for="message in displayErrorMessage(field.state.meta.errors)"
+                                                    :key="message">
+                                                    {{ message }}
+                                                </UIFieldError>
+                                            </div>
                                         </UIField>
                                     </template>
                                 </form.Field>
@@ -184,9 +213,13 @@ const form = useForm({
                                                 placeholder="Enter address" autocomplete="off" @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
 
-                                            <UIFieldError v-if="field.state.meta.errors.length">
-                                                {{ field.state.meta.errors.join(', ') }}
-                                            </UIFieldError>
+                                            <div v-if="field.state.meta.errors.length">
+                                                <UIFieldError
+                                                    v-for="message in displayErrorMessage(field.state.meta.errors)"
+                                                    :key="message">
+                                                    {{ message }}
+                                                </UIFieldError>
+                                            </div>
                                         </UIField>
                                     </template>
                                 </form.Field>
@@ -205,9 +238,13 @@ const form = useForm({
                                                 </UISelectContent>
                                             </UISelect>
 
-                                            <UIFieldError v-if="field.state.meta.errors.length">
-                                                {{ field.state.meta.errors.join(', ') }}
-                                            </UIFieldError>
+                                            <div v-if="field.state.meta.errors.length">
+                                                <UIFieldError
+                                                    v-for="message in displayErrorMessage(field.state.meta.errors)"
+                                                    :key="message">
+                                                    {{ message }}
+                                                </UIFieldError>
+                                            </div>
                                         </UIField>
                                     </template>
                                 </form.Field>
@@ -219,9 +256,13 @@ const form = useForm({
                                                 placeholder="Enter postcode" autocomplete="off" @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
 
-                                            <UIFieldError v-if="field.state.meta.errors.length">
-                                                {{ field.state.meta.errors.join(', ') }}
-                                            </UIFieldError>
+                                            <div v-if="field.state.meta.errors.length">
+                                                <UIFieldError
+                                                    v-for="message in displayErrorMessage(field.state.meta.errors)"
+                                                    :key="message">
+                                                    {{ message }}
+                                                </UIFieldError>
+                                            </div>
                                         </UIField>
                                     </template>
                                 </form.Field>
@@ -241,9 +282,13 @@ const form = useForm({
                                                 </UISelectContent>
                                             </UISelect>
 
-                                            <UIFieldError v-if="field.state.meta.errors.length">
-                                                {{ field.state.meta.errors.join(', ') }}
-                                            </UIFieldError>
+                                            <div v-if="field.state.meta.errors.length">
+                                                <UIFieldError
+                                                    v-for="message in displayErrorMessage(field.state.meta.errors)"
+                                                    :key="message">
+                                                    {{ message }}
+                                                </UIFieldError>
+                                            </div>
                                         </UIField>
                                     </template>
                                 </form.Field>
@@ -258,12 +303,13 @@ const form = useForm({
                             <form.Field name="services" class="my-4">
                                 <template #default="{ field }">
                                     <UIField>
-
                                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-3">
-                                            <div v-for="service of pharmacyServices.pharmacyServices" :key="service.id"
+                                            <div v-for="service of services.pharmacyServices" :key="service.id"
                                                 class="flex items-center space-x-2">
-                                                <UICheckbox :value="service.id"
-                                                    :checked="field.state.value.includes(service.name)" @update:checked="(checked: boolean) => {
+                                                <UICheckbox :value="service.name"
+                                                    :checked="field.state.value.includes(service.name)"
+                                                    @update:model-value="(checked: boolean | 'indeterminate') => {
+                                                        if (checked === 'indeterminate') return;
                                                         const updatedServices = checked
                                                             ? [...field.state.value, service.name]
                                                             : field.state.value.filter(s => s !== service.name);
@@ -275,9 +321,13 @@ const form = useForm({
                                             </div>
                                         </div>
 
-                                        <UIFieldError v-if="field.state.meta.errors.length">
-                                            {{ field.state.meta.errors.join(', ') }}
-                                        </UIFieldError>
+                                        <div v-if="field.state.meta.errors.length">
+                                            <UIFieldError
+                                                v-for="message in displayErrorMessage(field.state.meta.errors)"
+                                                :key="message">
+                                                {{ message }}
+                                            </UIFieldError>
+                                        </div>
                                     </UIField>
                                 </template>
                             </form.Field>
@@ -295,7 +345,6 @@ const form = useForm({
                                                             @update:model-value="(enabled: boolean) => {
                                                                 const dayKey = day.toLowerCase() as keyof typeof field.state.value;
                                                                 const updatedHours = { ...field.state.value };
-                                                                console.log('Enabled:', enabled, updatedHours);
                                                                 updatedHours[dayKey] = enabled
                                                                     ? { open: '09:00', close: '17:00', enabled, is24Hours: false }
                                                                     : null;
@@ -385,9 +434,13 @@ const form = useForm({
                                                     </div>
                                                 </div>
 
-                                                <UIFieldError v-if="field.state.meta.errors.length">
-                                                    {{ field.state.meta.errors.join(', ') }}
-                                                </UIFieldError>
+                                                <div v-if="field.state.meta.errors.length">
+                                                    <UIFieldError
+                                                        v-for="message in displayErrorMessage(field.state.meta.errors)"
+                                                        :key="message">
+                                                        {{ message }}
+                                                    </UIFieldError>
+                                                </div>
                                             </UIField>
                                         </template>
                                     </form.Field>

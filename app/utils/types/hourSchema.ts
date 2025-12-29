@@ -29,8 +29,8 @@ export const hoursSchema = z.object({
 export interface DaySchedule {
   enabled: boolean;
   is24Hours: boolean;
-  openTime: string;
-  closeTime: string;
+  open: string;
+  close: string;
 }
 
 export interface OperatingHours {
@@ -54,8 +54,8 @@ export const getDefaultOperatingHours = (): OperatingHours => {
     hours[day] = {
       enabled: day !== "Sunday",
       is24Hours: false,
-      openTime: "09:00",
-      closeTime: "18:00",
+      open: "09:00",
+      close: "18:00",
     };
   });
   return hours;

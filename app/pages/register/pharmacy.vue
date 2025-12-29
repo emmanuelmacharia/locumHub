@@ -257,28 +257,30 @@ const form = useForm({
                                                 </div>
 
                                                 <div class="flex items-center gap-2 w-30">
-                                                    <UISwitch
-                                                        :model-value="!!(field.state.value[day.toLowerCase() as keyof typeof field.state.value]?.open)"
-                                                        @update:model-value="(value: boolean) => {
-                                                            const dayKey = day.toLowerCase() as keyof typeof field.state.value;
-                                                            const updatedHours = { ...field.state.value };
-                                                            field.handleChange(updatedHours);
-                                                        }" />
+                                                    <UISwitch :model-value="field.state.value[day.toLowerCase() as keyof typeof
+                                                        field.state.value]?.open === '00:00' &&
+                                                        field.state.value[day.toLowerCase() as keyof typeof
+                                                            field.state.value]?.close === '23:59'" @update:model-value="
+                                                                (value: boolean) => {
+                                                                    const dayKey = day.toLowerCase() as keyof typeof
+                                                                        field.state.value;
+                                                                    const updatedHours = { ...field.state.value };
+                                                                    field.handleChange(updatedHours);
+                                                                }" />
                                                     <span className="text-sm font-medium">24 hrs</span>
                                                 </div>
 
                                                 <div class="flex items-center gap-3 w-full">
                                                     <UISelect>
                                                         <UISelectTrigger class="w-30">
-                                                            <UISelectValue placeholder="09:00" />
+                                                            <UISelectValue placeholder="06:00" />
                                                         </UISelectTrigger>
                                                         <UISelectContent>
                                                             <UISelectItem v-for="hour in timeOptions"
-                                                                :key="`open-${hour}`" :value="hour">
-                                                                {{ hour }} </UISelectItem>
+                                                                :key="`close-${hour}`" :value="hour">
+                                                                {{ hour }}</UISelectItem>
                                                         </UISelectContent>
                                                     </UISelect>
-
                                                     <span class="text-sm text-muted-foreground">to</span>
                                                     <UISelect>
                                                         <UISelectTrigger class="w-30">
@@ -293,7 +295,7 @@ const form = useForm({
                                                 </div>
                                             </div>
                                         </template>
-                                    </form.field>
+                                    </form.Field>
                                 </div>
                             </div>
                             <div class="flex justify-center">
@@ -304,11 +306,11 @@ const form = useForm({
                         </form>
                     </UICardContent>
                 </UICard>
-                <p class="text-center text-muted-foreground text-sm mt-8">
-                    Already have an account?
-                    <NuxtLink to="/login" class="text-emerald-500 hover:underline">Log in here.</NuxtLink>
-                </p>
             </div>
+            <p class="text-center text-muted-foreground text-sm mt-8">
+                Already have an account?
+                <NuxtLink to="/login" class="text-emerald-500 hover:underline">Log in here.</NuxtLink>
+            </p>
         </div>
     </ClientOnly>
 </template>

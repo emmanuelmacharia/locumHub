@@ -52,7 +52,7 @@ export const getDefaultOperatingHours = (): OperatingHours => {
   const hours: OperatingHours = {};
   days.forEach((day) => {
     hours[day] = {
-      enabled: day !== "Sunday",
+      enabled: day !== "sunday",
       is24Hours: false,
       open: "09:00",
       close: "18:00",

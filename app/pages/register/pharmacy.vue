@@ -350,13 +350,14 @@ const displayErrorMessage = (fieldError: any[]) => {
                                                                     : null;
                                                                 field.handleChange(updatedHours);
                                                             }" />
-                                                        <span className="text-sm font-medium">{{ day }}</span>
+                                                        <span class="text-sm font-medium">{{ day }}</span>
                                                     </div>
 
                                                     <div v-if="field.state.value[day.toLowerCase() as keyof typeof field.state.value]"
                                                         class="flex flex-col items-center md:flex-row gap-4 md:w-[400px] w-full">
                                                         <div class="flex items-center gap-2 md:w-[200px]">
-                                                            <UISwitch :model-value="field.state.value[day.toLowerCase() as keyof typeof
+                                                            <UISwitch 
+                                                            :model-value="field.state.value[day.toLowerCase() as keyof typeof
                                                                 field.state.value]?.is24Hours || false"
                                                                 @update:model-value="
                                                                     (value: boolean) => {
@@ -374,49 +375,49 @@ const displayErrorMessage = (fieldError: any[]) => {
                                                                         }
                                                                         field.handleChange(updatedHours);
                                                                     }" />
-                                                            <span className="text-sm text-muted-foreground">24
+                                                            <span class="text-sm text-muted-foreground">24
                                                                 hrs</span>
                                                         </div>
                                                         <div v-if="!field.state.value[day.toLowerCase() as keyof typeof field.state.value]?.is24Hours"
                                                             class="flex md:items-center justify-center flex-col md:flex-row gap-1 md:gap-3">
-                                                            <UISelect>
+                                                            <UISelect 
+                                                            @update:model-value="(value: string | any) => {
+                                                                const dayKey = day.toLowerCase() as keyof typeof
+                                                                    field.state.value;
+                                                                const currentState = field.state.value[dayKey];
+                                                                const updatedHours = { ...field.state.value };
+                                                                if (!updatedHours[dayKey]) {
+                                                                    updatedHours[dayKey] = { open: '', close: currentState!.close, is24Hours: false, enabled: true };
+                                                                }
+                                                                updatedHours[dayKey].open = value
+                                                                field.handleChange(updatedHours);
+                                                            }">
                                                                 <UISelectTrigger class="w-30">
                                                                     <UISelectValue
                                                                         :placeholder="field.state.value[day.toLowerCase() as keyof typeof field.state.value]?.open" />
                                                                 </UISelectTrigger>
                                                                 <UISelectContent>
                                                                     <UISelectItem v-for="hour in timeOptions"
-                                                                        :key="`open-${hour}`" :value="hour"
-                                                                        @update:model-value="(value: string) => {
-                                                                            const dayKey = day.toLowerCase() as keyof typeof
-                                                                                field.state.value;
-                                                                            const currentState = field.state.value[dayKey];
-                                                                            const updatedHours = { ...field.state.value };
-                                                                            if (!updatedHours[dayKey]) {
-                                                                                updatedHours[dayKey] = { open: '', close: currentState!.close, is24Hours: false, enabled: true };
-                                                                            }
-                                                                            updatedHours[dayKey].open = value
-                                                                            field.handleChange(updatedHours);
-                                                                        }">
+                                                                        :key="`open-${hour}`" :value="hour">
                                                                         {{ hour }}</UISelectItem>
                                                                 </UISelectContent>
                                                             </UISelect>
                                                             <p class="text-sm text-muted-foreground">to</p>
-                                                            <UISelect>
+                                                            <UISelect 
+                                                            @update:model-value="(value: string | any) => {
+                                                                const dayKey = day.toLowerCase() as keyof typeof
+                                                                    field.state.value;
+                                                                const currentState = field.state.value[dayKey];
+                                                                const updatedHours = { ...field.state.value };
+                                                                if (!updatedHours[dayKey]) {
+                                                                    updatedHours[dayKey] = { open: currentState!.open, close: field.state.value[dayKey]?.close || '', is24Hours: false, enabled: true };
+                                                                }
+                                                                updatedHours[dayKey].close = value
+                                                                field.handleChange(updatedHours);
+                                                            }">
                                                                 <UISelectTrigger class="w-30">
                                                                     <UISelectValue
-                                                                        :placeholder="field.state.value[day.toLowerCase() as keyof typeof field.state.value]?.close"
-                                                                        @update:model-value="(value: string) => {
-                                                                            const dayKey = day.toLowerCase() as keyof typeof
-                                                                                field.state.value;
-                                                                            const currentState = field.state.value[dayKey];
-                                                                            const updatedHours = { ...field.state.value };
-                                                                            if (!updatedHours[dayKey]) {
-                                                                                updatedHours[dayKey] = { open: currentState!.open, close: field.state.value[dayKey]?.close || '', is24Hours: false, enabled: true };
-                                                                            }
-                                                                            updatedHours[dayKey].close = value
-                                                                            field.handleChange(updatedHours);
-                                                                        }" />
+                                                                        :placeholder="field.state.value[day.toLowerCase() as keyof typeof field.state.value]?.close" />
                                                                 </UISelectTrigger>
                                                                 <UISelectContent>
                                                                     <UISelectItem v-for="hour in timeOptions"

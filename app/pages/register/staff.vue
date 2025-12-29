@@ -13,7 +13,8 @@ definePageMeta({
         <div class="py-12">
             <div class="max-w-3xl mx-auto">
                 <div class="mb-8">
-                    <NuxtLink to="/register"
+                    <NuxtLink
+to="/register"
                         class="inline-flex items-center text-sm text-muted-foreground hover:text-primary text-decoration-none">
                         <Icon name="lucide:arrow-left" class="h-4 w-4 mr-2" />
                         Back to user selection

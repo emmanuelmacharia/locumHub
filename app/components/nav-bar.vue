@@ -76,7 +76,8 @@ const features: { title: string, href: string, description: string }[] = [
                                 class="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[minmax(0,.75fr)_minmax(0,1fr)]">
                                 <li>
                                     <NavigationMenuLink as-child>
-                                        <a href="/docs/introduction"
+                                        <a
+href="/docs/introduction"
                                             class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                                             <div class="text-sm font-medium leading-none">Find work</div>
                                             <p class="line-clamp-3 text-sm leading-snug text-muted-foreground">
@@ -87,7 +88,8 @@ const features: { title: string, href: string, description: string }[] = [
                                 </li>
                                 <li>
                                     <NavigationMenuLink as-child>
-                                        <a href="/docs/installation"
+                                        <a
+href="/docs/installation"
                                             class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                                             <div class="text-sm font-medium leading-none">Find talent</div>
                                             <p class="line-clamp-3 text-sm leading-snug text-muted-foreground">
@@ -105,7 +107,8 @@ const features: { title: string, href: string, description: string }[] = [
                             <ul class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                                 <li v-for="feature in features" :key="feature.title">
                                     <NavigationMenuLink as-child>
-                                        <a :href="feature.href"
+                                        <a
+:href="feature.href"
                                             class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                                             <div class="text-sm font-medium leading-none">{{ feature.title }}</div>
                                             <p class="line-clamp-3 text-sm leading-snug text-muted-foreground">

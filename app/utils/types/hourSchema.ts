@@ -1,44 +1,11 @@
 import { z } from "zod";
 import { days } from "../data/time";
 
-const dayEnum = z.enum([
-  "monday",
-  "tuesday",
-  "wednesday",
-  "thursday",
-  "friday",
-  "saturday",
-  "sunday",
-  "holidays",
-]);
-
 const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
 const timeSchema = z
   .string()
   .regex(timeRegex, "Invalid time format. Expected HH:MM (24-hour)");
 
-export const hourSchemav1 = z.array(
-  z.discriminatedUnion("type", [
-    z
-      .object({
-        type: z.literal("regular"),
-        days: z.array(dayEnum),
-        open: timeSchema,
-        close: timeSchema,
-      })
-      .refine((data) => data.close > data.open, {
-        message: "Close time must be after open time",
-      }),
-    z.object({
-      type: z.literal("24hours"),
-      days: z.array(dayEnum),
-    }),
-    z.object({
-      type: z.literal("closed"),
-      days: z.array(dayEnum),
-    }),
-  ])
-);
 const dayHoursSchema = z
   .object({
     open: timeSchema,

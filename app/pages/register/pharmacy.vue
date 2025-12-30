@@ -306,7 +306,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-3">
                                             <div v-for="service of services.pharmacyServices" :key="service.id"
                                                 class="flex items-center space-x-2">
-                                                <UICheckbox :value="service.name"
+                                                <UICheckbox :id="`${service.name}-${service.id}`" :value="service.name"
                                                     :checked="field.state.value.includes(service.name)"
                                                     @update:model-value="(checked: boolean | 'indeterminate') => {
                                                         if (checked === 'indeterminate') return;
@@ -315,7 +315,8 @@ const displayErrorMessage = (fieldError: any[]) => {
                                                             : field.state.value.filter(s => s !== service.name);
                                                         field.handleChange(updatedServices);
                                                     }" />
-                                                <UILabel class="text-sm text-muted-foreground">
+                                                <UILabel class="text-sm text-muted-foreground"
+                                                    :for="`${service.name}-${service.id}`">
                                                     {{ service.name }}
                                                 </UILabel>
                                             </div>
@@ -356,8 +357,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                                                     <div v-if="field.state.value[day.toLowerCase() as keyof typeof field.state.value]"
                                                         class="flex flex-col items-center md:flex-row gap-4 md:w-[400px] w-full">
                                                         <div class="flex items-center gap-2 md:w-[200px]">
-                                                            <UISwitch 
-                                                            :model-value="field.state.value[day.toLowerCase() as keyof typeof
+                                                            <UISwitch :model-value="field.state.value[day.toLowerCase() as keyof typeof
                                                                 field.state.value]?.is24Hours || false"
                                                                 @update:model-value="
                                                                     (value: boolean) => {
@@ -380,8 +380,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                                                         </div>
                                                         <div v-if="!field.state.value[day.toLowerCase() as keyof typeof field.state.value]?.is24Hours"
                                                             class="flex md:items-center justify-center flex-col md:flex-row gap-1 md:gap-3">
-                                                            <UISelect 
-                                                            @update:model-value="(value: string | any) => {
+                                                            <UISelect @update:model-value="(value: string | any) => {
                                                                 const dayKey = day.toLowerCase() as keyof typeof
                                                                     field.state.value;
                                                                 const currentState = field.state.value[dayKey];
@@ -403,8 +402,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                                                                 </UISelectContent>
                                                             </UISelect>
                                                             <p class="text-sm text-muted-foreground">to</p>
-                                                            <UISelect 
-                                                            @update:model-value="(value: string | any) => {
+                                                            <UISelect @update:model-value="(value: string | any) => {
                                                                 const dayKey = day.toLowerCase() as keyof typeof
                                                                     field.state.value;
                                                                 const currentState = field.state.value[dayKey];

@@ -122,9 +122,9 @@ const displayErrorMessage = (fieldError: any[]) => {
                                 <form.Field name="pharmacyName">
                                     <template #default="{ field }">
                                         <UIField>
-                                            <UIFieldLabel>Pharmacy Name</UIFieldLabel>
-                                            <UIInput v-model="field.state.value" :name="field.name" type="text"
-                                                placeholder="Enter pharmacy name" autocomplete="off"
+                                            <UIFieldLabel for="pharmacyName">Pharmacy Name</UIFieldLabel>
+                                            <UIInput id="pharmacyName" v-model="field.state.value" :name="field.name"
+                                                type="text" placeholder="Enter pharmacy name" autocomplete="off"
                                                 @blur="field.handleBlur" @input="(e: Event) => {
                                                     field.handleChange((e.target as HTMLInputElement).value)
                                                 }" />
@@ -142,10 +142,10 @@ const displayErrorMessage = (fieldError: any[]) => {
                                 <form.Field name="licenseNumber">
                                     <template #default="{ field }">
                                         <UIField>
-                                            <UIFieldLabel>Pharmacy License Number</UIFieldLabel>
-                                            <UIInput v-model="field.state.value" :name="field.name" type="text"
-                                                placeholder="Enter pharmacy license number" autocomplete="off"
-                                                @blur="field.handleBlur"
+                                            <UIFieldLabel for="licenseNumber">Pharmacy License Number</UIFieldLabel>
+                                            <UIInput id="licenseNumber" v-model="field.state.value" :name="field.name"
+                                                type="text" placeholder="Enter pharmacy license number"
+                                                autocomplete="off" @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
 
                                             <div v-if="field.state.meta.errors.length">
@@ -161,9 +161,9 @@ const displayErrorMessage = (fieldError: any[]) => {
                                 <form.Field name="phoneNumber">
                                     <template #default="{ field }">
                                         <UIField>
-                                            <UIFieldLabel>Phone Number</UIFieldLabel>
-                                            <UIInput v-model="field.state.value" :name="field.name" type="tel"
-                                                placeholder="Enter phone number" autocomplete="off"
+                                            <UIFieldLabel for="phoneNumber">Phone Number</UIFieldLabel>
+                                            <UIInput id="phoneNumber" v-model="field.state.value" :name="field.name"
+                                                type="tel" placeholder="Enter phone number" autocomplete="off"
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
 
@@ -180,9 +180,9 @@ const displayErrorMessage = (fieldError: any[]) => {
                                 <form.Field name="email">
                                     <template #default="{ field }">
                                         <UIField>
-                                            <UIFieldLabel>Email Address</UIFieldLabel>
-                                            <UIInput v-model="field.state.value" :name="field.name" type="email"
-                                                placeholder="Enter Email Address" autocomplete="off"
+                                            <UIFieldLabel for="email">Contact Email Address</UIFieldLabel>
+                                            <UIInput id="email" v-model="field.state.value" :name="field.name"
+                                                type="email" placeholder="Enter Email Address" autocomplete="off"
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
 
@@ -208,9 +208,10 @@ const displayErrorMessage = (fieldError: any[]) => {
                                 <form.Field name="address">
                                     <template #default="{ field }">
                                         <UIField>
-                                            <UIFieldLabel>Address</UIFieldLabel>
-                                            <UIInput v-model="field.state.value" :name="field.name" type="text"
-                                                placeholder="Enter address" autocomplete="off" @blur="field.handleBlur"
+                                            <UIFieldLabel for="address">Address</UIFieldLabel>
+                                            <UIInput id="address" v-model="field.state.value" :name="field.name"
+                                                type="text" placeholder="Enter address" autocomplete="off"
+                                                @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
 
                                             <div v-if="field.state.meta.errors.length">
@@ -226,8 +227,8 @@ const displayErrorMessage = (fieldError: any[]) => {
                                 <form.Field name="city">
                                     <template #default="{ field }">
                                         <UIField>
-                                            <UIFieldLabel>City</UIFieldLabel>
-                                            <UISelect v-model="field.state.value" :name="field.name"
+                                            <UIFieldLabel for="city">City</UIFieldLabel>
+                                            <UISelect id="city" v-model="field.state.value" :name="field.name"
                                                 @update:model-value="(value: any) => value && field.handleChange(value)">
                                                 <UISelectTrigger>
                                                     <UISelectValue placeholder="Select city" />
@@ -251,9 +252,10 @@ const displayErrorMessage = (fieldError: any[]) => {
                                 <form.Field name="postcode">
                                     <template #default="{ field }">
                                         <UIField>
-                                            <UIFieldLabel>Postcode</UIFieldLabel>
-                                            <UIInput v-model="field.state.value" :name="field.name" type="text"
-                                                placeholder="Enter postcode" autocomplete="off" @blur="field.handleBlur"
+                                            <UIFieldLabel for="postcode">Postcode</UIFieldLabel>
+                                            <UIInput id="postcode" v-model="field.state.value" :name="field.name"
+                                                type="text" placeholder="Enter postcode" autocomplete="off"
+                                                @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
 
                                             <div v-if="field.state.meta.errors.length">
@@ -269,8 +271,8 @@ const displayErrorMessage = (fieldError: any[]) => {
                                 <form.Field name="country">
                                     <template #default="{ field }">
                                         <UIField>
-                                            <UIFieldLabel>Country</UIFieldLabel>
-                                            <UISelect v-model="field.state.value" :name="field.name"
+                                            <UIFieldLabel for="country">Country</UIFieldLabel>
+                                            <UISelect id="country" v-model="field.state.value" :name="field.name"
                                                 @update:model-value="(value: any) => value && field.handleChange(value)">
                                                 <UISelectTrigger>
                                                     <UISelectValue placeholder="Select country" />

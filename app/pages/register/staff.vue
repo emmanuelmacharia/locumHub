@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useForm } from "@tanstack/vue-form";
-import z from 'zod';
+import { z } from 'zod';
 import { cities, countries } from "~/utils/data/locations";
 import skills from "~/utils/data/skills.json";
 
@@ -36,7 +36,7 @@ const form = useForm({
         country: '',
         qualifications: '',
         licenseNumber: '',
-        yearsOfExperience: 1,
+        yearsOfExperience: 0,
         hourlyRate: 100,
         professionalBio: '',
         services: [] as string[],
@@ -121,7 +121,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                                     <template #default="{ field }">
                                         <UIField>
                                             <UIFieldLabel for="phoneNumber">Phone Number</UIFieldLabel>
-                                            <UIInput id="phoneNumber" v-model="field.state.value" type="text"
+                                            <UIInput id="phoneNumber" v-model="field.state.value" type="tel"
                                                 :name="field.name" placeholder="Enter your phone number"
                                                 @blur="field.handleBlur"
                                                 @input="(e: Event) => field.handleChange((e.target as HTMLInputElement).value)" />
@@ -165,8 +165,8 @@ const displayErrorMessage = (fieldError: any[]) => {
                                 <form.Field name="country">
                                     <template #default="{ field }">
                                         <UIField>
-                                            <UIFieldLabel>Country</UIFieldLabel>
-                                            <UISelect v-model="field.state.value" :name="field.name"
+                                            <UIFieldLabel for="country">Country</UIFieldLabel>
+                                            <UISelect id="country" v-model="field.state.value" :name="field.name"
                                                 @update:model-value="(value: any) => value && field.handleChange(value)">
                                                 <UISelectTrigger>
                                                     <UISelectValue placeholder="Select country" />
@@ -193,7 +193,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                                     <template #default="{ field }">
                                         <UIField>
                                             <UIFieldLabel for="city">City</UIFieldLabel>
-                                            <UISelect v-model="field.state.value" :name="field.name"
+                                            <UISelect id="city" v-model="field.state.value" :name="field.name"
                                                 @update:model-value="(value: any) => value && field.handleChange(value)">
                                                 <UISelectTrigger>
                                                     <UISelectValue placeholder="Select city" />

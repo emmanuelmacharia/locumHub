@@ -266,7 +266,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                                     <template #default="{ field }">
                                         <UIField>
                                             <UINumberField id="yearsOfExperience" :model-value="field.state.value"
-                                                :min="1" :name="field.name" @blur="field.handleBlur"
+                                                :min="0" :name="field.name" @blur="field.handleBlur"
                                                 @update:model-value="(value: number) => field.handleChange(value)">
                                                 <UILabel for="yearsOfExperience">Years of Experience</UILabel>
                                                 <UINumberFieldContent>

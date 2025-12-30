@@ -1,64 +1,64 @@
 {
-    "pharmacyServices": [
-        {
-            "id": 1,
-            "name": "Prescription Dispensing",
-            "description": "Filling and dispensing medications prescribed by healthcare providers, including verifying dosages and checking for drug interactions."
-        },
-        {
-            "id": 2,
-            "name": "Medication Counseling",
-            "description": "Providing patients with information about their medications, including proper usage, side effects, and storage instructions."
-        },
-        {
-            "id": 3,
-            "name": "Immunizations",
-            "description": "Administering vaccines such as flu shots, COVID-19 vaccines, shingles, and other routine immunizations."
-        },
-        {
-            "id": 4,
-            "name": "Over-the-Counter (OTC) Recommendations",
-            "description": "Advising customers on appropriate non-prescription medications for minor ailments and symptoms."
-        },
-        {
-            "id": 5,
-            "name": "Prescription Refills",
-            "description": "Processing refills for ongoing prescriptions, often with options for auto-refill and reminder notifications."
-        },
-        {
-            "id": 6,
-            "name": "Medication Therapy Management",
-            "description": "Reviewing a patient's complete medication regimen to optimize therapeutic outcomes and reduce risks."
-        },
-        {
-            "id": 7,
-            "name": "Health Screenings",
-            "description": "Offering basic health checks such as blood pressure monitoring, cholesterol testing, and blood glucose testing."
-        },
-        {
-            "id": 8,
-            "name": "Compounding Services",
-            "description": "Preparing customized medications tailored to individual patient needs when commercial options are unsuitable."
-        },
-        {
-            "id": 9,
-            "name": "Insurance and Billing Assistance",
-            "description": "Helping patients navigate insurance coverage, process claims, and find cost-saving options for medications."
-        },
-        {
-            "id": 10,
-            "name": "Home Delivery",
-            "description": "Delivering prescriptions directly to patients' homes for convenience, especially for those with mobility issues."
-        },
-        {
-            "id": 11,
-            "name": "Medication Synchronization",
-            "description": "Aligning refill dates for multiple prescriptions so patients can pick up all medications in a single visit."
-        },
-        {
-            "id": 12,
-            "name": "Drug Disposal Programs",
-            "description": "Providing safe disposal options for expired or unused medications to prevent misuse and environmental harm."
-        }
-    ]
+  "pharmacyServices": [
+    {
+      "id": 1,
+      "name": "Prescription Dispensing",
+      "description": "Filling and dispensing medications prescribed by healthcare providers, including verifying dosages and checking for drug interactions."
+    },
+    {
+      "id": 2,
+      "name": "Medication Counseling",
+      "description": "Providing patients with information about their medications, including proper usage, side effects, and storage instructions."
+    },
+    {
+      "id": 3,
+      "name": "Immunizations",
+      "description": "Administering vaccines such as flu shots, COVID-19 vaccines, shingles, and other routine immunizations."
+    },
+    {
+      "id": 4,
+      "name": "Over-the-Counter (OTC) Recommendations",
+      "description": "Advising customers on appropriate non-prescription medications for minor ailments and symptoms."
+    },
+    {
+      "id": 5,
+      "name": "Prescription Refills",
+      "description": "Processing refills for ongoing prescriptions, often with options for auto-refill and reminder notifications."
+    },
+    {
+      "id": 6,
+      "name": "Medication Therapy Management",
+      "description": "Reviewing a patient's complete medication regimen to optimize therapeutic outcomes and reduce risks."
+    },
+    {
+      "id": 7,
+      "name": "Health Screenings",
+      "description": "Offering basic health checks such as blood pressure monitoring, cholesterol testing, and blood glucose testing."
+    },
+    {
+      "id": 8,
+      "name": "Compounding Services",
+      "description": "Preparing customized medications tailored to individual patient needs when commercial options are unsuitable."
+    },
+    {
+      "id": 9,
+      "name": "Insurance and Billing Assistance",
+      "description": "Helping patients navigate insurance coverage, process claims, and find cost-saving options for medications."
+    },
+    {
+      "id": 10,
+      "name": "Home Delivery",
+      "description": "Delivering prescriptions directly to patients' homes for convenience, especially for those with mobility issues."
+    },
+    {
+      "id": 11,
+      "name": "Medication Synchronization",
+      "description": "Aligning refill dates for multiple prescriptions so patients can pick up all medications in a single visit."
+    },
+    {
+      "id": 12,
+      "name": "Drug Disposal Programs",
+      "description": "Providing safe disposal options for expired or unused medications to prevent misuse and environmental harm."
+    }
+  ]
 }

@@ -1,179 +1,179 @@
 {
-    "pharmacistServices": [
-        {
-            "id": 1,
-            "name": "Clinical Pharmacy",
-            "description": "Providing direct patient care to optimize medication therapy and promote health and disease prevention."
-        },
-        {
-            "id": 2,
-            "name": "Medication Therapy Management",
-            "description": "Conducting comprehensive medication reviews to ensure optimal therapeutic outcomes and minimize adverse effects."
-        },
-        {
-            "id": 3,
-            "name": "Patient Counseling",
-            "description": "Educating patients on medication usage, potential side effects, drug interactions, and adherence strategies."
-        },
-        {
-            "id": 4,
-            "name": "Oncology Pharmacy",
-            "description": "Specializing in chemotherapy and cancer treatment medications, including dosing calculations and supportive care."
-        },
-        {
-            "id": 5,
-            "name": "Pediatric Pharmacy",
-            "description": "Managing medication therapy for infants, children, and adolescents with age-appropriate dosing and formulations."
-        },
-        {
-            "id": 6,
-            "name": "Geriatric Pharmacy",
-            "description": "Addressing the unique medication needs of elderly patients, including polypharmacy management and fall-risk medications."
-        },
-        {
-            "id": 7,
-            "name": "Compounding",
-            "description": "Preparing customized medications by mixing, combining, or altering ingredients to meet specific patient needs."
-        },
-        {
-            "id": 8,
-            "name": "Drug Information",
-            "description": "Providing evidence-based drug information to healthcare professionals, patients, and institutions."
-        },
-        {
-            "id": 9,
-            "name": "Pharmacy Management",
-            "description": "Overseeing pharmacy operations, budgeting, regulatory compliance, and strategic planning."
-        },
-        {
-            "id": 10,
-            "name": "Inventory Control",
-            "description": "Managing medication stock levels, ordering, expiration tracking, and supply chain optimization."
-        },
-        {
-            "id": 11,
-            "name": "Staff Training",
-            "description": "Educating and mentoring pharmacy technicians, interns, and other staff on procedures and best practices."
-        },
-        {
-            "id": 12,
-            "name": "Quality Assurance",
-            "description": "Developing and monitoring protocols to ensure medication safety, accuracy, and regulatory compliance."
-        },
-        {
-            "id": 13,
-            "name": "Immunization Administration",
-            "description": "Administering vaccines and providing immunization consultations for preventive healthcare."
-        },
-        {
-            "id": 14,
-            "name": "Critical Care Pharmacy",
-            "description": "Managing complex medication regimens for critically ill patients in ICU and emergency settings."
-        },
-        {
-            "id": 15,
-            "name": "Infectious Disease Pharmacy",
-            "description": "Specializing in antimicrobial therapy, antibiotic stewardship, and treatment of infectious conditions."
-        },
-        {
-            "id": 16,
-            "name": "Psychiatric Pharmacy",
-            "description": "Managing psychotropic medications for patients with mental health disorders and behavioral conditions."
-        },
-        {
-            "id": 17,
-            "name": "Ambulatory Care",
-            "description": "Providing pharmaceutical care in outpatient clinics for chronic disease management and preventive care."
-        },
-        {
-            "id": 18,
-            "name": "Nuclear Pharmacy",
-            "description": "Preparing and dispensing radioactive materials for diagnostic imaging and therapeutic procedures."
-        },
-        {
-            "id": 19,
-            "name": "Nutrition Support Pharmacy",
-            "description": "Managing parenteral and enteral nutrition therapy for patients unable to meet nutritional needs orally."
-        },
-        {
-            "id": 20,
-            "name": "Pharmacokinetics",
-            "description": "Applying drug absorption, distribution, metabolism, and excretion principles to optimize dosing regimens."
-        },
-        {
-            "id": 21,
-            "name": "Pharmacovigilance",
-            "description": "Monitoring, detecting, and reporting adverse drug reactions to ensure medication safety."
-        },
-        {
-            "id": 22,
-            "name": "Regulatory Affairs",
-            "description": "Ensuring compliance with pharmaceutical laws, regulations, and licensing requirements."
-        },
-        {
-            "id": 23,
-            "name": "Anticoagulation Management",
-            "description": "Monitoring and adjusting blood thinner therapies to prevent clotting while minimizing bleeding risks."
-        },
-        {
-            "id": 24,
-            "name": "Pain Management",
-            "description": "Collaborating on pain treatment plans, including opioid stewardship and alternative therapies."
-        },
-        {
-            "id": 25,
-            "name": "Sterile Product Preparation",
-            "description": "Compounding injectable medications, IV admixtures, and other sterile preparations under aseptic conditions."
-        },
-        {
-            "id": 26,
-            "name": "Medication Reconciliation",
-            "description": "Comparing patient medication lists during care transitions to prevent errors and omissions."
-        },
-        {
-            "id": 27,
-            "name": "Cardiology Pharmacy",
-            "description": "Specializing in cardiovascular medications, including heart failure, hypertension, and lipid management."
-        },
-        {
-            "id": 28,
-            "name": "Home Infusion Therapy",
-            "description": "Providing IV medication therapy and support for patients receiving treatment at home."
-        },
-        {
-            "id": 29,
-            "name": "Long-Term Care Pharmacy",
-            "description": "Managing medication needs for residents in nursing homes, assisted living, and rehabilitation facilities."
-        },
-        {
-            "id": 30,
-            "name": "Health Screening Services",
-            "description": "Conducting point-of-care testing for blood pressure, glucose, cholesterol, and other health markers."
-        },
-        {
-            "id": 31,
-            "name": "Prescription Verification",
-            "description": "Reviewing prescriptions for accuracy, appropriateness, drug interactions, and contraindications before dispensing."
-        },
-        {
-            "id": 32,
-            "name": "Chronic Disease Management",
-            "description": "Collaborating with patients to manage conditions like diabetes, asthma, hypertension, and COPD."
-        },
-        {
-            "id": 33,
-            "name": "Pharmaceutical Research",
-            "description": "Participating in clinical trials, drug development studies, and outcomes research."
-        },
-        {
-            "id": 34,
-            "name": "Poison Control Consultation",
-            "description": "Providing guidance on toxic exposures, overdoses, and appropriate treatment interventions."
-        },
-        {
-            "id": 35,
-            "name": "Transplant Pharmacy",
-            "description": "Managing immunosuppressive therapies and medication regimens for organ transplant patients."
-        }
-    ]
+  "pharmacistServices": [
+    {
+      "id": 1,
+      "name": "Clinical Pharmacy",
+      "description": "Providing direct patient care to optimize medication therapy and promote health and disease prevention."
+    },
+    {
+      "id": 2,
+      "name": "Medication Therapy Management",
+      "description": "Conducting comprehensive medication reviews to ensure optimal therapeutic outcomes and minimize adverse effects."
+    },
+    {
+      "id": 3,
+      "name": "Patient Counseling",
+      "description": "Educating patients on medication usage, potential side effects, drug interactions, and adherence strategies."
+    },
+    {
+      "id": 4,
+      "name": "Oncology Pharmacy",
+      "description": "Specializing in chemotherapy and cancer treatment medications, including dosing calculations and supportive care."
+    },
+    {
+      "id": 5,
+      "name": "Pediatric Pharmacy",
+      "description": "Managing medication therapy for infants, children, and adolescents with age-appropriate dosing and formulations."
+    },
+    {
+      "id": 6,
+      "name": "Geriatric Pharmacy",
+      "description": "Addressing the unique medication needs of elderly patients, including polypharmacy management and fall-risk medications."
+    },
+    {
+      "id": 7,
+      "name": "Compounding",
+      "description": "Preparing customized medications by mixing, combining, or altering ingredients to meet specific patient needs."
+    },
+    {
+      "id": 8,
+      "name": "Drug Information",
+      "description": "Providing evidence-based drug information to healthcare professionals, patients, and institutions."
+    },
+    {
+      "id": 9,
+      "name": "Pharmacy Management",
+      "description": "Overseeing pharmacy operations, budgeting, regulatory compliance, and strategic planning."
+    },
+    {
+      "id": 10,
+      "name": "Inventory Control",
+      "description": "Managing medication stock levels, ordering, expiration tracking, and supply chain optimization."
+    },
+    {
+      "id": 11,
+      "name": "Staff Training",
+      "description": "Educating and mentoring pharmacy technicians, interns, and other staff on procedures and best practices."
+    },
+    {
+      "id": 12,
+      "name": "Quality Assurance",
+      "description": "Developing and monitoring protocols to ensure medication safety, accuracy, and regulatory compliance."
+    },
+    {
+      "id": 13,
+      "name": "Immunization Administration",
+      "description": "Administering vaccines and providing immunization consultations for preventive healthcare."
+    },
+    {
+      "id": 14,
+      "name": "Critical Care Pharmacy",
+      "description": "Managing complex medication regimens for critically ill patients in ICU and emergency settings."
+    },
+    {
+      "id": 15,
+      "name": "Infectious Disease Pharmacy",
+      "description": "Specializing in antimicrobial therapy, antibiotic stewardship, and treatment of infectious conditions."
+    },
+    {
+      "id": 16,
+      "name": "Psychiatric Pharmacy",
+      "description": "Managing psychotropic medications for patients with mental health disorders and behavioral conditions."
+    },
+    {
+      "id": 17,
+      "name": "Ambulatory Care",
+      "description": "Providing pharmaceutical care in outpatient clinics for chronic disease management and preventive care."
+    },
+    {
+      "id": 18,
+      "name": "Nuclear Pharmacy",
+      "description": "Preparing and dispensing radioactive materials for diagnostic imaging and therapeutic procedures."
+    },
+    {
+      "id": 19,
+      "name": "Nutrition Support Pharmacy",
+      "description": "Managing parenteral and enteral nutrition therapy for patients unable to meet nutritional needs orally."
+    },
+    {
+      "id": 20,
+      "name": "Pharmacokinetics",
+      "description": "Applying drug absorption, distribution, metabolism, and excretion principles to optimize dosing regimens."
+    },
+    {
+      "id": 21,
+      "name": "Pharmacovigilance",
+      "description": "Monitoring, detecting, and reporting adverse drug reactions to ensure medication safety."
+    },
+    {
+      "id": 22,
+      "name": "Regulatory Affairs",
+      "description": "Ensuring compliance with pharmaceutical laws, regulations, and licensing requirements."
+    },
+    {
+      "id": 23,
+      "name": "Anticoagulation Management",
+      "description": "Monitoring and adjusting blood thinner therapies to prevent clotting while minimizing bleeding risks."
+    },
+    {
+      "id": 24,
+      "name": "Pain Management",
+      "description": "Collaborating on pain treatment plans, including opioid stewardship and alternative therapies."
+    },
+    {
+      "id": 25,
+      "name": "Sterile Product Preparation",
+      "description": "Compounding injectable medications, IV admixtures, and other sterile preparations under aseptic conditions."
+    },
+    {
+      "id": 26,
+      "name": "Medication Reconciliation",
+      "description": "Comparing patient medication lists during care transitions to prevent errors and omissions."
+    },
+    {
+      "id": 27,
+      "name": "Cardiology Pharmacy",
+      "description": "Specializing in cardiovascular medications, including heart failure, hypertension, and lipid management."
+    },
+    {
+      "id": 28,
+      "name": "Home Infusion Therapy",
+      "description": "Providing IV medication therapy and support for patients receiving treatment at home."
+    },
+    {
+      "id": 29,
+      "name": "Long-Term Care Pharmacy",
+      "description": "Managing medication needs for residents in nursing homes, assisted living, and rehabilitation facilities."
+    },
+    {
+      "id": 30,
+      "name": "Health Screening Services",
+      "description": "Conducting point-of-care testing for blood pressure, glucose, cholesterol, and other health markers."
+    },
+    {
+      "id": 31,
+      "name": "Prescription Verification",
+      "description": "Reviewing prescriptions for accuracy, appropriateness, drug interactions, and contraindications before dispensing."
+    },
+    {
+      "id": 32,
+      "name": "Chronic Disease Management",
+      "description": "Collaborating with patients to manage conditions like diabetes, asthma, hypertension, and COPD."
+    },
+    {
+      "id": 33,
+      "name": "Pharmaceutical Research",
+      "description": "Participating in clinical trials, drug development studies, and outcomes research."
+    },
+    {
+      "id": 34,
+      "name": "Poison Control Consultation",
+      "description": "Providing guidance on toxic exposures, overdoses, and appropriate treatment interventions."
+    },
+    {
+      "id": 35,
+      "name": "Transplant Pharmacy",
+      "description": "Managing immunosuppressive therapies and medication regimens for organ transplant patients."
+    }
+  ]
 }

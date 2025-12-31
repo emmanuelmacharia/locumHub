@@ -1,17 +1,23 @@
 <script setup lang="ts">
 import { useForm } from "@tanstack/vue-form";
+import { useUser } from "@clerk/vue";
 import { z } from "zod";
 import { hoursSchema } from "~/utils/types/hourSchema";
 import { cities, countries } from "~/utils/data/locations";
 import { days, timeOptions } from "~/utils/data/time";
 import services from "~/utils/data/services.json";
+import type { IUserPayloadSchema } from "~/utils/types/onboardingPayloads";
+import { getRandomValues } from "crypto";
 
 definePageMeta({
   layout: "landing-page",
 });
 
+const { user } = useUser();
+
 const formSchema = z.object({
   // id data
+  fullName: z.string().min(2, "Full name must be at least 2 characters"),
   pharmacyName: z
     .string()
     .min(2, "Pharmacy name must be at least 2 characters long"),
@@ -42,6 +48,7 @@ type FormInput = z.input<typeof formSchema>;
 
 const form = useForm({
   defaultValues: {
+    fullName: "",
     pharmacyName: "",
     licenseNumber: "",
     phoneNumber: "",
@@ -71,7 +78,42 @@ const form = useForm({
   onSubmit: async ({ value }) => {
     // eslint-disable-next-line no-console
     console.log("Form Submitted:", value);
+
+    const {
+      createdAt,
+      emailAddresses,
+      id,
+      lastSignInAt,
+      primaryEmailAddress,
+      primaryPhoneNumber,
+      updatedAt,
+      username,
+    } = user.value!;
+
+    console.log(
+      createdAt,
+      emailAddresses,
+      id,
+      lastSignInAt,
+      primaryEmailAddress,
+      primaryPhoneNumber,
+      updatedAt,
+      username
+    );
+
+    const userEmail =
+      primaryEmailAddress?.emailAddress ?? emailAddresses[0]?.emailAddress;
     // Handle form submission logic here
+    const createUserPayload: IUserPayloadSchema = {
+      email: userEmail!,
+      userId: id,
+      firstName: value.fullName.split(" ")[0]!,
+      lastName: value.fullName.split(" ")[-1]!,
+      isActive: true,
+      phoneNumber: primaryPhoneNumber?.phoneNumber ?? undefined,
+      createdAt: createdAt!,
+      updatedAt: updatedAt!,
+    };
   },
   onSubmitInvalid: ({ value, formApi }) => {
     // eslint-disable-next-line no-console
@@ -131,6 +173,37 @@ const displayErrorMessage = (fieldError: any[]) => {
                 </div>
               </div>
               <UIFieldGroup class="grid grid-cols-1 md:grid-cols-2">
+                <form.Field name="fullName">
+                  <template #default="{ field }">
+                    <UIField>
+                      <UIFieldLabel for="fullName">Full Name</UIFieldLabel>
+                      <UIInput
+                        id="fullName"
+                        v-model="field.state.value"
+                        type="text"
+                        :name="field.name"
+                        placeholder="Enter your full name"
+                        @blur="field.handleBlur"
+                        @input="
+                          (e: Event) =>
+                            field.handleChange(
+                              (e.target as HTMLInputElement).value
+                            )
+                        "
+                      />
+                      <div v-if="field.state.meta.errors.length">
+                        <UIFieldError
+                          v-for="message in displayErrorMessage(
+                            field.state.meta.errors
+                          )"
+                          :key="message"
+                        >
+                          {{ message }}
+                        </UIFieldError>
+                      </div>
+                    </UIField>
+                  </template>
+                </form.Field>
                 <form.Field name="pharmacyName">
                   <template #default="{ field }">
                     <UIField>

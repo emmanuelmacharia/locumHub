@@ -116,12 +116,12 @@ const applicationTables = {
   users: defineTable({
     userid: v.string(),
     email: v.string(),
+    phoneNumber: v.optional(v.string()),
     firstName: v.string(),
     lastName: v.string(),
     isActive: v.boolean(),
     createdAt: v.number(),
     updatedAt: v.number(),
-    // isPlatformAdmin: v.boolean()
   })
     .index("by_email", ["email"])
     .index("by_user_id", ["userid"]),
@@ -217,15 +217,14 @@ const applicationTables = {
     locationCode: v.optional(v.string()),
 
     addressLine1: v.string(),
-    addressLine2: v.optional(v.string()),
     city: v.string(),
     county: v.optional(v.string()),
     postcode: v.string(),
     country: v.string(),
 
-    latitude: v.number(),
-    longitude: v.number(),
-    timezone: v.string(),
+    latitude: v.optional(v.number()),
+    longitude: v.optional(v.number()),
+    timezone: v.optional(v.string()),
 
     locationPhone: v.optional(v.string()),
     locationEmail: v.optional(v.string()),
@@ -241,8 +240,7 @@ const applicationTables = {
     }),
 
     services: v.array(v.string()),
-    parkingAvailable: v.boolean(),
-    wheelchairAccessible: v.boolean(),
+    wheelchairAccessible: v.optional(v.boolean()),
 
     isActive: v.boolean(),
     isPrimary: v.boolean(),
@@ -340,19 +338,18 @@ const applicationTables = {
     contactPhone: v.string(),
 
     addressLine1: v.string(),
-    addressLine2: v.optional(v.string()),
     city: v.string(),
     county: v.optional(v.string()),
     postcode: v.string(),
-    latitude: v.number(),
-    longitude: v.number(),
+    latitude: v.optional(v.number()),
+    longitude: v.optional(v.number()),
     travelRadiusKm: v.number(),
 
     baseHourlyRate: v.number(),
-    minimumShiftHours: v.number(),
-    emergencyRateMultiplier: v.number(),
+    minimumShiftHours: v.optional(v.number()),
+    emergencyRateMultiplier: v.optional(v.number()),
 
-    isOnline: v.boolean(),
+    isOnline: v.optional(v.boolean()),
     lastOnlineAt: v.optional(v.number()),
 
     ratingSum: v.number(),

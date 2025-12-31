@@ -103,7 +103,7 @@ const displayErrorMessage = (fieldError: any[]) => {
             >
               <div class="my-4">
                 <div class="flex items-center space-x-2">
-                  <Icon name="lucide:file-user" />
+                  <Icon name="lucide:file-user  text-muted-foreground" />
                   <UILabel class="text-lg font-medium">User details</UILabel>
                 </div>
               </div>

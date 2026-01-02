@@ -6,7 +6,10 @@ import { hoursSchema } from "~/utils/types/hourSchema";
 import { cities, countries } from "~/utils/data/locations";
 import { days, timeOptions } from "~/utils/data/time";
 import services from "~/utils/data/services.json";
-import type { IUserPayloadSchema } from "~/utils/types/onboardingPayloads";
+import type {
+  ICreatePharmacySchema,
+  IUserPayloadSchema,
+} from "~/utils/types/onboardingPayloads";
 import { getRandomValues } from "crypto";
 
 definePageMeta({
@@ -113,6 +116,19 @@ const form = useForm({
       phoneNumber: primaryPhoneNumber?.phoneNumber ?? undefined,
       createdAt: createdAt!,
       updatedAt: updatedAt!,
+    };
+
+    const createPharmacyPayload: ICreatePharmacySchema = {
+      businessName: value.pharmacyName,
+      licenseNumber: value.licenseNumber,
+      contactPhone: value.phoneNumber,
+      contactEmail: value.email,
+      address: value.address,
+      postcode: value.postcode,
+      city: value.city,
+      country: value.country,
+      services: value.services,
+      operatingHours: value.operatingHours,
     };
   },
   onSubmitInvalid: ({ value, formApi }) => {

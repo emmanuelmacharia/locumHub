@@ -35,6 +35,8 @@ const operatingHours = v.object({
   open: v.string(),
   close: v.string(),
   closed: v.boolean(),
+  is24Hours: v.boolean(),
+  enabled: v.boolean(),
 });
 
 const paymentMethodType = v.union(
@@ -237,6 +239,7 @@ const applicationTables = {
       fri: operatingHours,
       sat: operatingHours,
       sun: operatingHours,
+      hol: operatingHours,
     }),
 
     services: v.array(v.string()),

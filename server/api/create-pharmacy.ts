@@ -17,16 +17,12 @@ export default defineEventHandler(async (event) => {
   const convex = getConvexClient();
 
   try {
-    const { businessName, contactEmail, contactPhone, licenseNumber, userId } =
-      result.data;
-
-    // creates pharmacy
+    // creates pharmacy and pharmacy location
     const pharmaId = await convex.mutation(
       api.pharmacies.pharmacy.createPharmacy,
-      { businessName, contactEmail, contactPhone, licenseNumber, userId }
+      result.data
     );
 
-    // create pharmacy location before returning response; A pharma cannot run without a location - it's best you add in before responding to the user; the client will navigate away after the response
     return {
       statusCode: 201,
       statusMessage: "Pharmacy successfully created",

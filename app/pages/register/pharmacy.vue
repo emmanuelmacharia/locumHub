@@ -103,6 +103,7 @@ const form = useForm({
     };
 
     const createPharmacyPayload: ICreatePharmacySchema = {
+      userId: id,
       businessName: value.pharmacyName,
       licenseNumber: value.licenseNumber,
       contactPhone: value.phoneNumber,
@@ -115,17 +116,17 @@ const form = useForm({
       operatingHours: value.operatingHours,
     };
 
-    const promise = Promise.all([
-      $fetch("/api/create-user", { method: "POST", body: createUserPayload }),
-      $fetch("/api/create-pharmacy", {
-        method: "POST",
-        body: createPharmacyPayload,
-      }),
-    ]);
     const toastId = toast.loading("Processing data...");
 
     try {
-      const [createUser, createPharmacy] = await promise;
+      const createUser = await $fetch("/api/create-user", {
+        method: "POST",
+        body: createUserPayload,
+      });
+      const createPharmacy = await $fetch("/api/create-pharmacy", {
+        method: "POST",
+        body: createPharmacyPayload,
+      });
 
       toast.success("Registration complete", {
         id: toastId,

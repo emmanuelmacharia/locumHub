@@ -31,12 +31,24 @@ const dayOfWeek = v.union(
   v.literal("sunday")
 );
 
-const operatingHours = v.object({
-  open: v.string(),
-  close: v.string(),
-  closed: v.boolean(),
-  is24Hours: v.boolean(),
-  enabled: v.boolean(),
+const operatingHours = v.optional(
+  v.object({
+    open: v.string(),
+    close: v.string(),
+    is24Hours: v.boolean(),
+    enabled: v.boolean(),
+  })
+);
+
+export const operatingDayHours = v.object({
+  monday: operatingHours,
+  tuesday: operatingHours,
+  wednesday: operatingHours,
+  thursday: operatingHours,
+  friday: operatingHours,
+  saturday: operatingHours,
+  sunday: operatingHours,
+  holiday: operatingHours,
 });
 
 const paymentMethodType = v.union(
@@ -222,7 +234,7 @@ const applicationTables = {
     locationName: v.string(),
     locationCode: v.optional(v.string()),
 
-    addressLine1: v.string(),
+    address: v.string(),
     city: v.string(),
     county: v.optional(v.string()),
     postcode: v.string(),
@@ -235,16 +247,7 @@ const applicationTables = {
     locationPhone: v.optional(v.string()),
     locationEmail: v.optional(v.string()),
 
-    operatingHours: v.object({
-      mon: operatingHours,
-      tue: operatingHours,
-      wed: operatingHours,
-      thu: operatingHours,
-      fri: operatingHours,
-      sat: operatingHours,
-      sun: operatingHours,
-      hol: operatingHours,
-    }),
+    operatingHours: operatingDayHours,
 
     services: v.array(v.string()),
     wheelchairAccessible: v.optional(v.boolean()),

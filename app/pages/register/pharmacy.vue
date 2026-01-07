@@ -63,14 +63,14 @@ const form = useForm({
     city: "",
     country: "",
     operatingHours: {
-      monday: null,
-      tuesday: null,
-      wednesday: null,
-      thursday: null,
-      friday: null,
-      saturday: null,
-      sunday: null,
-      holidays: null,
+      monday: undefined,
+      tuesday: undefined,
+      wednesday: undefined,
+      thursday: undefined,
+      friday: undefined,
+      saturday: undefined,
+      sunday: undefined,
+      holidays: undefined,
     },
     services: [] as string[],
   } as FormInput,
@@ -624,7 +624,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                                         enabled,
                                         is24Hours: false,
                                       }
-                                    : null;
+                                    : undefined;
                                   field.handleChange(updatedHours);
                                 }
                               "

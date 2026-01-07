@@ -36,6 +36,12 @@ export const createPharmacySchema = z.object({
   country: z.string().min(2, "Country must be at least 2 characters long"),
   services: z.array(z.string()).min(1, "At least one service must be selected"),
   operatingHours: hoursSchema,
+  userId: z.string(),
 });
 
 export type ICreatePharmacySchema = z.infer<typeof createPharmacySchema>;
+
+export type ICreatePharmacyPrimitive = Pick<
+  ICreatePharmacySchema,
+  "businessName" | "contactEmail" | "contactPhone" | "licenseNumber" | "userId"
+>;

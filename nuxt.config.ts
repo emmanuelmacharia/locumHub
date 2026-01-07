@@ -36,4 +36,7 @@ export default defineNuxtConfig({
   convex: {
     url: process.env.CONVEX_URL,
   },
+  nitro: {
+    plugins: ["./plugins/error-logger.ts"],
+  },
 });

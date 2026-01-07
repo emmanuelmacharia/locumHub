@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
 
   const convex = getConvexClient();
   try {
-    const userId = await convex.mutation(api.user.createUser, {
+    const userId = await convex.mutation(api.users.user.createUser, {
       ...result.data,
       phoneNumber: result.data.phoneNumber ?? undefined,
       clerkCreatedAt: new Date(result.data.clerkCreatedAt).getTime(),

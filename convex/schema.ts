@@ -116,7 +116,7 @@ const applicationTables = {
    * User Tables
    */
   users: defineTable({
-    userid: v.string(),
+    userId: v.string(),
     email: v.string(),
     phoneNumber: v.optional(v.string()),
     firstName: v.string(),
@@ -124,9 +124,11 @@ const applicationTables = {
     isActive: v.boolean(),
     createdAt: v.number(),
     updatedAt: v.number(),
+    clerkCreatedAt: v.number(),
+    clerkUpdatedAt: v.number(),
   })
     .index("by_email", ["email"])
-    .index("by_user_id", ["userid"]),
+    .index("by_user_id", ["userId"]),
 
   userProfiles: defineTable({
     userId: v.id("users"),

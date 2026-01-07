@@ -212,6 +212,8 @@ const applicationTables = {
   })
     .index("by_active", ["isActive"])
     .index("by_chain", ["isChain", "isActive"])
+    .index("by_contact_email", ["contactEmail", "contactPhone"])
+    .index("by_contact_phone", ["contactPhone"])
     .index("by_license", ["licenseNumber"]),
 
   pharmacyLocations: defineTable({

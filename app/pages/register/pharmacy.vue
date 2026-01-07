@@ -10,7 +10,8 @@ import type {
   ICreatePharmacySchema,
   IUserPayloadSchema,
 } from "~/utils/types/onboardingPayloads";
-import { getRandomValues } from "crypto";
+import { toast } from "vue-sonner";
+import { FetchError } from "ofetch";
 
 definePageMeta({
   layout: "landing-page",
@@ -56,8 +57,6 @@ const form = useForm({
     licenseNumber: "",
     phoneNumber: "",
     email: "",
-    // isChain: false,
-    // locationName: "",
     address: "",
     postcode: "",
     isPrimaryLocation: true,
@@ -79,30 +78,14 @@ const form = useForm({
     onSubmit: formSchema,
   },
   onSubmit: async ({ value }) => {
-    // eslint-disable-next-line no-console
-    console.log("Form Submitted:", value);
-
     const {
       createdAt,
       emailAddresses,
       id,
-      lastSignInAt,
       primaryEmailAddress,
       primaryPhoneNumber,
       updatedAt,
-      username,
     } = user.value!;
-
-    console.log(
-      createdAt,
-      emailAddresses,
-      id,
-      lastSignInAt,
-      primaryEmailAddress,
-      primaryPhoneNumber,
-      updatedAt,
-      username
-    );
 
     const userEmail =
       primaryEmailAddress?.emailAddress ?? emailAddresses[0]?.emailAddress;
@@ -111,11 +94,12 @@ const form = useForm({
       email: userEmail!,
       userId: id,
       firstName: value.fullName.split(" ")[0]!,
-      lastName: value.fullName.split(" ")[-1]!,
+      lastName:
+        value.fullName.split(" ")[value.fullName.split(" ").length - 1]!,
       isActive: true,
       phoneNumber: primaryPhoneNumber?.phoneNumber ?? undefined,
-      createdAt: createdAt!,
-      updatedAt: updatedAt!,
+      clerkCreatedAt: new Date(createdAt!),
+      clerkUpdatedAt: new Date(updatedAt!),
     };
 
     const createPharmacyPayload: ICreatePharmacySchema = {
@@ -130,6 +114,39 @@ const form = useForm({
       services: value.services,
       operatingHours: value.operatingHours,
     };
+
+    const promise = Promise.all([
+      $fetch("/api/create-user", { method: "POST", body: createUserPayload }),
+      $fetch("/api/create-pharmacy", {
+        method: "POST",
+        body: createPharmacyPayload,
+      }),
+    ]);
+    const toastId = toast.loading("Processing data...");
+
+    try {
+      const [createUser, createPharmacy] = await promise;
+
+      toast.success("Registration complete", {
+        id: toastId,
+        description: `Created user ${createUser} and pharmacy ${createPharmacy}`,
+      });
+      console.log(createUser, createPharmacy);
+      // route to dashboard
+    } catch (err) {
+      if (err instanceof FetchError) {
+        toast.error(`Registration failed`, {
+          id: toastId,
+          description: err.statusMessage,
+        });
+        return;
+      }
+      toast.error("Registration failed", {
+        id: toastId,
+        description: "Something went wrong",
+      });
+      return;
+    }
   },
   onSubmitInvalid: ({ value, formApi }) => {
     // eslint-disable-next-line no-console
@@ -232,7 +249,6 @@ const displayErrorMessage = (fieldError: any[]) => {
                         :name="field.name"
                         type="text"
                         placeholder="Enter pharmacy name"
-                        autocomplete="off"
                         @blur="field.handleBlur"
                         @input="
                           (e: Event) => {
@@ -268,7 +284,6 @@ const displayErrorMessage = (fieldError: any[]) => {
                         :name="field.name"
                         type="text"
                         placeholder="Enter pharmacy license number"
-                        autocomplete="off"
                         @blur="field.handleBlur"
                         @input="
                           (e: Event) =>
@@ -303,7 +318,6 @@ const displayErrorMessage = (fieldError: any[]) => {
                         :name="field.name"
                         type="tel"
                         placeholder="Enter phone number"
-                        autocomplete="off"
                         @blur="field.handleBlur"
                         @input="
                           (e: Event) =>
@@ -338,7 +352,6 @@ const displayErrorMessage = (fieldError: any[]) => {
                         :name="field.name"
                         type="email"
                         placeholder="Enter Email Address"
-                        autocomplete="off"
                         @blur="field.handleBlur"
                         @input="
                           (e: Event) =>
@@ -385,7 +398,6 @@ const displayErrorMessage = (fieldError: any[]) => {
                         :name="field.name"
                         type="text"
                         placeholder="Enter address"
-                        autocomplete="off"
                         @blur="field.handleBlur"
                         @input="
                           (e: Event) =>
@@ -456,7 +468,6 @@ const displayErrorMessage = (fieldError: any[]) => {
                         :name="field.name"
                         type="text"
                         placeholder="Enter postcode"
-                        autocomplete="off"
                         @blur="field.handleBlur"
                         @input="
                           (e: Event) =>

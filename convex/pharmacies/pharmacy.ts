@@ -1,6 +1,8 @@
 import { v } from "convex/values";
 import { appError } from "../lib/errors";
 import { mutation } from "../_generated/server";
+import { operatingDayHours } from "../schema";
+import { api } from "../_generated/api";
 
 export const createPharmacy = mutation({
   args: {
@@ -9,6 +11,12 @@ export const createPharmacy = mutation({
     licenseNumber: v.string(), // enforce uniqueness
     contactEmail: v.string(), // enforce uniqueness
     contactPhone: v.string(), // enforce uniqueness
+    address: v.string(),
+    postcode: v.string(),
+    city: v.string(),
+    country: v.string(),
+    services: v.array(v.string()),
+    operatingHours: operatingDayHours,
   },
   handler: async (ctx, args) => {
     // first we ensure uniqueness of unique params
@@ -16,8 +24,6 @@ export const createPharmacy = mutation({
       .query("pharmacies")
       .withIndex("by_license", (q) => q.eq("licenseNumber", args.licenseNumber))
       .first();
-
-    console.log(pharmaLicense);
 
     if (pharmaLicense) {
       return appError({
@@ -67,9 +73,6 @@ export const createPharmacy = mutation({
         statusMessage: "The user creating this pharmacy doesn't exist",
       });
     }
-
-    console.log(user);
-
     const payload = {
       createdAt: new Date().getTime(),
       updatedAt: new Date().getTime(),
@@ -95,6 +98,41 @@ export const createPharmacy = mutation({
     };
 
     const created = await ctx.db.insert("pharmacies", payload);
-    return created;
+
+    // we create pharma locations from within the convex context, as that avoids many round trips between the nuxt server and convex
+
+    const {
+      businessName,
+      licenseNumber,
+      contactPhone,
+      contactEmail,
+      userId,
+      ...locationPartialPayload
+    } = args;
+
+    const locationPayload = {
+      locationName: args.businessName,
+      pharmacyId: created,
+      isPrimary: true,
+      ...locationPartialPayload,
+    };
+    const locationCreated = await ctx.runMutation(
+      api.pharmacies.pharmacyLocations.createPharmacyLocation,
+      locationPayload
+    );
+
+    if (locationCreated.statusCode === 201) {
+      return created;
+    }
+    return appError({
+      code: "CONVEX_ERROR",
+      statusCode: 500,
+      statusMessage:
+        "Something went wrong while creating pharmacies or locations",
+    });
   },
 });
+
+// export const getPharmacy = query({
+//   args: {}, handler: (ctx, args) => {}
+// })

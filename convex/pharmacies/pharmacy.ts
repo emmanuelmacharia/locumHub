@@ -49,8 +49,6 @@ export const createPharmacy = mutation({
 
     const contactsNotUnique = pharmaEmail ?? pharmaPhone;
 
-    console.log(pharmaEmail, pharmaPhone, contactsNotUnique);
-
     if (contactsNotUnique) {
       return appError({
         code: "DUPLICATE_ENTRY",

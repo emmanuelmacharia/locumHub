@@ -132,7 +132,6 @@ const form = useForm({
         id: toastId,
         description: `Created user ${createUser} and pharmacy ${createPharmacy}`,
       });
-      console.log(createUser, createPharmacy);
       // route to dashboard
     } catch (err) {
       if (err instanceof FetchError) {

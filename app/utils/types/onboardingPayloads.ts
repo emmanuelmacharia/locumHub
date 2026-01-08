@@ -11,7 +11,6 @@ export const userPayloadSchema = z
       .string()
       .min(10, "You must enter a valid phone number")
       .optional(),
-    isActive: z.boolean(),
     clerkCreatedAt: z.coerce.date(),
     clerkUpdatedAt: z.coerce.date(),
   })

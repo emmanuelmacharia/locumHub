@@ -20,6 +20,7 @@ export default defineEventHandler(async (event) => {
   try {
     const userId = await convex.mutation(api.users.user.createUser, {
       ...result.data,
+      isActive: true,
       phoneNumber: result.data.phoneNumber ?? undefined,
       clerkCreatedAt: new Date(result.data.clerkCreatedAt).getTime(),
       clerkUpdatedAt: new Date(result.data.clerkUpdatedAt).getTime(),
@@ -35,7 +36,7 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     if (isAppError(error)) {
       const { data } = error;
-      return createError({
+      throw createError({
         statusCode: data.statusCode,
         statusMessage: data.statusMessage,
         data: {
@@ -44,10 +45,9 @@ export default defineEventHandler(async (event) => {
       });
     } else {
       // handle other error types
-      return createError({
+      throw createError({
         statusCode: 500,
         statusMessage: "Something went wrong; Please try again later",
-        data: error,
       });
     }
   }

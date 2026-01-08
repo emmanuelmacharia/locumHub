@@ -7,10 +7,10 @@
 ## 📖 Table of Contents
 
 - [The Two Paths](#the-two-paths)
-- [Decision Tree](#-decision-tree)
+- [Decision Tree](#decision-tree)
 - [Golden Rules](#-the-golden-rules)
 - [Quick Reference Table](#-quick-reference-table)
-- [Examples by Feature](#-examples-by-feature)
+- [Examples by Feature](#%EF%B8%8F-examples-by-feature)
 - [Code Patterns](#-code-patterns)
 - [Cheat Sheet](#-cheat-sheet)
 
@@ -18,7 +18,7 @@
 
 ## The Two Paths
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
 │  🟢 PATH A: Direct to Convex                                   │

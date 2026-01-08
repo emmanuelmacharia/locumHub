@@ -67,7 +67,7 @@ export const createPharmacy = mutation({
     if (!user) {
       return appError({
         code: "NOT_FOUND",
-        statusCode: 400,
+        statusCode: 404,
         statusMessage: "The user creating this pharmacy doesn't exist",
       });
     }
@@ -122,6 +122,7 @@ export const createPharmacy = mutation({
     if (locationCreated.statusCode === 201) {
       return created;
     }
+    await ctx.db.delete(created);
     return appError({
       code: "CONVEX_ERROR",
       statusCode: 500,

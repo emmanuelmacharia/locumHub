@@ -78,6 +78,12 @@ const form = useForm({
     onSubmit: formSchema,
   },
   onSubmit: async ({ value }) => {
+    if (!user.value) {
+      toast.error("Authentication error", {
+        description: "User session not found. Please log in again.",
+      });
+      return;
+    }
     const {
       createdAt,
       emailAddresses,
@@ -85,18 +91,30 @@ const form = useForm({
       primaryEmailAddress,
       primaryPhoneNumber,
       updatedAt,
-    } = user.value!;
+    } = user.value;
 
     const userEmail =
       primaryEmailAddress?.emailAddress ?? emailAddresses[0]?.emailAddress;
+
+    const toastId = toast.loading("Processing data...");
+
+    if (!userEmail) {
+      toast.error("Registration failed", {
+        id: toastId,
+        description:
+          "Unable to retrieve email from your account. Please log in and try again",
+      });
+      return;
+    }
     // Handle form submission logic here
     const createUserPayload: IUserPayloadSchema = {
       email: userEmail!,
       userId: id,
       firstName: value.fullName.split(" ")[0]!,
       lastName:
-        value.fullName.split(" ")[value.fullName.split(" ").length - 1]!,
-      isActive: true,
+        value.fullName.split(" ").length > 1
+          ? value.fullName.split(" ").slice(1).join(" ")
+          : value.fullName.split(" ")[0]!,
       phoneNumber: primaryPhoneNumber?.phoneNumber ?? undefined,
       clerkCreatedAt: new Date(createdAt!),
       clerkUpdatedAt: new Date(updatedAt!),
@@ -116,21 +134,19 @@ const form = useForm({
       operatingHours: value.operatingHours,
     };
 
-    const toastId = toast.loading("Processing data...");
-
     try {
-      const createUser = await $fetch("/api/create-user", {
+      await $fetch("/api/create-user", {
         method: "POST",
         body: createUserPayload,
       });
-      const createPharmacy = await $fetch("/api/create-pharmacy", {
+      await $fetch("/api/create-pharmacy", {
         method: "POST",
         body: createPharmacyPayload,
       });
 
       toast.success("Registration complete", {
         id: toastId,
-        description: `Created user ${createUser} and pharmacy ${createPharmacy}`,
+        description: `Welcome to LocumHub! Your pharmacy has been registered successfully`,
       });
       // route to dashboard
     } catch (err) {

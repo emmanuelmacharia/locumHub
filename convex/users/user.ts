@@ -39,7 +39,7 @@ export const createUser = mutation({
       lastName: args.lastName,
       email: args.email,
       userId: args.userId,
-      isActive: true,
+      isActive: args.isActive,
     };
     const created = await ctx.db.insert("users", payload);
     return created;

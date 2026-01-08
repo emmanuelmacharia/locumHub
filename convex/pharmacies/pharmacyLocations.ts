@@ -37,7 +37,7 @@ export const createPharmacyLocation = mutation({
       locationEmail: pharma.contactEmail,
       wheelchairAccessible: false,
       isActive: true,
-      locatonCode: undefined,
+      locationCode: undefined,
       createdAt: new Date().getTime(),
       updatedAt: new Date().getTime(),
     };

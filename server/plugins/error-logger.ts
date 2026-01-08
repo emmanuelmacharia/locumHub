@@ -18,11 +18,11 @@ export default defineNitroPlugin((nitro) => {
     // eslint-disable-next-line no-console
     console.error("Server error: ", error);
     // error sanitizer
-    if (isErrorBody(error) && error.statusCode >= 400) {
-      if ("stack" in error) delete error.stack;
-      if (error.statusCode >= 500) {
-        error.message = "An unexpected error occurred";
-      }
+    if (isErrorBody(error) && error.statusCode >= 500) {
+      const sanitized = { ...error };
+      delete sanitized.stack;
+      sanitized.message = "An unexpected error occurred";
+      Object.assign(error, sanitized);
     }
   });
 });

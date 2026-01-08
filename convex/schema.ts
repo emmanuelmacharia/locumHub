@@ -240,6 +240,7 @@ const applicationTables = {
     postcode: v.string(),
     country: v.string(),
 
+    //TODO: these values will be filled out using Mapbox during a post registration journey for the pharmacies and locums; This would reduce onboarding friction.
     latitude: v.optional(v.number()),
     longitude: v.optional(v.number()),
     timezone: v.optional(v.string()),

@@ -23,7 +23,7 @@ export const hoursSchema = z.object({
   friday: dayHoursSchema,
   saturday: dayHoursSchema,
   sunday: dayHoursSchema,
-  holidays: dayHoursSchema,
+  holiday: dayHoursSchema,
 });
 
 export interface DaySchedule {

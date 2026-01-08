@@ -1,3 +1,3 @@
-export default defineEventHandler(event => {
-  return 'Hello create-locum'
-})
+export default defineEventHandler((event) => {
+  return `Hello create-locum ${event}`;
+});

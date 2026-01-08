@@ -1,17 +1,27 @@
 <script setup lang="ts">
 import { useForm } from "@tanstack/vue-form";
+import { useUser } from "@clerk/vue";
 import { z } from "zod";
 import { hoursSchema } from "~/utils/types/hourSchema";
 import { cities, countries } from "~/utils/data/locations";
 import { days, timeOptions } from "~/utils/data/time";
 import services from "~/utils/data/services.json";
+import type {
+  ICreatePharmacySchema,
+  IUserPayloadSchema,
+} from "~/utils/types/onboardingPayloads";
+import { toast } from "vue-sonner";
+import { FetchError } from "ofetch";
 
 definePageMeta({
   layout: "landing-page",
 });
 
+const { user } = useUser();
+
 const formSchema = z.object({
   // id data
+  fullName: z.string().min(2, "Full name must be at least 2 characters"),
   pharmacyName: z
     .string()
     .min(2, "Pharmacy name must be at least 2 characters long"),
@@ -42,26 +52,25 @@ type FormInput = z.input<typeof formSchema>;
 
 const form = useForm({
   defaultValues: {
+    fullName: "",
     pharmacyName: "",
     licenseNumber: "",
     phoneNumber: "",
     email: "",
-    // isChain: false,
-    // locationName: "",
     address: "",
     postcode: "",
     isPrimaryLocation: true,
     city: "",
     country: "",
     operatingHours: {
-      monday: null,
-      tuesday: null,
-      wednesday: null,
-      thursday: null,
-      friday: null,
-      saturday: null,
-      sunday: null,
-      holidays: null,
+      monday: undefined,
+      tuesday: undefined,
+      wednesday: undefined,
+      thursday: undefined,
+      friday: undefined,
+      saturday: undefined,
+      sunday: undefined,
+      holiday: undefined,
     },
     services: [] as string[],
   } as FormInput,
@@ -69,9 +78,91 @@ const form = useForm({
     onSubmit: formSchema,
   },
   onSubmit: async ({ value }) => {
-    // eslint-disable-next-line no-console
-    console.log("Form Submitted:", value);
+    if (!user.value) {
+      toast.error("Authentication error", {
+        description: "User session not found. Please log in again.",
+      });
+      return;
+    }
+    const {
+      createdAt,
+      emailAddresses,
+      id,
+      primaryEmailAddress,
+      primaryPhoneNumber,
+      updatedAt,
+    } = user.value;
+
+    const userEmail =
+      primaryEmailAddress?.emailAddress ?? emailAddresses[0]?.emailAddress;
+
+    const toastId = toast.loading("Processing data...");
+
+    if (!userEmail) {
+      toast.error("Registration failed", {
+        id: toastId,
+        description:
+          "Unable to retrieve email from your account. Please log in and try again",
+      });
+      return;
+    }
     // Handle form submission logic here
+    const createUserPayload: IUserPayloadSchema = {
+      email: userEmail!,
+      userId: id,
+      firstName: value.fullName.split(" ")[0]!,
+      lastName:
+        value.fullName.split(" ").length > 1
+          ? value.fullName.split(" ").slice(1).join(" ")
+          : value.fullName.split(" ")[0]!,
+      phoneNumber: primaryPhoneNumber?.phoneNumber ?? undefined,
+      clerkCreatedAt: new Date(createdAt!),
+      clerkUpdatedAt: new Date(updatedAt!),
+    };
+
+    const createPharmacyPayload: ICreatePharmacySchema = {
+      userId: id,
+      businessName: value.pharmacyName,
+      licenseNumber: value.licenseNumber,
+      contactPhone: value.phoneNumber,
+      contactEmail: value.email,
+      address: value.address,
+      postcode: value.postcode,
+      city: value.city,
+      country: value.country,
+      services: value.services,
+      operatingHours: value.operatingHours,
+    };
+
+    try {
+      await $fetch("/api/create-user", {
+        method: "POST",
+        body: createUserPayload,
+      });
+      await $fetch("/api/create-pharmacy", {
+        method: "POST",
+        body: createPharmacyPayload,
+      });
+
+      toast.success("Registration complete", {
+        id: toastId,
+        description: `Welcome to LocumHub! Your pharmacy has been registered successfully`,
+      });
+      // route to dashboard
+    } catch (err) {
+      if (err instanceof FetchError) {
+        toast.error(`Registration failed`, {
+          id: toastId,
+          description: err.statusMessage,
+        });
+        return;
+      }
+      toast.error("Registration failed", {
+        id: toastId,
+        description: "Something went wrong",
+      });
+      return;
+    }
   },
   onSubmitInvalid: ({ value, formApi }) => {
     // eslint-disable-next-line no-console
@@ -131,6 +222,37 @@ const displayErrorMessage = (fieldError: any[]) => {
                 </div>
               </div>
               <UIFieldGroup class="grid grid-cols-1 md:grid-cols-2">
+                <form.Field name="fullName">
+                  <template #default="{ field }">
+                    <UIField>
+                      <UIFieldLabel for="fullName">Full Name</UIFieldLabel>
+                      <UIInput
+                        id="fullName"
+                        v-model="field.state.value"
+                        type="text"
+                        :name="field.name"
+                        placeholder="Enter your full name"
+                        @blur="field.handleBlur"
+                        @input="
+                          (e: Event) =>
+                            field.handleChange(
+                              (e.target as HTMLInputElement).value
+                            )
+                        "
+                      />
+                      <div v-if="field.state.meta.errors.length">
+                        <UIFieldError
+                          v-for="message in displayErrorMessage(
+                            field.state.meta.errors
+                          )"
+                          :key="message"
+                        >
+                          {{ message }}
+                        </UIFieldError>
+                      </div>
+                    </UIField>
+                  </template>
+                </form.Field>
                 <form.Field name="pharmacyName">
                   <template #default="{ field }">
                     <UIField>
@@ -143,7 +265,6 @@ const displayErrorMessage = (fieldError: any[]) => {
                         :name="field.name"
                         type="text"
                         placeholder="Enter pharmacy name"
-                        autocomplete="off"
                         @blur="field.handleBlur"
                         @input="
                           (e: Event) => {
@@ -179,7 +300,6 @@ const displayErrorMessage = (fieldError: any[]) => {
                         :name="field.name"
                         type="text"
                         placeholder="Enter pharmacy license number"
-                        autocomplete="off"
                         @blur="field.handleBlur"
                         @input="
                           (e: Event) =>
@@ -214,7 +334,6 @@ const displayErrorMessage = (fieldError: any[]) => {
                         :name="field.name"
                         type="tel"
                         placeholder="Enter phone number"
-                        autocomplete="off"
                         @blur="field.handleBlur"
                         @input="
                           (e: Event) =>
@@ -249,7 +368,6 @@ const displayErrorMessage = (fieldError: any[]) => {
                         :name="field.name"
                         type="email"
                         placeholder="Enter Email Address"
-                        autocomplete="off"
                         @blur="field.handleBlur"
                         @input="
                           (e: Event) =>
@@ -296,7 +414,6 @@ const displayErrorMessage = (fieldError: any[]) => {
                         :name="field.name"
                         type="text"
                         placeholder="Enter address"
-                        autocomplete="off"
                         @blur="field.handleBlur"
                         @input="
                           (e: Event) =>
@@ -367,7 +484,6 @@ const displayErrorMessage = (fieldError: any[]) => {
                         :name="field.name"
                         type="text"
                         placeholder="Enter postcode"
-                        autocomplete="off"
                         @blur="field.handleBlur"
                         @input="
                           (e: Event) =>
@@ -523,7 +639,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                                         enabled,
                                         is24Hours: false,
                                       }
-                                    : null;
+                                    : undefined;
                                   field.handleChange(updatedHours);
                                 }
                               "

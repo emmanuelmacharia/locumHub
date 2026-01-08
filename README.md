@@ -91,8 +91,8 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 ## Frontend tasks
 
 - [x] Build out landing page
-- [ ] Build out onboarding forms
-- [ ] Build out login screens
+- [x] Build out onboarding forms
+- [x] Build out login screens
 
 ## Backend tasks
 

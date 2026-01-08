@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@clerk/nuxt": "^1.13.10",
+    "@clerk/vue": "^1.17.6",
     "@nuxt/fonts": "0.11.4",
     "@nuxt/icon": "2.1.0",
     "@nuxt/image": "1.11.0",
@@ -21,7 +22,7 @@
     "@vueuse/core": "^14.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "convex": "^1.29.3",
+    "convex": "^1.31.2",
     "convex-nuxt": "0.1.5",
     "convex-vue": "^0.1.5",
     "lucide-vue-next": "^0.552.0",
@@ -33,6 +34,7 @@
     "vue": "^3.5.22",
     "vue-input-otp": "^0.3.2",
     "vue-router": "^4.6.3",
+    "vue-sonner": "^2.0.9",
     "zod": "^4.2.1"
   },
   "devDependencies": {

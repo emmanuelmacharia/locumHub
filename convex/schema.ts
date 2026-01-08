@@ -31,10 +31,24 @@ const dayOfWeek = v.union(
   v.literal("sunday")
 );
 
-const operatingHours = v.object({
-  open: v.string(),
-  close: v.string(),
-  closed: v.boolean(),
+const operatingHours = v.optional(
+  v.object({
+    open: v.string(),
+    close: v.string(),
+    is24Hours: v.boolean(),
+    enabled: v.boolean(),
+  })
+);
+
+export const operatingDayHours = v.object({
+  monday: operatingHours,
+  tuesday: operatingHours,
+  wednesday: operatingHours,
+  thursday: operatingHours,
+  friday: operatingHours,
+  saturday: operatingHours,
+  sunday: operatingHours,
+  holiday: operatingHours,
 });
 
 const paymentMethodType = v.union(
@@ -114,17 +128,19 @@ const applicationTables = {
    * User Tables
    */
   users: defineTable({
-    userid: v.string(),
+    userId: v.string(),
     email: v.string(),
+    phoneNumber: v.optional(v.string()),
     firstName: v.string(),
     lastName: v.string(),
     isActive: v.boolean(),
     createdAt: v.number(),
     updatedAt: v.number(),
-    // isPlatformAdmin: v.boolean()
+    clerkCreatedAt: v.number(),
+    clerkUpdatedAt: v.number(),
   })
     .index("by_email", ["email"])
-    .index("by_user_id", ["userid"]),
+    .index("by_user_id", ["userId"]),
 
   userProfiles: defineTable({
     userId: v.id("users"),
@@ -208,6 +224,8 @@ const applicationTables = {
   })
     .index("by_active", ["isActive"])
     .index("by_chain", ["isChain", "isActive"])
+    .index("by_contact_email", ["contactEmail", "contactPhone"])
+    .index("by_contact_phone", ["contactPhone"])
     .index("by_license", ["licenseNumber"]),
 
   pharmacyLocations: defineTable({
@@ -216,33 +234,24 @@ const applicationTables = {
     locationName: v.string(),
     locationCode: v.optional(v.string()),
 
-    addressLine1: v.string(),
-    addressLine2: v.optional(v.string()),
+    address: v.string(),
     city: v.string(),
     county: v.optional(v.string()),
     postcode: v.string(),
     country: v.string(),
 
-    latitude: v.number(),
-    longitude: v.number(),
-    timezone: v.string(),
+    //TODO: these values will be filled out using Mapbox during a post registration journey for the pharmacies and locums; This would reduce onboarding friction.
+    latitude: v.optional(v.number()),
+    longitude: v.optional(v.number()),
+    timezone: v.optional(v.string()),
 
     locationPhone: v.optional(v.string()),
     locationEmail: v.optional(v.string()),
 
-    operatingHours: v.object({
-      mon: operatingHours,
-      tue: operatingHours,
-      wed: operatingHours,
-      thu: operatingHours,
-      fri: operatingHours,
-      sat: operatingHours,
-      sun: operatingHours,
-    }),
+    operatingHours: operatingDayHours,
 
     services: v.array(v.string()),
-    parkingAvailable: v.boolean(),
-    wheelchairAccessible: v.boolean(),
+    wheelchairAccessible: v.optional(v.boolean()),
 
     isActive: v.boolean(),
     isPrimary: v.boolean(),
@@ -340,19 +349,18 @@ const applicationTables = {
     contactPhone: v.string(),
 
     addressLine1: v.string(),
-    addressLine2: v.optional(v.string()),
     city: v.string(),
     county: v.optional(v.string()),
     postcode: v.string(),
-    latitude: v.number(),
-    longitude: v.number(),
+    latitude: v.optional(v.number()),
+    longitude: v.optional(v.number()),
     travelRadiusKm: v.number(),
 
     baseHourlyRate: v.number(),
-    minimumShiftHours: v.number(),
-    emergencyRateMultiplier: v.number(),
+    minimumShiftHours: v.optional(v.number()),
+    emergencyRateMultiplier: v.optional(v.number()),
 
-    isOnline: v.boolean(),
+    isOnline: v.optional(v.boolean()),
     lastOnlineAt: v.optional(v.number()),
 
     ratingSum: v.number(),

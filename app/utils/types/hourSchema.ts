@@ -13,7 +13,7 @@ const dayHoursSchema = z
     is24Hours: z.boolean(),
     enabled: z.boolean(),
   })
-  .nullable();
+  .optional();
 
 export const hoursSchema = z.object({
   monday: dayHoursSchema,
@@ -23,7 +23,7 @@ export const hoursSchema = z.object({
   friday: dayHoursSchema,
   saturday: dayHoursSchema,
   sunday: dayHoursSchema,
-  holidays: dayHoursSchema,
+  holiday: dayHoursSchema,
 });
 
 export interface DaySchedule {

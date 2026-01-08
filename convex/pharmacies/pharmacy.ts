@@ -47,13 +47,21 @@ export const createPharmacy = mutation({
       )
       .first();
 
-    const contactsNotUnique = pharmaEmail ?? pharmaPhone;
-
-    if (contactsNotUnique) {
+    if (pharmaEmail) {
       return appError({
         code: "DUPLICATE_ENTRY",
         statusCode: 400,
-        statusMessage: "Contact Email or Contact Phone must be unique",
+        statusMessage:
+          "Contact Email is already registered to another pharmacy",
+      });
+    }
+
+    if (pharmaPhone) {
+      return appError({
+        code: "DUPLICATE_ENTRY",
+        statusCode: 400,
+        statusMessage:
+          "Contact Phone is already registered to another pharmacy",
       });
     }
 
@@ -122,7 +130,19 @@ export const createPharmacy = mutation({
     if (locationCreated.statusCode === 201) {
       return created;
     }
-    await ctx.db.delete(created);
+
+    try {
+      // rollback pharmacy creation to removed orphaned pharmacies; we can add a mutation that patches this to inactive later.
+      await ctx.db.delete(created);
+    } catch (deleteError) {
+      // Log or handle delete failure - pharmacy is now orphaned
+      // eslint-disable-next-line no-console
+      console.error(
+        "Failed to delete orphaned pharmacy:",
+        created,
+        deleteError
+      );
+    }
     return appError({
       code: "CONVEX_ERROR",
       statusCode: 500,

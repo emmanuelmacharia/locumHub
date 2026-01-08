@@ -70,7 +70,7 @@ const form = useForm({
       friday: undefined,
       saturday: undefined,
       sunday: undefined,
-      holidays: undefined,
+      holiday: undefined,
     },
     services: [] as string[],
   } as FormInput,

@@ -50,8 +50,7 @@ export const createLocumStaff = mutation({
       return appError({
         code: "DUPLICATE_ENTRY",
         statusCode: 400,
-        statusMessage:
-          "Contact Phone is already registered to another pharmacy",
+        statusMessage: "Contact Phone is already registered to another user",
       });
     }
 
@@ -65,8 +64,7 @@ export const createLocumStaff = mutation({
       return appError({
         code: "DUPLICATE_ENTRY",
         statusCode: 400,
-        statusMessage:
-          "Contact Email is already registered to another pharmacy",
+        statusMessage: "Contact Email is already registered to another user",
       });
     }
     // fetch user

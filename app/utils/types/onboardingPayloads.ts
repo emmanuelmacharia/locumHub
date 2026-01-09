@@ -44,3 +44,35 @@ export type ICreatePharmacyPrimitive = Pick<
   ICreatePharmacySchema,
   "businessName" | "contactEmail" | "contactPhone" | "licenseNumber" | "userId"
 >;
+
+export const createLocumPayloadSchema = z.object({
+  userId: z.string(),
+  registrationNumber: z
+    .string()
+    .min(8, "license number must be at least 8 characters long"),
+  yearsOfExperience: z
+    .number()
+    .min(0, "Years of experience must be a positive number"),
+  qualifications: z.array(
+    z.string().min(5, "Qualifications must be at least 5 characters long")
+  ),
+  specializations: z
+    .array(z.string())
+    .min(1, "At least one service must be selected"),
+  contactEmail: z.email("Invalid email address"),
+  contactPhone: z
+    .string()
+    .min(10, "Phone number must be at least 10 characters long"),
+  city: z.string().min(2, "City must be at least 2 characters long"),
+  country: z.string().min(2, "Country must be at least 2 characters long"),
+  address: z.string().min(10, "Address must be at least 10 characters long"),
+  baseHourlyRate: z
+    .number()
+    .min(100, "Hourly rate must be greater than 100 KES"),
+  professionalBio: z
+    .string()
+    .min(20, "You must have a brief but detailed professional bio")
+    .max(500, "Your professional bio is too long. You need to summarize it"),
+});
+
+export type ICreateLocumSchema = z.infer<typeof createLocumPayloadSchema>;

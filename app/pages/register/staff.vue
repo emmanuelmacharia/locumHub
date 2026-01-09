@@ -75,7 +75,7 @@ const form = useForm({
       qualifications: [value.qualifications],
       specializations: value.services,
       contactEmail: payload.email,
-      contactPhone: value.phoneNumber || payload.phoneNumber!,
+      contactPhone: value.phoneNumber || payload.phoneNumber || "",
       city: value.city,
       country: value.country,
       address: value.address,

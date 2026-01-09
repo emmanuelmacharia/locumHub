@@ -59,11 +59,11 @@ export const deleteOrphanedUser = internalMutation({
       .first();
 
     if (!user) {
-      return appError({
-        code: "NOT_FOUND",
-        statusCode: 404,
-        statusMessage: "The user doesn't exist",
-      });
+      // User already deleted or doesn't exist - idempotent success
+      return {
+        statusCode: 200,
+        statusMessage: "User already deleted or doesn't exist",
+      };
     }
 
     try {

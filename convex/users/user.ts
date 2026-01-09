@@ -67,7 +67,7 @@ export const deleteOrphanedUser = internalMutation({
     }
 
     try {
-      // rollback pharmacy creation to removed orphaned pharmacies; we can add a mutation that patches this to inactive later.
+      // rollback for user creation to removed orphaned users; we can add a mutation that patches this to inactive later.
       await ctx.db.delete(user._id);
       return {
         statusCode: 200,
@@ -76,7 +76,7 @@ export const deleteOrphanedUser = internalMutation({
     } catch (deleteError) {
       // Log or handle delete failure - user is now orphaned
       // eslint-disable-next-line no-console
-      console.error("Failed to delete orphaned pharmacy:", deleteError);
+      console.error("Failed to delete orphaned user:", deleteError);
       return appError({
         code: "CONVEX_ERROR",
         statusCode: 500,

@@ -41,10 +41,14 @@ export default defineEventHandler(async (event) => {
         },
       });
     }
+    // eslint-disable-next-line no-console
+    console.log(error);
     throw createError({
       statusCode: 500,
       statusMessage: "Something went wrong; Please try again later",
-      data: error,
+      data: {
+        message: "Internal server error",
+      },
     });
   }
 });

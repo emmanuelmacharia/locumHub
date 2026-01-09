@@ -334,59 +334,56 @@ const applicationTables = {
    */
   locumProfiles: defineTable({
     userId: v.id("users"),
-
     registrationNumber: v.string(),
     registrationBody: v.string(),
     yearsOfExperience: v.number(),
     qualifications: v.array(v.string()),
     specializations: v.array(v.string()),
-
-    profileImageId: v.optional(v.string()),
-    bio: v.optional(v.string()),
-    headline: v.optional(v.string()),
-
+    address: v.string(),
+    city: v.string(),
     contactEmail: v.string(),
     contactPhone: v.string(),
-
-    addressLine1: v.string(),
-    city: v.string(),
-    county: v.optional(v.string()),
-    postcode: v.string(),
-    latitude: v.optional(v.number()),
-    longitude: v.optional(v.number()),
-    travelRadiusKm: v.number(),
-
     baseHourlyRate: v.number(),
-    minimumShiftHours: v.optional(v.number()),
-    emergencyRateMultiplier: v.optional(v.number()),
+    isActive: v.boolean(),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+    professionalBio: v.string(),
+    country: v.string(),
 
-    isOnline: v.optional(v.boolean()),
-    lastOnlineAt: v.optional(v.number()),
-
+    // Default properties - use defaults then correct post registration
+    travelRadiusKm: v.number(), // default first
     ratingSum: v.number(),
     ratingCount: v.number(),
+    isVerified: v.boolean(),
 
     totalShiftsCompleted: v.number(),
     totalHoursWorked: v.number(),
 
-    isVerified: v.boolean(),
-    verifiedAt: v.optional(v.number()),
-    verifiedBy: v.optional(v.id("users")),
+    // Optional Properties- can be collected on post registration
+    profileImageId: v.optional(v.string()),
+    headline: v.optional(v.string()),
+    county: v.optional(v.string()),
+    latitude: v.optional(v.number()),
+    longitude: v.optional(v.number()),
+    minimumShiftHours: v.optional(v.number()),
+    emergencyRateMultiplier: v.optional(v.number()),
 
-    isActive: v.boolean(),
+    // interesting param - we can think about this one for chat
+    isOnline: v.optional(v.boolean()),
+    lastOnlineAt: v.optional(v.number()),
+
     deactivatedAt: v.optional(v.number()),
     deactivationReason: v.optional(v.string()),
-
-    createdAt: v.number(),
-    updatedAt: v.number(),
+    verifiedAt: v.optional(v.number()),
+    verifiedBy: v.optional(v.id("users")),
   })
     .index("by_user_id", ["userId"])
     .index("by_online_city", ["isOnline", "city"])
     .index("by_city_active", ["city", "isActive"])
     .index("by_county_active", ["county", "isActive"])
-    .index("by_postcode", ["postcode"])
     .index("by_contact_email", ["contactEmail"])
     .index("by_contact_phone", ["contactPhone"])
+    .index("by_registration_id", ["registrationNumber"])
     .index("by_verified_active", ["isVerified", "isActive"]),
 
   availabilityPatterns: defineTable({

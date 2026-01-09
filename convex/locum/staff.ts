@@ -30,15 +30,6 @@ export const createLocumStaff = mutation({
       )
       .first();
 
-    console.log(
-      license,
-      await ctx.db
-        .query("locumProfiles")
-        .withIndex("by_registration_id", (q) =>
-          q.eq("registrationNumber", registrationNumber)
-        )
-    );
-
     if (license) {
       await ctx.runMutation(internal.users.user.deleteOrphanedUser, { userId }); // rollback
       return appError({

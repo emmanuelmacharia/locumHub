@@ -99,8 +99,25 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 - [x] Evaluate backend options - convex
 - [x] Set up database schema
 - [x] Evaluate Auth providers: We'll go with the 2-step approach we saw with WorkOS; We'll have to use clerk because of single tenancy limitations with WorkOS
-- [ ] Set up authentication and user management
-- [ ] Set up API endpoints for onboarding flow
+- [x] Set up authentication and user management
+- [x] Set up API endpoints for onboarding flow
+- [ ] Complete Homepage navigation (consider view transition api)
+  - [ ] Find staff
+  - [ ] Find Work
+  - [ ] How it Works
+  - [ ] Pricing??
+- [ ] Add frontend middleware to act as an auth route guard
+- [ ] Implement the dashboard
+- [ ] Shift management
+  - [ ] Pharmacy -- create Shift
+  - [ ] Pharmacy -- update shift details
+  - [ ] Pharmacy -- delete shift
+  - [ ] Locum -- view postings
+  - [ ] Locum -- view post details
+  - [ ] Locum -- make application for shift
+  - [ ] Pharmacy -- review applications for shift
+  - [ ] Pharmacy -- shortlist candidates
+  - [ ] Pharmacy & locum -- fill shift
 - [ ] Figure out user roles, constraints and permissions
-- [ ] Evaluate browserbase for verifying pharmacist ids
+- [x] Evaluate browserbase for verifying pharmacist ids - we don't need browserbase or puppeteer - we can fetch all the information using our server
 - [ ] Set up email service for onboarding and notifications

@@ -9,6 +9,7 @@
  */
 
 import type * as lib_errors from "../lib/errors.js";
+import type * as locum_staff from "../locum/staff.js";
 import type * as pharmacies_pharmacy from "../pharmacies/pharmacy.js";
 import type * as pharmacies_pharmacyLocations from "../pharmacies/pharmacyLocations.js";
 import type * as users_user from "../users/user.js";
@@ -21,6 +22,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   "lib/errors": typeof lib_errors;
+  "locum/staff": typeof locum_staff;
   "pharmacies/pharmacy": typeof pharmacies_pharmacy;
   "pharmacies/pharmacyLocations": typeof pharmacies_pharmacyLocations;
   "users/user": typeof users_user;

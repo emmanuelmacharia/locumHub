@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import { useForm } from "@tanstack/vue-form";
+import { useUser } from "@clerk/vue";
 import { z } from "zod";
 import { cities, countries } from "~/utils/data/locations";
 import skills from "~/utils/data/skills.json";
+import { toast } from "vue-sonner";
+import type { ICreateLocumSchema } from "~/utils/types/onboardingPayloads";
+import { FetchError } from "ofetch";
+import { useUserPayload } from "../../composables/user-payload";
 
 definePageMeta({
   layout: "landing-page",
 });
+
+const { user } = useUser();
+const { createUserPayload } = useUserPayload();
 
 const formSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
@@ -31,7 +39,7 @@ const formSchema = z.object({
   services: z.array(z.string()).min(1, "At least one service must be selected"),
 });
 
-type FormInput = z.input<typeof formSchema>;
+export type StaffUserFormInput = z.input<typeof formSchema>;
 
 const form = useForm({
   defaultValues: {
@@ -46,14 +54,63 @@ const form = useForm({
     hourlyRate: 100,
     professionalBio: "",
     services: [] as string[],
-  } as FormInput,
+  } as StaffUserFormInput,
   validators: {
     onSubmit: formSchema,
   },
   onSubmit: async (values) => {
-    // eslint-disable-next-line no-console
-    console.log("Form submitted with values:", values);
     // Handle form submission logic here
+    const { value } = values;
+
+    const userPayloadResult = createUserPayload(user.value, value);
+
+    if (!userPayloadResult) return;
+
+    const { payload, toastId } = userPayloadResult;
+
+    const createStaffPayload: ICreateLocumSchema = {
+      userId: payload.userId,
+      registrationNumber: value.licenseNumber,
+      yearsOfExperience: value.yearsOfExperience,
+      qualifications: [value.qualifications],
+      specializations: value.services,
+      contactEmail: payload.email,
+      contactPhone: value.phoneNumber || payload.phoneNumber!,
+      city: value.city,
+      country: value.country,
+      address: value.address,
+      baseHourlyRate: value.hourlyRate,
+      professionalBio: value.professionalBio,
+    };
+
+    try {
+      await $fetch("/api/create-user", {
+        method: "POST",
+        body: payload,
+      });
+      await $fetch("/api/create-locum", {
+        method: "POST",
+        body: createStaffPayload,
+      });
+      toast.success("Registration complete", {
+        id: toastId,
+        description: `Welcome to LocumHub! Your profile has been successfully created`,
+      });
+    } catch (err) {
+      if (err instanceof FetchError) {
+        toast.error(`Registration failed`, {
+          id: toastId,
+          description: err.statusMessage,
+        });
+        return;
+      }
+      toast.error("Registration failed", {
+        id: toastId,
+        description:
+          "Something went wrong while we were trying to create your profile. Please try again later",
+      });
+      return;
+    }
   },
   onSubmitInvalid: (errors) => {
     // eslint-disable-next-line no-console

@@ -74,9 +74,14 @@ export const deleteOrphanedUser = internalMutation({
         statusMessage: "User deleted",
       };
     } catch (deleteError) {
-      // Log or handle delete failure - pharmacy is now orphaned
+      // Log or handle delete failure - user is now orphaned
       // eslint-disable-next-line no-console
       console.error("Failed to delete orphaned pharmacy:", deleteError);
+      return appError({
+        code: "CONVEX_ERROR",
+        statusCode: 500,
+        statusMessage: "Failed to delete orphaned user",
+      });
     }
   },
 });

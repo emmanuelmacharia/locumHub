@@ -1,4 +1,4 @@
-import { mutation } from "../_generated/server";
+import { internalMutation, mutation } from "../_generated/server";
 import { v } from "convex/values";
 import { appError } from "../lib/errors";
 
@@ -43,5 +43,40 @@ export const createUser = mutation({
     };
     const created = await ctx.db.insert("users", payload);
     return created;
+  },
+});
+
+// let's work on making this an internal mutation
+export const deleteOrphanedUser = internalMutation({
+  args: {
+    userId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const { userId } = args;
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_user_id", (q) => q.eq("userId", userId))
+      .first();
+
+    if (!user) {
+      return appError({
+        code: "NOT_FOUND",
+        statusCode: 404,
+        statusMessage: "The user doesn't exist",
+      });
+    }
+
+    try {
+      // rollback pharmacy creation to removed orphaned pharmacies; we can add a mutation that patches this to inactive later.
+      await ctx.db.delete(user._id);
+      return {
+        statusCode: 200,
+        statusMessage: "User deleted",
+      };
+    } catch (deleteError) {
+      // Log or handle delete failure - pharmacy is now orphaned
+      // eslint-disable-next-line no-console
+      console.error("Failed to delete orphaned pharmacy:", deleteError);
+    }
   },
 });

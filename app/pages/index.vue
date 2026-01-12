@@ -6,7 +6,6 @@ definePageMeta({
 <template>
   <main>
     <section class="relative overflow-hidden">
-      <!-- decorative background -->
       <div class="absolute inset-0 pointer-events-none">
         <div class="absolute inset-0 bg-gradient-hero opacity-5" />
       </div>

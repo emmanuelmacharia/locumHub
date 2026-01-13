@@ -13,27 +13,32 @@ const nums = [1, 2, 3, 4];
     class="min-h-screen bg-linear-to-b from-background via-background to-muted/30"
   >
     <main>
-      <section class="container py-12 mx-auto">
-        <div class="text-center max-w-3xl mx-auto mb-16">
+      <!-- Hero Section -->
+      <section class="container py-16 md:py-24 mx-auto">
+        <div class="max-w-3xl mx-auto text-center">
           <UIBadge
-            class="mb-4 py-1 bg-gradient-primary/10 text-emerald-500 border-emerald-500/20"
+            class="mb-6 py-1.5 px-4 bg-gradient-primary/10 text-emerald-500 border-emerald-500/20"
           >
             For pharmacy owners
           </UIBadge>
-          <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight"
+          >
             Staff your pharmacies
             <span class="bg-gradient-primary bg-clip-text text-transparent"
               >with confidence</span
             >
           </h1>
-          <p class="text-lg text-muted-foreground mb-8">
+          <p
+            class="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
+          >
             Access to a curated network of verified locum pharmacists, techs and
             assistants. Fill shifts in hours, not days - with professionals you
             can trust
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <UIButton
-              class="bg-gradient-primary hover:opacity-90"
+              class="bg-gradient-primary hover:opacity-90 h-12 px-8 text-base"
               size="lg"
               as-child
             >
@@ -42,35 +47,42 @@ const nums = [1, 2, 3, 4];
                 <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
               </NuxtLink>
             </UIButton>
-            <UIButton size="lg" variant="outline" as-child>
+            <UIButton
+              size="lg"
+              variant="outline"
+              class="h-12 px-8 text-base"
+              as-child
+            >
               <NuxtLink to="/how-it-works"> Learn how it works </NuxtLink>
             </UIButton>
           </div>
         </div>
       </section>
+
+      <!-- Feature 1: Network -->
       <section class="py-20 md:py-28 bg-muted/30">
-        <div class="container max-w-6xl mx-auto px-5">
+        <div class="container mx-auto">
           <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div class="order-2 lg:order-1 sm:mx-auto">
+            <div class="order-2 lg:order-1">
               <img
                 src="~/assets/images/networkIllustration.svg"
                 alt="Illustration of the network of talent locumhub has access to"
               />
             </div>
-            <div class="order-1 lg:order-2 sm:max-w-4xl md:max-w-full mx-auto">
-              <div class="text-3xl md:text-4xl font-bold text-foreground mb-6">
+            <div class="order-1 lg:order-2">
+              <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-6">
                 A network of verified professionals
-              </div>
-              <div class="text-lg text-muted-foreground mb-8 leading-relaxed">
+              </h2>
+              <p class="text-lg text-muted-foreground mb-8 leading-relaxed">
                 Every locum on our platform undergoes rigorous vetting. Their
                 credentials are verified, competencies are checked, and
                 performance is continuously monitored through real pharmacy
                 reviews.
-              </div>
+              </p>
               <ul class="space-y-4">
                 <li class="flex items-start gap-3">
                   <div
-                    class="w-6 rounded-full bg-green-600/20 flex items-center justify-center p-1"
+                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5"
                   >
                     <Icon
                       name="lucide:check-circle"
@@ -81,7 +93,7 @@ const nums = [1, 2, 3, 4];
                 </li>
                 <li class="flex items-start gap-3">
                   <div
-                    class="w-6 rounded-full bg-green-600/20 flex items-center justify-center p-1"
+                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5"
                   >
                     <Icon
                       name="lucide:check-circle"
@@ -94,7 +106,7 @@ const nums = [1, 2, 3, 4];
                 </li>
                 <li class="flex items-start gap-3">
                   <div
-                    class="w-6 rounded-full bg-green-600/20 flex items-center justify-center p-1"
+                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5"
                   >
                     <Icon
                       name="lucide:check-circle"
@@ -111,12 +123,11 @@ const nums = [1, 2, 3, 4];
         </div>
       </section>
 
+      <!-- Feature 2: Matching -->
       <section class="py-20 md:py-28">
-        <div class="container max-w-6xl mx-auto px-5">
-          <div
-            class="grid lg:grid-cols-2 sm:grid-rows-2 gap-12 lg:gap-20 items-center"
-          >
-            <div class="">
+        <div class="container mx-auto">
+          <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div>
               <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-6">
                 Smart matching for your needs
               </h2>
@@ -128,7 +139,7 @@ const nums = [1, 2, 3, 4];
               <ul class="space-y-4">
                 <li class="flex items-start gap-3">
                   <div
-                    class="w-6 rounded-full bg-green-600/20 flex items-center justify-center p-1"
+                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5"
                   >
                     <Icon
                       name="lucide:file-spreadsheet"
@@ -139,7 +150,7 @@ const nums = [1, 2, 3, 4];
                 </li>
                 <li class="flex items-start gap-3">
                   <div
-                    class="w-6 rounded-full bg-green-600/20 flex items-center justify-center p-1"
+                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5"
                   >
                     <Icon name="lucide:star" class="w-4 h-4 text-green-600" />
                   </div>
@@ -149,7 +160,7 @@ const nums = [1, 2, 3, 4];
                 </li>
                 <li class="flex items-start gap-3">
                   <div
-                    class="w-6 rounded-full bg-green-600/20 flex items-center justify-center p-1"
+                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5"
                   >
                     <Icon name="lucide:award" class="w-4 h-4 text-green-600" />
                   </div>
@@ -159,7 +170,7 @@ const nums = [1, 2, 3, 4];
                 </li>
               </ul>
             </div>
-            <div class="sm:mx-auto sm:py-12">
+            <div>
               <img
                 src="~assets/images/matchingIllustration.svg"
                 alt="Illustration of the criteria for matching owners to locums"
@@ -169,9 +180,10 @@ const nums = [1, 2, 3, 4];
         </div>
       </section>
 
-      <section class="py-16 md:py-16 bg-muted/25">
-        <div class="container max-w-6xl mx-auto px-5">
-          <div class="grid grid-cols-2 gap-12 items-center">
+      <!-- Feature 3: Speed -->
+      <section class="py-20 md:py-28 bg-muted/30">
+        <div class="container mx-auto">
+          <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div class="order-2 lg:order-1">
               <img
                 src="~assets/images/speedIllustration.svg"
@@ -193,7 +205,7 @@ const nums = [1, 2, 3, 4];
                   <p class="text-sm text-muted-foreground">Avg. fill time</p>
                 </div>
                 <div class="text-center">
-                  <p class="p text-3xl font-bold text-primary">500+</p>
+                  <p class="text-3xl font-bold text-primary">500+</p>
                   <p class="text-sm text-muted-foreground">Active locums</p>
                 </div>
                 <div class="text-center">
@@ -205,8 +217,10 @@ const nums = [1, 2, 3, 4];
           </div>
         </div>
       </section>
+
+      <!-- Preview Section -->
       <section class="py-20 md:py-28">
-        <div class="container">
+        <div class="container mx-auto">
           <div class="text-center max-w-2xl mx-auto mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Preview our network
@@ -218,62 +232,59 @@ const nums = [1, 2, 3, 4];
           </div>
           <div class="relative max-w-4xl mx-auto">
             <div
-              class="absolute inset-0 bg-linear to-t from-gradient-background via-emerald/50 to-transparent z-10 rounded-2xl"
-            >
-              <div class="grid md:grid-cols-2 gap-4 blur-[3px]">
-                <div
-                  v-for="i in nums"
-                  :key="i"
-                  class="p-5 bg-card border border-border rounded-xl"
-                >
-                  <div class="flex items-center gap-4">
-                    <div
-                      class="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center"
-                    >
-                      <span
-                        class="text-lg font-semibold text-primary-foreground"
-                      >
-                        Here is a name
-                      </span>
-                    </div>
-                    <div class="flex-1">
-                      <h3 class="font-semibold text-foreground">Their name</h3>
-                      <p class="text-sm text-muted-foreground">Pharma D</p>
-                      <div class="flex items-center gap-1 mt-1">
-                        <Icon
-                          name="star"
-                          class="w-3 h-3 fill-yellow text-yellow"
-                        />
-                        <span class="text-sm">4.5</span>
-                      </div>
+              class="absolute inset-0 bg-linear-to-t from-background via-background/50 to-transparent z-10 rounded-2xl"
+            />
+            <div class="grid md:grid-cols-2 gap-4 blur-[3px]">
+              <div
+                v-for="i in nums"
+                :key="i"
+                class="p-5 bg-card border border-border rounded-xl"
+              >
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center"
+                  >
+                    <span class="text-lg font-semibold text-primary-foreground">
+                      Here is a name
+                    </span>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-foreground">Their name</h3>
+                    <p class="text-sm text-muted-foreground">Pharma D</p>
+                    <div class="flex items-center gap-1 mt-1">
+                      <Icon
+                        name="lucide:star"
+                        class="w-3 h-3 fill-yellow text-yellow"
+                      />
+                      <span class="text-sm">4.5</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div
-                class="absolute inset-0 flex items-center justify-center z-20"
+            </div>
+            <div class="absolute inset-0 flex items-center justify-center z-20">
+              <UIButton
+                size="lg"
+                class="bg-gradient-primary hover:opacity-90"
+                as-child
               >
-                <UIButton
-                  size="lg"
-                  class="bg-gradient-primary hover:opacity-90"
-                  as-child
-                >
-                  <NuxtLink to="/register">
-                    Sign up to view profile
-                    <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
-                  </NuxtLink>
-                </UIButton>
-              </div>
+                <NuxtLink to="/register">
+                  Sign up to view profile
+                  <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
+                </NuxtLink>
+              </UIButton>
             </div>
           </div>
         </div>
       </section>
+
+      <!-- CTA Section -->
       <section class="py-20 md:py-28 bg-emerald-600/15">
-        <div class="container">
+        <div class="container mx-auto">
           <div class="max-w-3xl mx-auto text-center">
-            <h3 class="text-3xl md:text-4xl font-bold text-foreground mb-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-6">
               Ready to fill your next shift?
-            </h3>
+            </h2>
             <p class="text-lg text-muted-foreground mb-10">
               Join 150+ pharmacies already using PharmLocum to fill shifts
               faster and build reliable teams.
@@ -285,7 +296,7 @@ const nums = [1, 2, 3, 4];
             >
               <NuxtLink to="/register">
                 Create Free Account
-                <ArrowRight class="ml-2 h-4 w-4" />
+                <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
               </NuxtLink>
             </UIButton>
           </div>

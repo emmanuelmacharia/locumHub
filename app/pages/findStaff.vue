@@ -14,7 +14,7 @@ const nums = [1, 2, 3, 4];
   >
     <main>
       <!-- Hero Section -->
-      <section class="container py-16 md:py-24 mx-auto">
+      <section class="container px-4 md:px-6 py-16 md:py-24 mx-auto">
         <div class="max-w-3xl mx-auto text-center">
           <UIBadge
             class="mb-6 py-1.5 px-4 bg-gradient-primary/10 text-emerald-500 border-emerald-500/20"
@@ -30,7 +30,7 @@ const nums = [1, 2, 3, 4];
             >
           </h1>
           <p
-            class="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
+            class="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
           >
             Access to a curated network of verified locum pharmacists, techs and
             assistants. Fill shifts in hours, not days - with professionals you
@@ -61,7 +61,7 @@ const nums = [1, 2, 3, 4];
 
       <!-- Feature 1: Network -->
       <section class="py-20 md:py-28 bg-muted/30">
-        <div class="container mx-auto">
+        <div class="container px-4 md:px-6 mx-auto">
           <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div class="order-2 lg:order-1">
               <img
@@ -82,7 +82,7 @@ const nums = [1, 2, 3, 4];
               <ul class="space-y-4">
                 <li class="flex items-start gap-3">
                   <div
-                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5"
+                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5 shrink-0"
                   >
                     <Icon
                       name="lucide:check-circle"
@@ -93,7 +93,7 @@ const nums = [1, 2, 3, 4];
                 </li>
                 <li class="flex items-start gap-3">
                   <div
-                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5"
+                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5 shrink-0"
                   >
                     <Icon
                       name="lucide:check-circle"
@@ -106,7 +106,7 @@ const nums = [1, 2, 3, 4];
                 </li>
                 <li class="flex items-start gap-3">
                   <div
-                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5"
+                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5 shrink-0"
                   >
                     <Icon
                       name="lucide:check-circle"
@@ -125,7 +125,7 @@ const nums = [1, 2, 3, 4];
 
       <!-- Feature 2: Matching -->
       <section class="py-20 md:py-28">
-        <div class="container mx-auto">
+        <div class="container px-4 md:px-6 mx-auto">
           <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
               <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-6">
@@ -139,7 +139,7 @@ const nums = [1, 2, 3, 4];
               <ul class="space-y-4">
                 <li class="flex items-start gap-3">
                   <div
-                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5"
+                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5 shrink-0"
                   >
                     <Icon
                       name="lucide:file-spreadsheet"
@@ -150,7 +150,7 @@ const nums = [1, 2, 3, 4];
                 </li>
                 <li class="flex items-start gap-3">
                   <div
-                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5"
+                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5 shrink-0"
                   >
                     <Icon name="lucide:star" class="w-4 h-4 text-green-600" />
                   </div>
@@ -160,7 +160,7 @@ const nums = [1, 2, 3, 4];
                 </li>
                 <li class="flex items-start gap-3">
                   <div
-                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5"
+                    class="w-6 h-6 rounded-full bg-green-600/20 flex items-center justify-center mt-0.5 shrink-0"
                   >
                     <Icon name="lucide:award" class="w-4 h-4 text-green-600" />
                   </div>
@@ -182,7 +182,7 @@ const nums = [1, 2, 3, 4];
 
       <!-- Feature 3: Speed -->
       <section class="py-20 md:py-28 bg-muted/30">
-        <div class="container mx-auto">
+        <div class="container px-4 md:px-6 mx-auto">
           <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div class="order-2 lg:order-1">
               <img
@@ -199,18 +199,28 @@ const nums = [1, 2, 3, 4];
                 minutes. Most positions are confirmed within 2 hours, so you
                 never have to worry about coverage gaps.
               </p>
-              <div class="grid grid-cols-3 gap-6">
+              <div class="grid grid-cols-3 gap-4 md:gap-6">
                 <div class="text-center">
-                  <p class="text-3xl font-bold text-primary">2 hours</p>
-                  <p class="text-sm text-muted-foreground">Avg. fill time</p>
+                  <p class="text-2xl md:text-3xl font-bold text-primary">
+                    2 hours
+                  </p>
+                  <p class="text-xs md:text-sm text-muted-foreground">
+                    Avg. fill time
+                  </p>
                 </div>
                 <div class="text-center">
-                  <p class="text-3xl font-bold text-primary">500+</p>
-                  <p class="text-sm text-muted-foreground">Active locums</p>
+                  <p class="text-2xl md:text-3xl font-bold text-primary">
+                    500+
+                  </p>
+                  <p class="text-xs md:text-sm text-muted-foreground">
+                    Active locums
+                  </p>
                 </div>
                 <div class="text-center">
-                  <p class="text-3xl font-bold text-primary">98%</p>
-                  <p class="text-sm text-muted-foreground">Satisfaction</p>
+                  <p class="text-2xl md:text-3xl font-bold text-primary">98%</p>
+                  <p class="text-xs md:text-sm text-muted-foreground">
+                    Satisfaction
+                  </p>
                 </div>
               </div>
             </div>
@@ -220,7 +230,7 @@ const nums = [1, 2, 3, 4];
 
       <!-- Preview Section -->
       <section class="py-20 md:py-28">
-        <div class="container mx-auto">
+        <div class="container px-4 md:px-6 mx-auto">
           <div class="text-center max-w-2xl mx-auto mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Preview our network
@@ -242,13 +252,13 @@ const nums = [1, 2, 3, 4];
               >
                 <div class="flex items-center gap-4">
                   <div
-                    class="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center"
+                    class="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center shrink-0"
                   >
                     <span class="text-lg font-semibold text-primary-foreground">
                       Here is a name
                     </span>
                   </div>
-                  <div class="flex-1">
+                  <div class="flex-1 min-w-0">
                     <h3 class="font-semibold text-foreground">Their name</h3>
                     <p class="text-sm text-muted-foreground">Pharma D</p>
                     <div class="flex items-center gap-1 mt-1">
@@ -280,7 +290,7 @@ const nums = [1, 2, 3, 4];
 
       <!-- CTA Section -->
       <section class="py-20 md:py-28 bg-emerald-600/15">
-        <div class="container mx-auto">
+        <div class="container px-4 md:px-6 mx-auto">
           <div class="max-w-3xl mx-auto text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-6">
               Ready to fill your next shift?

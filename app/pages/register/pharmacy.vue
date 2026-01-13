@@ -146,7 +146,7 @@ const form = useForm({
 
       toast.success("Registration complete", {
         id: toastId,
-        description: `Welcome to LocumHub! Your pharmacy has been registered successfully`,
+        description: `Welcome to Pharmify! Your pharmacy has been registered successfully`,
       });
       // route to dashboard
     } catch (err) {

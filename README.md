@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/16104ee6-362b-486f-97d8-3b5041145fd6/deploy-status)](https://app.netlify.com/projects/locumhub/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/16104ee6-362b-486f-97d8-3b5041145fd6/deploy-status)](https://app.netlify.com/projects/Pharmify/deploys)
 
 # Nuxt Minimal Starter
 

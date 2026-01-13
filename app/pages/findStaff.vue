@@ -66,7 +66,7 @@ const nums = [1, 2, 3, 4];
             <div class="order-2 lg:order-1">
               <img
                 src="~/assets/images/networkIllustration.svg"
-                alt="Illustration of the network of talent locumhub has access to"
+                alt="Illustration of the network of talent Pharmify has access to"
               />
             </div>
             <div class="order-1 lg:order-2">
@@ -187,7 +187,7 @@ const nums = [1, 2, 3, 4];
             <div class="order-2 lg:order-1">
               <img
                 src="~assets/images/speedIllustration.svg"
-                alt="An illustration on the simple process locumhub provides to find good talent"
+                alt="An illustration on the simple process Pharmify provides to find good talent"
               />
             </div>
             <div class="order-1 lg:order-2">
@@ -296,8 +296,8 @@ const nums = [1, 2, 3, 4];
               Ready to fill your next shift?
             </h2>
             <p class="text-lg text-muted-foreground mb-10">
-              Join 150+ pharmacies already using PharmLocum to fill shifts
-              faster and build reliable teams.
+              Join 150+ pharmacies already using Pharmify to fill shifts faster
+              and build reliable teams.
             </p>
             <UIButton
               size="lg"

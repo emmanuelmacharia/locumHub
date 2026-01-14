@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { p } from "vue-router/dist/router-CWoNjPRp.mjs";
-
 definePageMeta({
   layout: "landing-page",
 });

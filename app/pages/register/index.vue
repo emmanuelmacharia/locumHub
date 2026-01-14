@@ -53,7 +53,7 @@ const handleSelect = (type: string) => {
                   class="h-full w-full text-white"
                 />
               </div>
-              <UICardTitle class="text-xl">As aPharmacy</UICardTitle>
+              <UICardTitle class="text-xl">As a Pharmacy</UICardTitle>
               <UICardDescription class="py-3">
                 Find qualified locum pharmacists to fill your temporary staffing
                 needs quickly and efficiently.
@@ -101,7 +101,7 @@ const handleSelect = (type: string) => {
                   class="text-white h-full w-full"
                 />
               </div>
-              <UICardTitle class="text-xl">As aPharmacist</UICardTitle>
+              <UICardTitle class="text-xl">As a Pharmacist</UICardTitle>
               <UICardDescription class="py-3">
                 Find flexible locum work opportunities at pharmacies that match
                 your skills.

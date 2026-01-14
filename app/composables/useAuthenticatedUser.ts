@@ -7,7 +7,7 @@ export const useAuthenticatedUser = () => {
   const { user: clerkUser, isLoaded: isClerkLoaded } = useUser();
 
   const userId = computed(() => clerkUser.value?.id);
-  const shouldSkip = computed(() => isClerkLoaded.value || !userId.value);
+  const shouldSkip = computed(() => !isClerkLoaded.value || !userId.value);
 
   const {
     data: userData,

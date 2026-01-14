@@ -6,6 +6,14 @@ export default withNuxt({
   rules: {
     "vue/no-multiple-template-root": "off",
     "no-console": ["warn"],
+    "vue/html-self-closing": [
+      "error",
+      {
+        html: {
+          void: "any", // Allow both <img> and <img />
+        },
+      },
+    ],
   },
   ignores: ["**/convex/_generated", "**/app/components/ui/*"],
 });

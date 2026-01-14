@@ -46,6 +46,7 @@
   --gradient-hero: var(--gradient-hero);
   --shadow-glow: var(--shadow-glow);
   --accent-highlight: var(--accent-highlight);
+  --warning: var(--warning);
 }
 
 :root {
@@ -90,6 +91,7 @@
   --accent-highlight: hsl(173 80% 40%);
   --gradient-hero: linear-gradient(135deg, hsl(173 80% 40%), hsl(190 80% 45%));
   --shadow-glow: 0 20px 40px -12px hsl(173 80% 40% / 0.25);
+  --warning: oklch(0.828 0.189 84.429);
 }
 
 .dark {
@@ -133,6 +135,7 @@
   --accent-highlight: hsl(173 80% 40%);
   --gradient-hero: linear-gradient(135deg, hsl(173 80% 40%), hsl(190 80% 45%));
   --shadow-glow: 0 20px 40px -12px hsl(173 80% 40% / 0.25);
+  --warning: oklch(0.828 0.189 84.429);
 }
 
 @layer base {

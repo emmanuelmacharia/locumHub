@@ -94,7 +94,7 @@ const form = useForm({
       });
       toast.success("Registration complete", {
         id: toastId,
-        description: `Welcome to LocumHub! Your profile has been successfully created`,
+        description: `Welcome to Pharmify! Your profile has been successfully created`,
       });
     } catch (err) {
       if (err instanceof FetchError) {

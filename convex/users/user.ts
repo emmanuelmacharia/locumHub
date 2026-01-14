@@ -1,4 +1,4 @@
-import { internalMutation, mutation } from "../_generated/server";
+import { internalMutation, mutation, query } from "../_generated/server";
 import { v } from "convex/values";
 import { appError } from "../lib/errors";
 
@@ -83,5 +83,25 @@ export const deleteOrphanedUser = internalMutation({
         statusMessage: "Failed to delete orphaned user",
       });
     }
+  },
+});
+
+export const fetchUser = query({
+  args: { userId: v.string() },
+  handler: async (ctx, args) => {
+    const { userId } = args;
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_user_id", (q) => q.eq("userId", userId))
+      .first();
+    if (!user) {
+      return appError({
+        code: "NOT_FOUND",
+        statusCode: 404,
+        statusMessage: "User Not found!",
+      });
+    }
+
+    return user;
   },
 });

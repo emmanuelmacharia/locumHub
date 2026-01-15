@@ -172,7 +172,7 @@ const scrollToSection = (id: string) => {
               <ul class="space-y-1">
                 <li v-for="feature in features" :key="feature.id">
                   <a
-                    :to="`#${feature.id}`"
+                    :href="`#${feature.id}`"
                     :class="`flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-all hover:cursor-pointer ${activeLink === feature.id ? 'bg-emerald-600/10 text-primary font-medium' : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'}`"
                     @click.prevent="scrollToSection(feature.id)"
                   >
@@ -264,7 +264,7 @@ const scrollToSection = (id: string) => {
                   class="bg-gradient-primary hover:opacity-90 gap-2"
                 >
                   Create Account
-                  <icon name="lucide:arrow-right" class="w-4 h-4" />
+                  <Icon name="lucide:arrow-right" class="w-4 h-4" />
                 </UIButton>
               </NuxtLink>
               <NuxtLink to="/pricing">

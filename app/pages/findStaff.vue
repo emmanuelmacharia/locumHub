@@ -11,7 +11,6 @@ const nums = [1, 2, 3, 4];
     class="min-h-screen bg-linear-to-b from-background via-background to-muted/30"
   >
     <main>
-      <!-- Hero Section -->
       <section class="container px-4 md:px-6 py-16 md:py-24 mx-auto">
         <div class="max-w-3xl mx-auto text-center">
           <UIBadge
@@ -51,13 +50,11 @@ const nums = [1, 2, 3, 4];
               class="h-12 px-8 text-base"
               as-child
             >
-              <NuxtLink to="/how-it-works"> Learn how it works </NuxtLink>
+              <NuxtLink to="/howitworks"> Learn how it works </NuxtLink>
             </UIButton>
           </div>
         </div>
       </section>
-
-      <!-- Feature 1: Network -->
       <section class="py-20 md:py-28 bg-muted/30">
         <div class="container px-4 md:px-6 mx-auto">
           <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -120,8 +117,6 @@ const nums = [1, 2, 3, 4];
           </div>
         </div>
       </section>
-
-      <!-- Feature 2: Matching -->
       <section class="py-20 md:py-28">
         <div class="container px-4 md:px-6 mx-auto">
           <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -178,7 +173,6 @@ const nums = [1, 2, 3, 4];
         </div>
       </section>
 
-      <!-- Feature 3: Speed -->
       <section class="py-20 md:py-28 bg-muted/30">
         <div class="container px-4 md:px-6 mx-auto">
           <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -225,8 +219,6 @@ const nums = [1, 2, 3, 4];
           </div>
         </div>
       </section>
-
-      <!-- Preview Section -->
       <section class="py-20 md:py-28">
         <div class="container px-4 md:px-6 mx-auto">
           <div class="text-center max-w-2xl mx-auto mb-12">
@@ -285,8 +277,6 @@ const nums = [1, 2, 3, 4];
           </div>
         </div>
       </section>
-
-      <!-- CTA Section -->
       <section class="py-20 md:py-28 bg-emerald-600/15">
         <div class="container px-4 md:px-6 mx-auto">
           <div class="max-w-3xl mx-auto text-center">

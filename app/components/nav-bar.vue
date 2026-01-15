@@ -37,37 +37,37 @@ const mobileOpen = ref(false);
 const features: { title: string; href: string; description: string }[] = [
   {
     title: "Verified Professionals",
-    href: "/features/verified-professionals",
+    href: "/howitworks#verified-professionals",
     description:
       "All locum pharmacists are thoroughly vetted with verified credentials and licenses to ensure quality service.",
   },
   {
     title: "Smart Matching",
-    href: "/features/smart-matching",
+    href: "/howitworks#smart-matching",
     description:
       "Our intelligent matching system pairs pharmacies with the most suitable locum professionals based on experience, location, and availability.",
   },
   {
     title: "Flexible Scheduling",
-    href: "/features/scheduling",
+    href: "/howitworks#flexible-scheduling",
     description:
       "Easy-to-use calendar system for managing shifts, availability, and booking confirmations in real-time.",
   },
   {
     title: "Instant Communication",
-    href: "/features/communication",
+    href: "/howitworks#instant-communication",
     description:
       "Direct messaging and notification system to facilitate quick and efficient communication between pharmacies and locums.",
   },
-  {
-    title: "Secure Payments",
-    href: "/features/payments",
-    description:
-      "Streamlined payment processing with automated invoicing and secure transaction handling for both parties.",
-  },
+  // { ---- I dont think we want to lay the infra for this one; at least until we have users -----
+  //   title: "Secure Payments",
+  //   href: "/howitworks#secure-payments",
+  //   description:
+  //     "Streamlined payment processing with automated invoicing and secure transaction handling for both parties.",
+  // },
   {
     title: "Quality Assurance",
-    href: "/features/quality-assurance",
+    href: "/howitworks#quality-assurance",
     description:
       "Comprehensive review and rating system to maintain high service standards and professional accountability.",
   },
@@ -90,7 +90,7 @@ function closeMobile() {
           <UISheet v-model:open="mobileOpen">
             <UISheetTrigger as-child>
               <UIButton variant="ghost" size="icon" aria-label="Open menu">
-                <Icon name="menu" class="h-5 w-5" />
+                <Icon name="lucide:menu" class="h-5 w-5" />
               </UIButton>
             </UISheetTrigger>
 
@@ -117,13 +117,13 @@ function closeMobile() {
 
               <div class="px-3 py-3">
                 <div class="grid gap-2">
-                  <a
-                    href="/"
+                  <NuxtLink
+                    to="/"
                     class="block rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
                     @click="closeMobile"
                   >
                     Home
-                  </a>
+                  </NuxtLink>
 
                   <UIAccordion type="single" collapsible class="w-full">
                     <UIAccordionItem value="getting-started">
@@ -132,8 +132,9 @@ function closeMobile() {
                       </UIAccordionTrigger>
                       <UIAccordionContent class="px-3 pb-2">
                         <div class="grid gap-2">
-                          <a
-                            href="/docs/introduction"
+                          <NuxtLink
+                            to="/findWork"
+                            prefetch-on="interaction"
                             class="block rounded-md p-3 hover:bg-accent hover:text-accent-foreground"
                             @click="closeMobile"
                           >
@@ -146,10 +147,11 @@ function closeMobile() {
                               Connecting you with pharmacies that need your
                               expertise.
                             </p>
-                          </a>
+                          </NuxtLink>
 
-                          <a
-                            href="/findStaff"
+                          <NuxtLink
+                            to="/findStaff"
+                            prefetch-on="interaction"
                             class="block rounded-md p-3 hover:bg-accent hover:text-accent-foreground"
                             @click="closeMobile"
                           >
@@ -161,7 +163,7 @@ function closeMobile() {
                             >
                               Finding the right locum for your pharmacy needs.
                             </p>
-                          </a>
+                          </NuxtLink>
                         </div>
                       </UIAccordionContent>
                     </UIAccordionItem>
@@ -172,10 +174,11 @@ function closeMobile() {
                       </UIAccordionTrigger>
                       <UIAccordionContent class="px-3 pb-2">
                         <div class="grid gap-2">
-                          <a
+                          <NuxtLink
                             v-for="feature in features"
                             :key="feature.title"
-                            :href="feature.href"
+                            :to="feature.href"
+                            prefetch-on="interaction"
                             class="block rounded-md p-3 hover:bg-accent hover:text-accent-foreground"
                             @click="closeMobile"
                           >
@@ -187,19 +190,20 @@ function closeMobile() {
                             >
                               {{ feature.description }}
                             </p>
-                          </a>
+                          </NuxtLink>
                         </div>
                       </UIAccordionContent>
                     </UIAccordionItem>
                   </UIAccordion>
 
-                  <a
-                    href="/docs/introduction"
+                  <NuxtLink
+                    to="/docs/introduction"
+                    prefetch-on="interaction"
                     class="block rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
                     @click="closeMobile"
                   >
                     Pricing
-                  </a>
+                  </NuxtLink>
                 </div>
 
                 <UISeparator class="my-4" />
@@ -232,7 +236,7 @@ function closeMobile() {
             </UISheetContent>
           </UISheet>
 
-          <a href="/" class="flex items-center gap-3">
+          <NuxtLink to="/" class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-lg items-center justify-center flex">
               <img src="~/assets/images/logo.svg" alt="Pharmify Logo" />
             </div>
@@ -241,17 +245,14 @@ function closeMobile() {
             >
               Pharmify
             </p>
-          </a>
+          </NuxtLink>
         </div>
 
         <!-- Desktop brand -->
         <UINavigationMenu class="hidden md:flex">
           <UINavigationMenuList>
             <UINavigationMenuItem class="flex items-center gap-4">
-              <UINavigationMenuLink
-                href="/"
-                :class="navigationMenuTriggerStyle()"
-              >
+              <NuxtLink to="/" prefetch-on="interaction">
                 <div class="flex items-center gap-3">
                   <div
                     class="w-10 h-10 rounded-lg items-center justify-center flex"
@@ -264,7 +265,7 @@ function closeMobile() {
                     Pharmify
                   </p>
                 </div>
-              </UINavigationMenuLink>
+              </NuxtLink>
             </UINavigationMenuItem>
           </UINavigationMenuList>
         </UINavigationMenu>
@@ -281,8 +282,9 @@ function closeMobile() {
               >
                 <li>
                   <UINavigationMenuLink as-child>
-                    <a
-                      href="/docs/introduction"
+                    <NuxtLink
+                      to="/findWork"
+                      prefetch-on="interaction"
                       class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                     >
                       <div class="text-sm font-medium leading-none">
@@ -293,13 +295,14 @@ function closeMobile() {
                       >
                         Connecting you with pharmacies that need your expertise.
                       </p>
-                    </a>
+                    </NuxtLink>
                   </UINavigationMenuLink>
                 </li>
                 <li>
                   <UINavigationMenuLink as-child>
-                    <a
-                      href="/findStaff"
+                    <NuxtLink
+                      to="/findStaff"
+                      prefetch-on="interaction"
                       class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                     >
                       <div class="text-sm font-medium leading-none">
@@ -310,7 +313,7 @@ function closeMobile() {
                       >
                         Finding the right locum for your pharmacy needs.
                       </p>
-                    </a>
+                    </NuxtLink>
                   </UINavigationMenuLink>
                 </li>
               </ul>
@@ -320,13 +323,12 @@ function closeMobile() {
           <UINavigationMenuItem>
             <UINavigationMenuTrigger>How it works</UINavigationMenuTrigger>
             <UINavigationMenuContent>
-              <ul
-                class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
-              >
+              <ul class="grid w-100 gap-3 p-4 md:w-125 md:grid-cols-2 lg:w-150">
                 <li v-for="feature in features" :key="feature.title">
                   <UINavigationMenuLink as-child>
-                    <a
-                      :href="feature.href"
+                    <NuxtLink
+                      :to="feature.href"
+                      prefetch-on="interaction"
                       class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                     >
                       <div class="text-sm font-medium leading-none">
@@ -337,7 +339,7 @@ function closeMobile() {
                       >
                         {{ feature.description }}
                       </p>
-                    </a>
+                    </NuxtLink>
                   </UINavigationMenuLink>
                 </li>
               </ul>

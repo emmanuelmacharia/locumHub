@@ -323,7 +323,9 @@ function closeMobile() {
           <UINavigationMenuItem>
             <UINavigationMenuTrigger>How it works</UINavigationMenuTrigger>
             <UINavigationMenuContent>
-              <ul class="grid w-100 gap-3 p-4 md:w-125 md:grid-cols-2 lg:w-150">
+              <ul
+                class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
+              >
                 <li v-for="feature in features" :key="feature.title">
                   <UINavigationMenuLink as-child>
                     <NuxtLink

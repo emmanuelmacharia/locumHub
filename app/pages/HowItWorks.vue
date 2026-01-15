@@ -153,7 +153,7 @@ const scrollToSection = (id: string) => {
               Connecting pharmacies with verified locum professionals. Simple,
               secure, and built for the way you actually work.
             </p>
-            <NuxtLink to="">
+            <NuxtLink to="/">
               <UIButton
                 size="lg"
                 class="bg-gradient-primary hover:opacity-90 gap-2"
@@ -254,8 +254,8 @@ const scrollToSection = (id: string) => {
               Ready to get started?
             </h2>
             <p class="text-muted-foreground mb-8">
-              Join pharmacies and professionals who trust PharmLocum for
-              reliable, compliant temporary staffing.
+              Join pharmacies and professionals who trust LocumHub for reliable,
+              compliant temporary staffing.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
               <NuxtLink to="/register">

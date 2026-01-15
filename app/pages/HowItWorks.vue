@@ -4,7 +4,7 @@ import InstantCommunicationIllustration from "~/components/instant-communication
 import QualityAssuranceIllustration from "~/components/quality-assurance-illustration.vue";
 // import SecurePaymentIllustration from "~/components/secure-payment-illustration.vue";
 import SmartMatchingIllustration from "~/components/smart-matching-illustration.vue";
-import VerifiedProffessionalsIllustration from "~/components/verified-proffessionals-illustration.vue";
+import VerifiedProfessionalsIllustration from "~/components/verified-professionals-illustration.vue";
 
 definePageMeta({
   layout: "landing-page",
@@ -23,7 +23,7 @@ const features = [
       "Real-time license verification with regulatory bodies",
       "Automatic alerts when credentials need renewal",
     ],
-    illustration: VerifiedProffessionalsIllustration,
+    illustration: VerifiedProfessionalsIllustration,
   },
   {
     id: "smart-matching",

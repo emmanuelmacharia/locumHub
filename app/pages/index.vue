@@ -34,10 +34,11 @@ definePageMeta({
             </p>
 
             <div
-              class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+              class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 px-4"
             >
               <NuxtLink to="/for-pharmacies" class="w-full sm:w-auto">
                 <UIButton
+                  size="lg"
                   variant="default"
                   class="rounded-md bg-gradient-primary w-full sm:w-auto px-6 py-3 text-white shadow-glow hover:shadow-glow/80 hover:opacity-90 transition-opacity"
                 >
@@ -47,6 +48,7 @@ definePageMeta({
 
               <NuxtLink to="/for-pharmacists" class="w-full sm:w-auto">
                 <UIButton
+                  size="lg"
                   variant="outlinedGhost"
                   class="w-full sm:w-auto px-6 py-3 rounded-md bg-white/90 border border-primary/20"
                 >

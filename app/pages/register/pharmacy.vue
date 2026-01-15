@@ -653,7 +653,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                                 day.toLowerCase() as keyof typeof field.state.value
                               ]
                             "
-                            class="flex flex-col items-center md:flex-row gap-4 md:w-[400px] w-full"
+                            class="flex flex-col items-center md:flex-row gap-4 md:w-100 w-full"
                           >
                             <div class="flex items-center gap-2 md:w-[200px]">
                               <UISwitch

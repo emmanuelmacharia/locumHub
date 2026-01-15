@@ -134,6 +134,15 @@ const scrollToSection = (id: string) => {
   const element = document.getElementById(id);
   element?.scrollIntoView({ behavior: "smooth" });
 };
+
+const clerk = useClerk();
+
+const handleSignUp = () => {
+  if (!clerk.value) return;
+  clerk.value.openSignUp({
+    fallbackRedirectUrl: "/register",
+  });
+};
 </script>
 
 <template>
@@ -153,10 +162,11 @@ const scrollToSection = (id: string) => {
               Connecting pharmacies with verified locum professionals. Simple,
               secure, and built for the way you actually work.
             </p>
-            <NuxtLink to="/">
+            <NuxtLink to="">
               <UIButton
                 size="lg"
-                class="bg-gradient-primary hover:opacity-90 gap-2"
+                class="bg-gradient-primary hover:opacity-90 gap-2 hover:cursor-pointer"
+                @click.prevent="handleSignUp()"
               >
                 Get started
                 <Icon name="lucide:arrow-right" />
@@ -261,7 +271,8 @@ const scrollToSection = (id: string) => {
               <NuxtLink to="/register">
                 <UIButton
                   size="lg"
-                  class="bg-gradient-primary hover:opacity-90 gap-2"
+                  class="bg-gradient-primary hover:opacity-90 gap-2 hover:cursor-pointer"
+                  @click.prevent="handleSignUp()"
                 >
                   Create Account
                   <Icon name="lucide:arrow-right" class="w-4 h-4" />

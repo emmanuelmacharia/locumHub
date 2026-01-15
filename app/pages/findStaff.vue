@@ -4,6 +4,15 @@ definePageMeta({
 });
 
 const nums = [1, 2, 3, 4];
+
+const clerk = useClerk();
+
+const handleSignUp = () => {
+  if (!clerk.value) return;
+  clerk.value.openSignUp({
+    fallbackRedirectUrl: "/register",
+  });
+};
 </script>
 
 <template>
@@ -35,11 +44,12 @@ const nums = [1, 2, 3, 4];
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <UIButton
-              class="bg-gradient-primary hover:opacity-90 h-12 px-8 text-base"
+              class="bg-gradient-primary hover:opacity-90 h-12 px-8 text-base hover:cursor-pointer"
               size="lg"
               as-child
+              @click.prevent="handleSignUp()"
             >
-              <NuxtLink to="/register">
+              <NuxtLink to="">
                 Start finding staff
                 <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
               </NuxtLink>
@@ -267,8 +277,9 @@ const nums = [1, 2, 3, 4];
                 size="lg"
                 class="bg-gradient-primary hover:opacity-90"
                 as-child
+                @click.prevent="handleSignUp()"
               >
-                <NuxtLink to="/register">
+                <NuxtLink to="">
                   Sign up to view profile
                   <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
                 </NuxtLink>
@@ -277,7 +288,7 @@ const nums = [1, 2, 3, 4];
           </div>
         </div>
       </section>
-      <section class="py-20 md:py-28 bg-emerald-600/15">
+      <section class="py-20 md:py-28 bg-emerald-600/10">
         <div class="container px-4 md:px-6 mx-auto">
           <div class="max-w-3xl mx-auto text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-6">

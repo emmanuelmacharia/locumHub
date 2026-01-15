@@ -35,8 +35,8 @@ const monthDays = (year: number, month: number) =>
       </div>
       <div class="grid grid-cols-7 gap-2 text-center text-xs">
         <span
-          v-for="day in days"
-          :key="day"
+          v-for="(day, idx) in days"
+          :key="idx"
           class="text-muted-foreground font-medium"
           >{{ day }}</span
         >

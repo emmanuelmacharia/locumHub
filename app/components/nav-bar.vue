@@ -278,7 +278,7 @@ function closeMobile() {
             <UINavigationMenuTrigger>Getting started</UINavigationMenuTrigger>
             <UINavigationMenuContent>
               <ul
-                class="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[minmax(0,.75fr)_minmax(0,1fr)]"
+                class="grid gap-3 p-6 md:w-100 lg:w-125 lg:grid-cols-[minmax(0,.75fr)_minmax(0,1fr)]"
               >
                 <li>
                   <UINavigationMenuLink as-child>
@@ -323,9 +323,7 @@ function closeMobile() {
           <UINavigationMenuItem>
             <UINavigationMenuTrigger>How it works</UINavigationMenuTrigger>
             <UINavigationMenuContent>
-              <ul
-                class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
-              >
+              <ul class="grid w-100 gap-3 p-4 md:w-125 md:grid-cols-2 lg:w-150">
                 <li v-for="feature in features" :key="feature.title">
                   <UINavigationMenuLink as-child>
                     <NuxtLink

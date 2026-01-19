@@ -30,7 +30,7 @@ export const useAuthenticatedUser = () => {
 
   const { data: userProfileData } = useConvexQuery(
     api.users.userProfile.getUserProfileByUserId,
-    computed(() => userProfileArgs.value || { userId: undefined })
+    computed(() => userProfileArgs.value || { userId: undefined }) //TODO: investigate the "skip" behaviour built into useConvexQuery
   );
 
   const isFullyOnboarded = computed(

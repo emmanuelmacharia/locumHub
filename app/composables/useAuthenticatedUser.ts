@@ -1,7 +1,6 @@
 import { useUser } from "@clerk/vue";
 import { useConvexQuery } from "convex-vue";
 import { api } from "~~/convex/_generated/api";
-import type { Id } from "~~/convex/_generated/dataModel";
 
 export const useAuthenticatedUser = () => {
   // clerk auth
@@ -31,7 +30,7 @@ export const useAuthenticatedUser = () => {
 
   const { data: userProfileData } = useConvexQuery(
     api.users.userProfile.getUserProfileByUserId,
-    computed(() => userProfileArgs.value || { userId: "" as Id<"users"> })
+    computed(() => userProfileArgs.value || { userId: undefined })
   );
 
   const isFullyOnboarded = computed(

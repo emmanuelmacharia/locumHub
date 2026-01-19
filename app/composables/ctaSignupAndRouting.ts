@@ -1,7 +1,13 @@
 export const useCtaSignupAndRouting = () => {
   const clerk = useClerk();
-  const { userData, userProfileData, isLoaded, isClerkLoaded, isPending } =
-    useAuthenticatedUser();
+  const {
+    userData,
+    userProfileData,
+    isLoaded,
+    isClerkLoaded,
+    isPending,
+    isFullyOnboarded,
+  } = useAuthenticatedUser();
 
   const router = useRouter();
 
@@ -10,10 +16,17 @@ export const useCtaSignupAndRouting = () => {
       return;
     }
 
-    if (userData.value) {
+    if (isFullyOnboarded.value && userProfileData.value?.accountType) {
       // User is already authenticated, redirect to dashboard or appropriate page
       const userType = userProfileData.value?.accountType;
       return goToDashboard(userType === "pharmacy" ? "pharmacy" : "staff");
+    }
+
+    if (userData.value && !userProfileData.value?.accountType) {
+      // Authenticated but not fully onboarded
+      return router.push(
+        url ?? (userType ? `/register/${userType}` : "/register")
+      );
     }
 
     if (!clerk.value) return;

@@ -37,7 +37,7 @@ const { handleSignUp, goToDashboard, userProfileData } =
             </p>
             <!-- User is logged in -->
             <div
-              v-if="userProfileData"
+              v-if="userProfileData?.accountType"
               class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 px-4"
             >
               <UIButton

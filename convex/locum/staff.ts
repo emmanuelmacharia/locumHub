@@ -1,7 +1,8 @@
-import { mutation } from "../_generated/server";
+import { mutation, query } from "../_generated/server";
 import { v } from "convex/values";
 import { appError } from "../lib/errors";
 import { internal } from "../_generated/api";
+import { setAccountType } from "../users/userProfile";
 
 export const createLocumStaff = mutation({
   args: {
@@ -111,6 +112,7 @@ export const createLocumStaff = mutation({
 
     try {
       const created = await ctx.db.insert("locumProfiles", payload);
+      await setAccountType(ctx, user._id, "locum", created);
       return created;
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -123,5 +125,33 @@ export const createLocumStaff = mutation({
         statusMessage: "Something went wrong while creating your profile",
       });
     }
+  },
+});
+
+export const fetchLocumStaffByUserId = query({
+  args: {
+    userId: v.id("users"),
+  },
+  handler: async (ctx, args) => {
+    const locumStaff = await ctx.db
+      .query("locumProfiles")
+      .withIndex("by_user_id", (q) => q.eq("userId", args.userId))
+      .first();
+
+    if (!locumStaff) {
+      return appError({
+        code: "NOT_FOUND",
+        statusCode: 404,
+        statusMessage: "User Not found!",
+      });
+    }
+
+    return {
+      userId: locumStaff.userId,
+      registrationNumber: locumStaff.registrationNumber,
+      yearsOfExperience: locumStaff.yearsOfExperience,
+      qualifications: locumStaff.qualifications,
+      specializations: locumStaff.specializations,
+    };
   },
 });

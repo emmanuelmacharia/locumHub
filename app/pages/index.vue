@@ -2,6 +2,36 @@
 definePageMeta({
   layout: "landing-page",
 });
+
+const clerk = useClerk();
+const { userData, userProfileData, isLoaded, isClerkLoaded, isPending } =
+  useAuthenticatedUser();
+
+const router = useRouter();
+
+const handleSignUp = (userType: "pharmacy" | "staff") => {
+  if (!isLoaded.value || !isClerkLoaded.value || isPending.value) {
+    return;
+  }
+
+  if (userData.value) {
+    // User is already authenticated, redirect to dashboard or appropriate page
+    const userType = userProfileData.value?.accountType;
+    return goToDashboard(userType === "pharmacy" ? "pharmacy" : "staff");
+  }
+
+  if (!clerk.value) return;
+
+  clerk.value.openSignUp({
+    fallbackRedirectUrl: `/register/${userType}`,
+  });
+};
+
+const goToDashboard = (userType: "pharmacy" | "staff") => {
+  const dashboardUrl =
+    userType === "pharmacy" ? "/pharmacy/dashboard" : "/staff/dashboard";
+  router.push(dashboardUrl);
+};
 </script>
 <template>
   <main>
@@ -32,29 +62,48 @@ definePageMeta({
               pharmacies that need temporary staffing solutions. Streamlined,
               secure and compliant with regulatory requirements.
             </p>
-
+            <!-- User is logged in -->
             <div
+              v-if="userData"
               class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 px-4"
             >
-              <NuxtLink to="/for-pharmacies" class="w-full sm:w-auto">
-                <UIButton
-                  size="lg"
-                  variant="default"
-                  class="rounded-md bg-gradient-primary w-full sm:w-auto px-6 py-3 text-white shadow-glow hover:shadow-glow/80 hover:opacity-90 transition-opacity"
-                >
-                  I'm a Pharmacy
-                </UIButton>
-              </NuxtLink>
+              <UIButton
+                size="lg"
+                variant="default"
+                class="rounded-md bg-gradient-primary w-full sm:w-auto px-6 py-3 text-white shadow-glow hover:shadow-glow/80 hover:opacity-90 transition-opacity cursor-pointer"
+                @click.prevent="
+                  goToDashboard(
+                    userProfileData?.accountType === 'pharmacy'
+                      ? 'pharmacy'
+                      : 'staff'
+                  )
+                "
+              >
+                Go to Dashboard
+              </UIButton>
+            </div>
 
-              <NuxtLink to="/for-pharmacists" class="w-full sm:w-auto">
-                <UIButton
-                  size="lg"
-                  variant="outlinedGhost"
-                  class="w-full sm:w-auto px-6 py-3 rounded-md bg-white/90 border border-primary/20"
-                >
-                  I'm a Pharmacist
-                </UIButton>
-              </NuxtLink>
+            <div
+              v-else
+              class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 px-4"
+            >
+              <UIButton
+                size="lg"
+                variant="default"
+                class="rounded-md bg-gradient-primary w-full sm:w-auto px-6 py-3 text-white shadow-glow hover:shadow-glow/80 hover:opacity-90 transition-opacity cursor-pointer"
+                @click.prevent="handleSignUp('pharmacy')"
+              >
+                I'm a Pharmacy
+              </UIButton>
+
+              <UIButton
+                size="lg"
+                variant="outlinedGhost"
+                class="w-full sm:w-auto px-6 py-3 rounded-md bg-white/90 border border-primary/20 cursor-pointer"
+                @click.prevent="handleSignUp('staff')"
+              >
+                I'm a Pharmacist
+              </UIButton>
             </div>
           </div>
         </div>

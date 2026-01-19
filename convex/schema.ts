@@ -61,6 +61,8 @@ const paymentMethodType = v.union(
   v.literal("mpesa") // default for Kenya
 );
 
+const userType = v.union(v.literal("locum"), v.literal("pharmacy"));
+
 const paymentFrequency = v.union(
   v.literal("per_shift"),
   v.literal("weekly"),
@@ -128,7 +130,7 @@ const applicationTables = {
    * User Tables
    */
   users: defineTable({
-    userId: v.string(),
+    userId: v.string(), // userid from clerk
     email: v.string(),
     phoneNumber: v.optional(v.string()),
     firstName: v.string(),
@@ -148,6 +150,9 @@ const applicationTables = {
     identityVerifiedBy: v.optional(v.id("users")),
     createdAt: v.number(),
     updatedAt: v.number(),
+    accountType: v.optional(userType),
+    locumProfileId: v.optional(v.id("locumProfiles")),
+    pharmacyMemberId: v.optional(v.id("pharmacies")),
   }).index("by_user_id", ["userId"]),
 
   userNotificationPreferences: defineTable({

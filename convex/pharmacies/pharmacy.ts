@@ -3,6 +3,7 @@ import { appError } from "../lib/errors";
 import { mutation } from "../_generated/server";
 import { operatingDayHours } from "../schema";
 import { api } from "../_generated/api";
+import { setAccountType } from "../users/userProfile";
 
 export const createPharmacy = mutation({
   args: {
@@ -105,6 +106,7 @@ export const createPharmacy = mutation({
 
     const created = await ctx.db.insert("pharmacies", payload);
 
+    await setAccountType(ctx, user._id, "pharmacy", created); // set the account type before anything else
     // we create pharma locations from within the convex context, as that avoids many round trips between the nuxt server and convex
 
     const {

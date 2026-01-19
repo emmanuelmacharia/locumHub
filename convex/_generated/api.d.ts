@@ -13,6 +13,7 @@ import type * as locum_staff from "../locum/staff.js";
 import type * as pharmacies_pharmacy from "../pharmacies/pharmacy.js";
 import type * as pharmacies_pharmacyLocations from "../pharmacies/pharmacyLocations.js";
 import type * as users_user from "../users/user.js";
+import type * as users_userProfile from "../users/userProfile.js";
 
 import type {
   ApiFromModules,
@@ -26,6 +27,7 @@ declare const fullApi: ApiFromModules<{
   "pharmacies/pharmacy": typeof pharmacies_pharmacy;
   "pharmacies/pharmacyLocations": typeof pharmacies_pharmacyLocations;
   "users/user": typeof users_user;
+  "users/userProfile": typeof users_userProfile;
 }>;
 
 /**

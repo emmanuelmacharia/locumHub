@@ -103,6 +103,9 @@ const features = [
 
 const activeLink = ref("verified-professionals");
 
+const { handleSignUp, goToDashboard, userProfileData } =
+  useCtaSignupAndRouting();
+
 onMounted(() => {
   const sections = features.map((f) => document.getElementById(f.id));
 
@@ -134,15 +137,6 @@ const scrollToSection = (id: string) => {
   const element = document.getElementById(id);
   element?.scrollIntoView({ behavior: "smooth" });
 };
-
-const clerk = useClerk();
-
-const handleSignUp = () => {
-  if (!clerk.value) return;
-  clerk.value.openSignUp({
-    fallbackRedirectUrl: "/register",
-  });
-};
 </script>
 
 <template>
@@ -162,16 +156,30 @@ const handleSignUp = () => {
               Connecting pharmacies with verified locum professionals. Simple,
               secure, and built for the way you actually work.
             </p>
-            <NuxtLink to="">
-              <UIButton
-                size="lg"
-                class="bg-gradient-primary hover:opacity-90 gap-2 hover:cursor-pointer"
-                @click.prevent="handleSignUp()"
-              >
-                Get started
-                <Icon name="lucide:arrow-right" />
-              </UIButton>
-            </NuxtLink>
+            <UIButton
+              v-if="userProfileData"
+              size="lg"
+              class="bg-gradient-primary hover:opacity-90 gap-2 hover:cursor-pointer"
+              @click.prevent="
+                goToDashboard(
+                  userProfileData?.accountType === 'pharmacy'
+                    ? 'pharmacy'
+                    : 'staff'
+                )
+              "
+            >
+              Go to Dashboard
+              <Icon name="lucide:arrow-right" />
+            </UIButton>
+            <UIButton
+              v-else
+              size="lg"
+              class="bg-gradient-primary hover:opacity-90 gap-2 hover:cursor-pointer"
+              @click.prevent="handleSignUp()"
+            >
+              Get started
+              <Icon name="lucide:arrow-right" />
+            </UIButton>
           </div>
         </div>
       </section>
@@ -268,16 +276,30 @@ const handleSignUp = () => {
               compliant temporary staffing.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <NuxtLink to="/register">
-                <UIButton
-                  size="lg"
-                  class="bg-gradient-primary hover:opacity-90 gap-2 hover:cursor-pointer"
-                  @click.prevent="handleSignUp()"
-                >
-                  Create Account
-                  <Icon name="lucide:arrow-right" class="w-4 h-4" />
-                </UIButton>
-              </NuxtLink>
+              <UIButton
+                v-if="userProfileData"
+                size="lg"
+                class="bg-gradient-primary hover:opacity-90 gap-2 hover:cursor-pointer"
+                @click.prevent="
+                  goToDashboard(
+                    userProfileData?.accountType === 'pharmacy'
+                      ? 'pharmacy'
+                      : 'staff'
+                  )
+                "
+              >
+                Go to Dashboard
+                <Icon name="lucide:arrow-right" class="w-4 h-4" />
+              </UIButton>
+              <UIButton
+                v-else
+                size="lg"
+                class="bg-gradient-primary hover:opacity-90 gap-2 hover:cursor-pointer"
+                @click.prevent="handleSignUp()"
+              >
+                Create Account
+                <Icon name="lucide:arrow-right" class="w-4 h-4" />
+              </UIButton>
               <NuxtLink to="/pricing">
                 <UIButton size="lg" variant="outline"> View Pricing </UIButton>
               </NuxtLink>

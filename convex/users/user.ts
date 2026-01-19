@@ -1,6 +1,7 @@
 import { internalMutation, mutation, query } from "../_generated/server";
 import { v } from "convex/values";
 import { appError } from "../lib/errors";
+import { api } from "../_generated/api";
 
 export const createUser = mutation({
   args: {
@@ -42,6 +43,10 @@ export const createUser = mutation({
       isActive: args.isActive,
     };
     const created = await ctx.db.insert("users", payload);
+    await ctx.runMutation(api.users.userProfile.createUserProfile, {
+      // create user profile
+      userId: created,
+    });
     return created;
   },
 });
@@ -66,9 +71,17 @@ export const deleteOrphanedUser = internalMutation({
       };
     }
 
+    const userProfile = await ctx.db // get user profile
+      .query("userProfiles")
+      .withIndex("by_user_id", (q) => q.eq("userId", user._id))
+      .first();
+
     try {
       // rollback for user creation to removed orphaned users; we can add a mutation that patches this to inactive later.
       await ctx.db.delete(user._id);
+      if (userProfile) {
+        await ctx.db.delete(userProfile._id); // also delete the user profile
+      }
       return {
         statusCode: 200,
         statusMessage: "User deleted",
@@ -89,18 +102,13 @@ export const deleteOrphanedUser = internalMutation({
 export const fetchUser = query({
   args: { userId: v.string() },
   handler: async (ctx, args) => {
+    if (!args.userId) return null;
     const { userId } = args;
     const user = await ctx.db
       .query("users")
       .withIndex("by_user_id", (q) => q.eq("userId", userId))
       .first();
-    if (!user) {
-      return appError({
-        code: "NOT_FOUND",
-        statusCode: 404,
-        statusMessage: "User Not found!",
-      });
-    }
+    if (!user) return null;
 
     return user;
   },

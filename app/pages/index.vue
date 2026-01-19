@@ -3,35 +3,8 @@ definePageMeta({
   layout: "landing-page",
 });
 
-const clerk = useClerk();
-const { userData, userProfileData, isLoaded, isClerkLoaded, isPending } =
-  useAuthenticatedUser();
-
-const router = useRouter();
-
-const handleSignUp = (userType: "pharmacy" | "staff") => {
-  if (!isLoaded.value || !isClerkLoaded.value || isPending.value) {
-    return;
-  }
-
-  if (userData.value) {
-    // User is already authenticated, redirect to dashboard or appropriate page
-    const userType = userProfileData.value?.accountType;
-    return goToDashboard(userType === "pharmacy" ? "pharmacy" : "staff");
-  }
-
-  if (!clerk.value) return;
-
-  clerk.value.openSignUp({
-    fallbackRedirectUrl: `/register/${userType}`,
-  });
-};
-
-const goToDashboard = (userType: "pharmacy" | "staff") => {
-  const dashboardUrl =
-    userType === "pharmacy" ? "/pharmacy/dashboard" : "/staff/dashboard";
-  router.push(dashboardUrl);
-};
+const { handleSignUp, goToDashboard, userProfileData } =
+  useCtaSignupAndRouting();
 </script>
 <template>
   <main>
@@ -64,7 +37,7 @@ const goToDashboard = (userType: "pharmacy" | "staff") => {
             </p>
             <!-- User is logged in -->
             <div
-              v-if="userData"
+              v-if="userProfileData"
               class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 px-4"
             >
               <UIButton

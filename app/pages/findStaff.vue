@@ -5,14 +5,8 @@ definePageMeta({
 
 const nums = [1, 2, 3, 4];
 
-const clerk = useClerk();
-
-const handleSignUp = () => {
-  if (!clerk.value) return;
-  clerk.value.openSignUp({
-    fallbackRedirectUrl: "/register",
-  });
-};
+const { handleSignUp, goToDashboard, userProfileData } =
+  useCtaSignupAndRouting();
 </script>
 
 <template>
@@ -44,15 +38,33 @@ const handleSignUp = () => {
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <UIButton
+              v-if="!userProfileData"
               class="bg-gradient-primary hover:opacity-90 h-12 px-8 text-base hover:cursor-pointer"
               size="lg"
-              as-child
               @click.prevent="handleSignUp()"
             >
-              <NuxtLink to="">
-                Start finding staff
-                <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
-              </NuxtLink>
+              Start finding staff
+              <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
+            </UIButton>
+            <UIButton
+              v-else
+              class="bg-gradient-primary hover:opacity-90 h-12 px-8 text-base hover:cursor-pointer"
+              size="lg"
+              @click.prevent="
+                goToDashboard(
+                  // think of how the user would go to the staff catalog page from here; rather than just the dashboard
+                  userProfileData?.accountType === 'pharmacy'
+                    ? 'pharmacy'
+                    : 'staff'
+                )
+              "
+            >
+              {{
+                userProfileData?.accountType === "pharmacy"
+                  ? "Start finding staff"
+                  : "Go to Dashboard"
+              }}
+              <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
             </UIButton>
             <UIButton
               size="lg"
@@ -229,7 +241,10 @@ const handleSignUp = () => {
           </div>
         </div>
       </section>
-      <section class="py-20 md:py-28">
+      <section
+        class="py-20 md:py-28"
+        v-if="!userProfileData || userProfileData?.accountType === 'pharmacy'"
+      >
         <div class="container px-4 md:px-6 mx-auto">
           <div class="text-center max-w-2xl mx-auto mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -274,15 +289,22 @@ const handleSignUp = () => {
             </div>
             <div class="absolute inset-0 flex items-center justify-center z-20">
               <UIButton
+                v-if="!userProfileData"
                 size="lg"
                 class="bg-gradient-primary hover:opacity-90"
-                as-child
                 @click.prevent="handleSignUp()"
               >
-                <NuxtLink to="">
-                  Sign up to view profile
-                  <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
-                </NuxtLink>
+                Sign up to view profiles
+                <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
+              </UIButton>
+              <UIButton
+                v-else
+                size="lg"
+                class="bg-gradient-primary hover:opacity-90"
+                @click.prevent="goToDashboard('pharmacy')"
+              >
+                Start finding staff
+                <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
               </UIButton>
             </div>
           </div>
@@ -299,14 +321,28 @@ const handleSignUp = () => {
               and build reliable teams.
             </p>
             <UIButton
+              v-if="!userProfileData"
               size="lg"
               class="bg-gradient-primary hover:opacity-90 h-12 px-8 text-base"
-              as-child
+              @click.prevent="handleSignUp()"
             >
-              <NuxtLink to="/register">
-                Create Free Account
-                <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
-              </NuxtLink>
+              Create Free Account
+              <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
+            </UIButton>
+            <UIButton
+              v-else
+              size="lg"
+              class="bg-gradient-primary hover:opacity-90 h-12 px-8 text-base"
+              @click.prevent="
+                goToDashboard(
+                  userProfileData?.accountType === 'pharmacy'
+                    ? 'pharmacy'
+                    : 'staff'
+                )
+              "
+            >
+              Go to Dashboard
+              <Icon name="lucide:arrow-right" class="ml-2 h-4 w-4" />
             </UIButton>
           </div>
         </div>

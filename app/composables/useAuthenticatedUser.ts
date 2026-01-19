@@ -39,7 +39,7 @@ export const useAuthenticatedUser = () => {
 
   return {
     user: computed(() => clerkUser.value), // Clerk user object
-    userData: computed(() => (shouldSkip.value ? null : userData.value)), // userf from Convex
+    userData: computed(() => (shouldSkip.value ? null : userData.value)), // user from Convex
     userProfileData: computed(() =>
       shouldSkip.value ? null : userProfileData.value
     ), // user profile from Convex

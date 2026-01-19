@@ -5,7 +5,7 @@ export const useCtaSignupAndRouting = () => {
 
   const router = useRouter();
 
-  const handleSignUp = (userType: "pharmacy" | "staff") => {
+  const handleSignUp = (userType?: "pharmacy" | "staff", url?: string) => {
     if (!isLoaded.value || !isClerkLoaded.value || isPending.value) {
       return;
     }
@@ -18,8 +18,11 @@ export const useCtaSignupAndRouting = () => {
 
     if (!clerk.value) return;
 
+    const redirectUrl =
+      url ?? (userType ? `/register/${userType}` : "/register");
+
     clerk.value.openSignUp({
-      fallbackRedirectUrl: `/register/${userType}`,
+      fallbackRedirectUrl: redirectUrl,
     });
   };
 

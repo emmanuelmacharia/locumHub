@@ -135,7 +135,9 @@ const handleSelect = (type: string) => {
         </div>
         <p class="text-center text-muted-foreground text-sm mt-8">
           Already have an account?
-          <NuxtLink to="/login" class="text-emerald-500 hover:underline"
+          <NuxtLink
+            to=""
+            class="text-emerald-500 hover:underline hover:cursor-pointer"
             >Log in here.</NuxtLink
           >
         </p>

@@ -331,7 +331,7 @@ const { handleSignUp } = useCtaSignupAndRouting();
               <div
                 v-for="(benefit, index) in staffBenefits"
                 :key="index"
-                class="flex gap-4 bg-gradient-primary rounded-xl p-4 border border-border/50"
+                class="flex gap-4 rounded-xl p-4 border border-border/50 shadow-lg"
               >
                 <div
                   class="w-12 h-12 bg-emerald-600/10 rounded-xl flex items-center justify-center shrink-0"

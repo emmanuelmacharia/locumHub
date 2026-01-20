@@ -141,7 +141,7 @@ const { handleSignUp } = useCtaSignupAndRouting();
           </h1>
           <p class="text-xl text-muted-foreground">
             Choose your path. Pharmacies subscribe to find qualified staff.
-            Pharmacies join for free and find flexible opportunities
+            Pharmacists join for free and find flexible opportunities
           </p>
         </div>
         <div class="flex justify-center mb-12">
@@ -182,13 +182,13 @@ const { handleSignUp } = useCtaSignupAndRouting();
         <div class="container mx-auto">
           <div class="flex items-center justify-center gap-4 mb-12">
             <span
-              :class="`text-sm ${isAnnualBilling ? 'text-foreground font-medium' : 'text-muted-foreground'}`"
+              :class="`text-sm ${!isAnnualBilling ? 'text-foreground font-medium' : 'text-muted-foreground'}`"
             >
               Monthly
             </span>
             <UISwitch v-model="isAnnualBilling" />
             <span
-              :class="`text-sm ${isAnnualBilling ? 'text-muted-foreground' : 'text-foreground font-medium'}`"
+              :class="`text-sm ${isAnnualBilling ? 'text-foreground font-medium' : 'text-muted-foreground'}`"
             >
               Annual
             </span>
@@ -331,7 +331,7 @@ const { handleSignUp } = useCtaSignupAndRouting();
               <div
                 v-for="(benefit, index) in staffBenefits"
                 :key="index"
-                class="flex gap-4 bg-gradient-background rounded-xl p-4 border border-border/50"
+                class="flex gap-4 bg-gradient-primary rounded-xl p-4 border border-border/50"
               >
                 <div
                   class="w-12 h-12 bg-emerald-600/10 rounded-xl flex items-center justify-center shrink-0"

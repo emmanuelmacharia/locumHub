@@ -197,7 +197,7 @@ function closeMobile() {
                   </UIAccordion>
 
                   <NuxtLink
-                    to="/docs/introduction"
+                    to="/pricing"
                     prefetch-on="interaction"
                     class="block rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
                     @click="closeMobile"
@@ -348,7 +348,7 @@ function closeMobile() {
 
           <UINavigationMenuItem>
             <UINavigationMenuLink
-              href="/docs/introduction"
+              href="/pricing"
               :class="navigationMenuTriggerStyle()"
             >
               Pricing

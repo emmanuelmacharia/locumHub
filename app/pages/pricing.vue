@@ -134,7 +134,7 @@ const { handleSignUp } = useCtaSignupAndRouting();
     class="min-h-screen bg-linear-to-b from-background via-background to-muted/30"
   >
     <main>
-      <section class="container py-16 lg:py-24 mx-auto">
+      <section class="container px-4 sm:px-6 py-16 lg:py-24 mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-12">
           <h1 class="text-4xl lg:text-6xl font-bold text-foreground mb-6">
             Simple, Transparent Pricing
@@ -179,7 +179,7 @@ const { handleSignUp } = useCtaSignupAndRouting();
         v-if="activeTab === 'pharmacy'"
         class="bg-muted/30 py-16 lg:py-24"
       >
-        <div class="container mx-auto">
+        <div class="container px-4 sm:px-6 mx-auto">
           <div class="flex items-center justify-center gap-4 mb-12">
             <span
               :class="`text-sm ${!isAnnualBilling ? 'text-foreground font-medium' : 'text-muted-foreground'}`"
@@ -299,7 +299,7 @@ const { handleSignUp } = useCtaSignupAndRouting();
         </div>
       </section>
       <section v-else class="bg-muted/30 py-16 lg:py-24">
-        <div class="container mx-auto">
+        <div class="container px-4 sm:px-6 mx-auto">
           <div class="max-w-3xl mx-auto text-center mb-16">
             <div
               class="inline-flex items-center gap-2 bg-emerald-600/10 text-emerald-600 rounded-full px-4 py-2 text-sm font-medium mb-6"
@@ -354,7 +354,7 @@ const { handleSignUp } = useCtaSignupAndRouting();
           </div>
         </div>
       </section>
-      <section class="container mx-auto py-16 lg:py-24">
+      <section class="container px-4 sm:px-6 mx-auto py-16 lg:py-24">
         <div class="max-w-3xl mx-auto">
           <h2 class="text-3xl font-bold text-foreground text-center mb-12">
             Frequently Asked Questions
@@ -376,7 +376,7 @@ const { handleSignUp } = useCtaSignupAndRouting();
         </div>
       </section>
       <div class="bg-muted/30 py-16 lg:py-24">
-        <div class="container mx-auto">
+        <div class="container px-4 sm:px-6 mx-auto">
           <div class="max-w-3xl mx-auto text-center">
             <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-6">
               {{

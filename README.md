@@ -102,11 +102,12 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 - [x] Set up authentication and user management
 - [x] Set up API endpoints for onboarding flow
 - [ ] Complete Homepage navigation (consider view transition api)
-  - [ ] Find staff
+  - [x] Find staff
   - [ ] Find Work
-  - [ ] How it Works
-  - [ ] Pricing??
+  - [x] How it Works
+  - [x] Pricing??
 - [ ] Add frontend middleware to act as an auth route guard
+- [ ] Add clerk middleware to protect backend api routes
 - [ ] Implement the dashboard
 - [ ] Shift management
   - [ ] Pharmacy -- create Shift
@@ -120,4 +121,4 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
   - [ ] Pharmacy & locum -- fill shift
 - [ ] Figure out user roles, constraints and permissions
 - [x] Evaluate browserbase for verifying pharmacist ids - we don't need browserbase or puppeteer - we can fetch all the information using our server
-- [ ] Set up email service for onboarding and notifications
+- [ ] Set up email service for onboarding and notifications - take a look at resend

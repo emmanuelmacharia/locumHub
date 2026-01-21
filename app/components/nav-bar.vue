@@ -9,7 +9,6 @@ import {
   NavigationMenuLink as UINavigationMenuLink,
   NavigationMenuList as UINavigationMenuList,
   NavigationMenuTrigger as UINavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
 import { Button as UIButton } from "@/components/ui/button";
@@ -347,11 +346,10 @@ function closeMobile() {
           </UINavigationMenuItem>
 
           <UINavigationMenuItem>
-            <UINavigationMenuLink
-              href="/pricing"
-              :class="navigationMenuTriggerStyle()"
-            >
-              Pricing
+            <UINavigationMenuLink as-child>
+              <NuxtLink to="/pricing" prefetch-on="interaction">
+                Pricing
+              </NuxtLink>
             </UINavigationMenuLink>
           </UINavigationMenuItem>
         </UINavigationMenuList>

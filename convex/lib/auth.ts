@@ -14,14 +14,14 @@ export async function getClerkAuthenticatedUser(ctx: QueryCtx | MutationCtx) {
   }
 
   return {
-    userid: identity.userId,
+    userId: identity.userId,
     email: identity.email,
     createdAt: identity.createdAt,
     updatedAt: identity.updatedAt,
     issuer: identity.issuer,
     tokenIdentifier: identity.tokenIdentifier,
     emailVerified: identity.emailVerified,
-    phoneNumberVerfied: identity.phoneNumberVerified,
+    phoneNumberVerified: identity.phoneNumberVerified,
     name: identity.name,
     pictureUrl: identity.pictureUrl,
   };

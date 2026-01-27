@@ -10,13 +10,6 @@ export default clerkMiddleware(async (event) => {
 
   if (!event.path.startsWith("/api")) return;
 
-  // eslint-disable-next-line no-console
-  console.log(
-    "Clerk Middleware: isAuthenticated =",
-    isAuthenticated,
-    event.context.auth(),
-  );
-
   if (!isAuthenticated && !isAnonymousRoute(event)) {
     throw createError({
       statusCode: 401,

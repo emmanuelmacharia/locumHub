@@ -2,12 +2,15 @@ import type { Id } from "../_generated/dataModel";
 import { mutation, query, type MutationCtx } from "../_generated/server";
 import { v } from "convex/values";
 import { appError } from "../lib/errors";
+import { getClerkAuthenticatedUser } from "../lib/auth";
 
 export const createUserProfile = mutation({
   args: {
     userId: v.id("users"),
   },
   handler: async (ctx, args) => {
+    await getClerkAuthenticatedUser(ctx);
+
     const existingProfile = await ctx.db
       .query("userProfiles")
       .withIndex("by_user_id", (q) => q.eq("userId", args.userId))
@@ -42,6 +45,7 @@ export const getUserProfileByUserId = query({
   },
   handler: async (ctx, args) => {
     if (!args.userId) return;
+    await getClerkAuthenticatedUser(ctx);
     const profile = await ctx.db
       .query("userProfiles")
       .withIndex("by_user_id", (q) => q.eq("userId", args.userId!))
@@ -62,8 +66,10 @@ export const setAccountType = async (
   ctx: MutationCtx,
   userId: Id<"users">,
   type: "locum" | "pharmacy",
-  referenceId: Id<"locumProfiles"> | Id<"pharmacies">
+  referenceId: Id<"locumProfiles"> | Id<"pharmacies">,
 ) => {
+  await getClerkAuthenticatedUser(ctx);
+
   const profile = await ctx.db
     .query("userProfiles")
     .withIndex("by_user_id", (q) => q.eq("userId", userId))

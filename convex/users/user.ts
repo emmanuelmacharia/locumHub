@@ -2,6 +2,7 @@ import { internalMutation, mutation, query } from "../_generated/server";
 import { v } from "convex/values";
 import { appError } from "../lib/errors";
 import { api } from "../_generated/api";
+import { getClerkAuthenticatedUser } from "../lib/auth";
 
 export const createUser = mutation({
   args: {
@@ -17,6 +18,8 @@ export const createUser = mutation({
   handler: async (ctx, args) => {
     // first check whether this user exists in db
     const { userId } = args;
+    await getClerkAuthenticatedUser(ctx); // throws an exception
+
     const existingUser = await ctx.db
       .query("users")
       .withIndex("by_user_id", (q) => q.eq("userId", userId))
@@ -104,6 +107,9 @@ export const fetchUser = query({
   handler: async (ctx, args) => {
     if (!args.userId) return null;
     const { userId } = args;
+
+    await getClerkAuthenticatedUser(ctx); // no need for return values
+
     const user = await ctx.db
       .query("users")
       .withIndex("by_user_id", (q) => q.eq("userId", userId))

@@ -36,14 +36,14 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       convex:
-        specifier: ^1.31.2
-        version: 1.31.3(react@19.2.3)
+        specifier: ^1.31.6
+        version: 1.31.6(react@19.2.3)
       convex-nuxt:
         specifier: 0.1.5
-        version: 0.1.5(convex-vue@0.1.5(convex@1.31.3(react@19.2.3))(vue@3.5.26(typescript@5.9.3)))(magicast@0.5.1)
+        version: 0.1.5(convex-vue@0.1.5(convex@1.31.6(react@19.2.3))(vue@3.5.26(typescript@5.9.3)))(magicast@0.5.1)
       convex-vue:
         specifier: ^0.1.5
-        version: 0.1.5(convex@1.31.3(react@19.2.3))(vue@3.5.26(typescript@5.9.3))
+        version: 0.1.5(convex@1.31.6(react@19.2.3))(vue@3.5.26(typescript@5.9.3))
       lucide-vue-next:
         specifier: ^0.552.0
         version: 0.552.0(vue@3.5.26(typescript@5.9.3))
@@ -2575,8 +2575,8 @@ packages:
       convex: '>=1.24.0'
       vue: '>=3.5.0'
 
-  convex@1.31.3:
-    resolution: {integrity: sha512-SkpLjhFFnml2xKB4vNOaZ+MtqyhVmDdk5AIF2m8rW8Z7nZsMtuO1Tpn2BnDHCysZkZPJj9xopnsF5RtAINQ0Eg==}
+  convex@1.31.6:
+    resolution: {integrity: sha512-9cIsOzepa3s9DURRF+fZHxbNuzLgilg9XGQCc45v0Xx4FemqeIezpPFSJF9WHC9ckk43TDUUXLecvLVt9djPkw==}
     engines: {node: '>=18.0.0', npm: '>=7.0.0'}
     hasBin: true
     peerDependencies:
@@ -7688,21 +7688,21 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
-  convex-nuxt@0.1.5(convex-vue@0.1.5(convex@1.31.3(react@19.2.3))(vue@3.5.26(typescript@5.9.3)))(magicast@0.5.1):
+  convex-nuxt@0.1.5(convex-vue@0.1.5(convex@1.31.6(react@19.2.3))(vue@3.5.26(typescript@5.9.3)))(magicast@0.5.1):
     dependencies:
       '@nuxt/kit': 3.20.2(magicast@0.5.1)
-      convex-vue: 0.1.5(convex@1.31.3(react@19.2.3))(vue@3.5.26(typescript@5.9.3))
+      convex-vue: 0.1.5(convex@1.31.6(react@19.2.3))(vue@3.5.26(typescript@5.9.3))
     transitivePeerDependencies:
       - magicast
 
-  convex-vue@0.1.5(convex@1.31.3(react@19.2.3))(vue@3.5.26(typescript@5.9.3)):
+  convex-vue@0.1.5(convex@1.31.6(react@19.2.3))(vue@3.5.26(typescript@5.9.3)):
     dependencies:
       consola: 3.4.2
-      convex: 1.31.3(react@19.2.3)
+      convex: 1.31.6(react@19.2.3)
       std-env: 3.10.0
       vue: 3.5.26(typescript@5.9.3)
 
-  convex@1.31.3(react@19.2.3):
+  convex@1.31.6(react@19.2.3):
     dependencies:
       esbuild: 0.27.0
       prettier: 3.7.4

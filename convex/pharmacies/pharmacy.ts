@@ -4,6 +4,7 @@ import { mutation } from "../_generated/server";
 import { operatingDayHours } from "../schema";
 import { api } from "../_generated/api";
 import { setAccountType } from "../users/userProfile";
+import { getClerkAuthenticatedUser } from "../lib/auth";
 
 export const createPharmacy = mutation({
   args: {
@@ -20,6 +21,8 @@ export const createPharmacy = mutation({
     operatingHours: operatingDayHours,
   },
   handler: async (ctx, args) => {
+    // auth
+    await getClerkAuthenticatedUser(ctx);
     // first we ensure uniqueness of unique params
     const pharmaLicense = await ctx.db
       .query("pharmacies")
@@ -37,14 +40,14 @@ export const createPharmacy = mutation({
     const pharmaPhone = await ctx.db
       .query("pharmacies")
       .withIndex("by_contact_phone", (q) =>
-        q.eq("contactPhone", args.contactPhone)
+        q.eq("contactPhone", args.contactPhone),
       )
       .first();
 
     const pharmaEmail = await ctx.db
       .query("pharmacies")
       .withIndex("by_contact_email", (q) =>
-        q.eq("contactEmail", args.contactEmail)
+        q.eq("contactEmail", args.contactEmail),
       )
       .first();
 
@@ -126,7 +129,7 @@ export const createPharmacy = mutation({
     };
     const locationCreated = await ctx.runMutation(
       api.pharmacies.pharmacyLocations.createPharmacyLocation,
-      locationPayload
+      locationPayload,
     );
 
     if (locationCreated.statusCode === 201) {
@@ -142,7 +145,7 @@ export const createPharmacy = mutation({
       console.error(
         "Failed to delete orphaned pharmacy:",
         created,
-        deleteError
+        deleteError,
       );
     }
     return appError({

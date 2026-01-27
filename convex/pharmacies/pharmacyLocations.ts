@@ -2,6 +2,7 @@ import { v } from "convex/values";
 import { mutation } from "../_generated/server";
 import { operatingDayHours } from "../schema";
 import { appError } from "../lib/errors";
+import { getClerkAuthenticatedUser } from "../lib/auth";
 
 export const createPharmacyLocation = mutation({
   args: {
@@ -16,6 +17,9 @@ export const createPharmacyLocation = mutation({
     city: v.string(),
   },
   handler: async (ctx, args) => {
+    // auth
+    await getClerkAuthenticatedUser(ctx);
+
     // fetch the pharmacy and validate that it exists
     const pharma = await ctx.db.get(args.pharmacyId);
 

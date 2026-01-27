@@ -3,6 +3,7 @@ import { v } from "convex/values";
 import { appError } from "../lib/errors";
 import { internal } from "../_generated/api";
 import { setAccountType } from "../users/userProfile";
+import { getClerkAuthenticatedUser } from "../lib/auth";
 
 export const createLocumStaff = mutation({
   args: {
@@ -20,6 +21,8 @@ export const createLocumStaff = mutation({
     professionalBio: v.string(),
   },
   handler: async (ctx, args) => {
+    // auth
+    await getClerkAuthenticatedUser(ctx);
     // fetch user
     const { userId, registrationNumber, contactEmail, contactPhone } = args;
 
@@ -27,7 +30,7 @@ export const createLocumStaff = mutation({
     const license = await ctx.db
       .query("locumProfiles")
       .withIndex("by_registration_id", (q) =>
-        q.eq("registrationNumber", registrationNumber)
+        q.eq("registrationNumber", registrationNumber),
       )
       .first();
 
@@ -133,6 +136,8 @@ export const fetchLocumStaffByUserId = query({
     userId: v.id("users"),
   },
   handler: async (ctx, args) => {
+    await getClerkAuthenticatedUser(ctx);
+
     const locumStaff = await ctx.db
       .query("locumProfiles")
       .withIndex("by_user_id", (q) => q.eq("userId", args.userId))

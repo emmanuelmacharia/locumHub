@@ -107,7 +107,7 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
   - [x] How it Works
   - [x] Pricing??
 - [ ] Add frontend middleware to act as an auth route guard
-- [ ] Add clerk middleware to protect backend api routes
+- [x] Add clerk middleware to protect backend api routes
 - [ ] Implement the dashboard
 - [ ] Shift management
   - [ ] Pharmacy -- create Shift

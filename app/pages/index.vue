@@ -48,7 +48,7 @@ const { handleSignUp, goToDashboard, userProfileData } =
                   goToDashboard(
                     userProfileData?.accountType === 'pharmacy'
                       ? 'pharmacy'
-                      : 'staff'
+                      : 'staff',
                   )
                 "
               >

@@ -1,0 +1,34 @@
+import type { QueryCtx, MutationCtx } from "../_generated/server";
+import { appError } from "./errors";
+
+export async function getClerkAuthenticatedUser(ctx: QueryCtx | MutationCtx) {
+  const identity = await ctx.auth.getUserIdentity();
+
+  if (!identity) {
+    // be sure to log this request
+    return appError({
+      code: "UNAUTHORIZED",
+      statusCode: 401,
+      statusMessage: "Authentication required",
+    });
+  }
+
+  return {
+    userid: identity.userId,
+    email: identity.email,
+    createdAt: identity.createdAt,
+    updatedAt: identity.updatedAt,
+    issuer: identity.issuer,
+    tokenIdentifier: identity.tokenIdentifier,
+    emailVerified: identity.emailVerified,
+    phoneNumberVerfied: identity.phoneNumberVerified,
+    name: identity.name,
+    pictureUrl: identity.pictureUrl,
+  };
+}
+
+// in case of roles and perms
+// export function requireAuth(ctx: QueryCtx | MutationCtx) {}
+
+// in case of validating source of request
+// export function validateOrigin(ctx: QueryCtx | MutationCtx) {}

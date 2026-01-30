@@ -7,6 +7,7 @@ export type AppErrorData = {
     | "DUPLICATE_ENTRY"
     | "NOT_FOUND"
     | "INVALID_PATCH"
+    | "FORBIDDEN"
     | "CONVEX_ERROR";
   statusMessage: string;
   statusCode: number;

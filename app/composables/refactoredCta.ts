@@ -4,25 +4,25 @@ export const useRefactoredCta = () => {
   const { profileData, isLoading } = useServerUserProfile();
 
   const isFullyOnboarded = computed(() => {
-    if (!isLoading.value) return;
+    if (isLoading.value) return;
     if (!profileData.value) return false;
     if (profileData.value.profile) return true;
   });
 
   const userAccountType = computed(() => {
-    if (!isLoading.value) return;
+    if (isLoading.value) return;
     if (!profileData.value?.profile) return;
     return profileData.value.profile.accountType;
   });
 
   const user = computed(() => {
-    if (!isLoading.value) return;
+    if (isLoading.value) return;
     if (!profileData.value?.user) return;
     return profileData.value.user;
   });
 
   const userProfile = computed(() => {
-    if (!isLoading.value) return;
+    if (isLoading.value) return;
     if (!profileData.value?.profile) return;
     return profileData.value.profile;
   });

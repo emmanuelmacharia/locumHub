@@ -27,6 +27,20 @@ export async function getClerkAuthenticatedUser(ctx: QueryCtx | MutationCtx) {
   };
 }
 
+export function validateRequestAndClerkUserId(
+  clerkUserId: string,
+  payloadUserId: string,
+) {
+  if (clerkUserId !== payloadUserId) {
+    return appError({
+      code: "FORBIDDEN",
+      statusCode: 403,
+      statusMessage: "Cannot access another user's profile",
+    });
+  }
+  return true;
+}
+
 // in case of roles and perms
 // export function requireAuth(ctx: QueryCtx | MutationCtx) {}
 

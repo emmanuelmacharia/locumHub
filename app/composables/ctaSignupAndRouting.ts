@@ -40,11 +40,6 @@ export const useCtaSignupAndRouting = () => {
   };
 
   const goToDashboard = (userType: "pharmacy" | "staff") => {
-    console.log(
-      userData.value,
-      userProfileData.value,
-      "===================== gotodashboard =======================",
-    );
     const dashboardUrl =
       userType === "pharmacy" ? "/dashboard/pharmacy" : "/dashboard/staff";
     router.push(dashboardUrl);

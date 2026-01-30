@@ -62,6 +62,30 @@ export const getUserProfileByUserId = query({
   },
 });
 
+export const getUserProfileByClerkId = query({
+  args: { clerkUserId: v.string() },
+  handler: async (ctx, args) => {
+    if (!args.clerkUserId) return null;
+
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_user_id", (q) => q.eq("userId", args.clerkUserId))
+      .first();
+
+    if (!user) return null;
+
+    const profile = await ctx.db
+      .query("userProfiles")
+      .withIndex("by_user_id", (q) => q.eq("userId", user._id))
+      .first();
+
+    return {
+      user,
+      profile,
+    };
+  },
+});
+
 export const setAccountType = async (
   ctx: MutationCtx,
   userId: Id<"users">,

@@ -25,7 +25,7 @@ export const useCtaSignupAndRouting = () => {
     if (userData.value && !userProfileData.value?.accountType) {
       // Authenticated but not fully onboarded
       return router.push(
-        url ?? (userType ? `/register/${userType}` : "/register")
+        url ?? (userType ? `/register/${userType}` : "/register"),
       );
     }
 
@@ -41,7 +41,7 @@ export const useCtaSignupAndRouting = () => {
 
   const goToDashboard = (userType: "pharmacy" | "staff") => {
     const dashboardUrl =
-      userType === "pharmacy" ? "/pharmacy/dashboard" : "/staff/dashboard";
+      userType === "pharmacy" ? "/dashboard/pharmacy" : "/dashboard/staff";
     router.push(dashboardUrl);
   };
 

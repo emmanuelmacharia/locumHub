@@ -1,7 +1,7 @@
 export const useServerUserProfile = () => {
   const { data: userProfileData, pending } = useAsyncData(
     "userProfile",
-    () => $fetch("/api/auth/getUserProfile"),
+    async () => await $fetch("/api/auth/getUserProfile"),
     {
       server: true,
     },

@@ -14,9 +14,9 @@ export default defineEventHandler(async (event) => {
     );
 
     return userProfile || null;
-  } catch (e) {
+  } catch (error) {
     // eslint-disable-next-line no-console
-    console.log(e);
+    console.log(typeof error);
     return null;
   }
 });

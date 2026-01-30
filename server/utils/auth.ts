@@ -6,7 +6,7 @@ export async function verifyAuth(event: H3Event): Promise<{
   token: string | null;
 }> {
   const { isAuthenticated, userId } = event.context.auth();
-  const token = await event.context.auth.getToken();
+  const token = await event.context.auth().getToken();
   return {
     isAuthenticated,
     userId: userId || null,

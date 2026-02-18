@@ -1,10 +1,14 @@
 import { v } from "convex/values";
 import { appError } from "../lib/errors";
-import { mutation } from "../_generated/server";
+import { mutation, query } from "../_generated/server";
 import { operatingDayHours } from "../schema";
 import { api } from "../_generated/api";
 import { setAccountType } from "../users/userProfile";
 import { getClerkAuthenticatedUser } from "../lib/auth";
+import type { Doc } from "../_generated/dataModel";
+
+type Pharmacy = Doc<"pharmacies">;
+type PharmacyLocation = Doc<"pharmacyLocations">;
 
 export const createPharmacy = mutation({
   args: {
@@ -157,6 +161,49 @@ export const createPharmacy = mutation({
   },
 });
 
-// export const getPharmacy = query({
-//   args: {}, handler: (ctx, args) => {}
-// })
+export const getPharmacyById = query({
+  args: { pharmacyId: v.id("pharmacies") },
+  handler: async (ctx, { pharmacyId }) => {
+    if (!pharmacyId) return null;
+
+    await getClerkAuthenticatedUser(ctx);
+
+    const pharmacy = await ctx.db.get(pharmacyId);
+
+    if (!pharmacy) return null;
+
+    return pharmacy;
+  },
+});
+
+export const getPharmacyAndPharmacyLocations = query({
+  args: { pharmacyId: v.id("pharmacies") },
+  handler: async (
+    ctx,
+    { pharmacyId },
+  ): Promise<{
+    pharmacy: Pharmacy | null;
+    locations: PharmacyLocation[] | null;
+  } | null> => {
+    if (!pharmacyId) return null;
+
+    await getClerkAuthenticatedUser(ctx);
+
+    const pharmacy: Pharmacy | null = await ctx.runQuery(
+      api.pharmacies.pharmacy.getPharmacyById,
+      { pharmacyId },
+    );
+
+    if (!pharmacy) return null;
+
+    const locations: PharmacyLocation[] | null = await ctx.runQuery(
+      api.pharmacies.pharmacyLocations.getPharmacyLocationsByPharmacyId,
+      { pharmacyId },
+    );
+
+    return {
+      pharmacy,
+      locations,
+    };
+  },
+});

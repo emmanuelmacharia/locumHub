@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation } from "../_generated/server";
+import { mutation, query } from "../_generated/server";
 import { operatingDayHours } from "../schema";
 import { appError } from "../lib/errors";
 import { getClerkAuthenticatedUser } from "../lib/auth";
@@ -62,5 +62,21 @@ export const createPharmacyLocation = mutation({
         data: error,
       });
     }
+  },
+});
+
+export const getPharmacyLocationsByPharmacyId = query({
+  args: { pharmacyId: v.id("pharmacies") },
+  handler: async (ctx, { pharmacyId }) => {
+    if (!pharmacyId) return [];
+
+    await getClerkAuthenticatedUser(ctx);
+
+    const locations = await ctx.db
+      .query("pharmacyLocations")
+      .withIndex("by_pharmacy", (q) => q.eq("pharmacyId", pharmacyId))
+      .collect();
+
+    return locations;
   },
 });

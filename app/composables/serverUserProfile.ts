@@ -1,48 +1,45 @@
-import type { Doc } from "~~/convex/_generated/dataModel";
+import { useUserProfileStore } from "~/stores/userProfile";
 
-type User = Doc<"users">;
-type UserProfile = Doc<"userProfiles">;
-
-export const useServerUserProfile = () => {
-  const {
-    data: userProfileData,
-    pending,
-    refresh,
-  } = useAsyncData<{
-    user: User;
-    profile: UserProfile;
-  } | null>(
-    "userProfile",
-    () =>
-      $fetch<{
-        user: User;
-        profile: UserProfile;
-      } | null>("/api/auth/getUserProfile"),
-    {
-      server: true,
-      getCachedData: (key, nuxtApp) => {
-        // If data already exists in payload, return it and skip the fetch
-        return nuxtApp.payload.data[key] ?? nuxtApp.static.data[key];
-      },
-    },
-  );
-  const profileData = computed(() => userProfileData.value);
-
-  return {
-    isLoading: pending,
-    profileData,
-    refresh,
-  };
+type Options = {
+  // Whether to bypass cache and re-fetch data on init
+  bypassCache?: boolean;
+  /**
+   * If true, will immediately kick off loading (and await in SSR contexts).
+   * In middleware you typically want preload: true.
+   */
+  preload?: boolean;
 };
 
-/**
- *
- * //TODO: invalidate cache on profile change (e.g. login or logout)
- * const { refresh } = useServerUserProfile();
- * await refresh(); // bypasses getCachedData and re-fetches
- *
- * // On logout — clear it manually
- * clearNuxtData("userProfile");
- * navigateTo("/");
- *
- */
+export const useServerUserProfile = (options: Options = {}) => {
+  const { bypassCache = false, preload = false } = options;
+  const store = useUserProfileStore();
+
+  const { data, pending, error, accountType } = storeToRefs(store);
+
+  const isReady = computed(() => !pending.value && data.value !== null);
+
+  const hasProfile = computed(() => !!data.value?.profile);
+
+  async function ensureLoaded() {
+    if (bypassCache) return store.refresh();
+    return store.init();
+  }
+  if (preload) {
+    // Kick off loading immediately (e.g. in middleware)
+    // in Nuxt, it's fine to call and return the promise.
+    // In a component/layout you can `await useServerUserProfile({ preload: true }).ensureLoaded()`
+    // In middleware you can `await ensureLoaded()` right after calling composable.
+    void store.init();
+  }
+
+  return {
+    profileData: data,
+    pending,
+    accountType,
+    isReady,
+    hasProfile,
+    ensureLoaded,
+    refresh: () => store.refresh(),
+    clear: () => store.clear(),
+  };
+};

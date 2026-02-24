@@ -49,7 +49,7 @@ function closeMobile() {
     class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 px-4 sm:px-6 lg:px-8"
   >
     <div class="mx-auto max-w-7xl flex items-center justify-between h-16">
-      <!-- LEFT - Mobile menu button + Logo -->
+      <!-- LEFT - Mobile menu button  Logo -->
       <div class="flex items-center gap-3 md:hidden">
         <!-- Mobile menu button -->
         <UISheet v-model:open="mobileOpen">
@@ -130,7 +130,7 @@ function closeMobile() {
         </UINavigationMenu> -->
       </div>
 
-      <!-- CENTER - Logo (desktop only) + Pharmacy info -->
+      <!-- CENTER - Logo (desktop only)  Pharmacy info -->
       <UINavigationMenu class="hidden md:flex">
         <UINavigationMenuList>
           <UINavigationMenuItem class="flex items-center gap-4">
@@ -160,8 +160,9 @@ function closeMobile() {
             <UINavigationMenuItem class="flex items-center gap-1">
               <span class="text-sm font-medium">
                 {{
-                  pharmacyData?.pharmacy?.businessName ||
-                  `${profileData?.user?.firstName} ${profileData?.user?.lastName}`
+                  [profileData?.user?.firstName, profileData?.user?.lastName]
+                    .filter(Boolean)
+                    .join(" ") || "—"
                 }}</span
               >
               <UIBadge variant="outline" class="text-xs mx-2">
@@ -191,7 +192,7 @@ function closeMobile() {
               class="absolute -top-0.5 -right-0.5 h-4 w-4 bg-destructive text-destructive-foreground text-[9px] font-bold rounded-full flex items-center justify-center"
               aria-label="Notifications"
             >
-              9+
+              9
             </span>
           </UIButton>
         </UINavigationMenuItem>

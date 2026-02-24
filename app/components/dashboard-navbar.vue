@@ -23,6 +23,24 @@ const { profileData, pharmacyData, locumData } = useDashboardNavbarInfo();
 
 // fetch locum information
 
+const rating = ref(() => {
+  if (pharmacyData.value?.pharmacy) {
+    if (!pharmacyData.value.pharmacy.ratingCount) return "-";
+    if (pharmacyData.value.pharmacy.ratingCount === 0) return "-";
+    return (
+      pharmacyData.value.pharmacy.ratingSum /
+      pharmacyData.value.pharmacy.ratingCount
+    ).toFixed(1);
+  } else if (locumData.value?.locum) {
+    if (!locumData.value.locum.ratingSum) return "-";
+    if (locumData.value.locum.ratingCount === 0) return "-";
+    return (
+      locumData.value.locum.ratingSum / locumData.value.locum.ratingCount
+    ).toFixed(1);
+  }
+  return "-";
+});
+
 const mobileOpen = ref(false);
 
 function closeMobile() {
@@ -150,34 +168,12 @@ function closeMobile() {
                   `${profileData?.user?.firstName} ${profileData?.user?.lastName}`
                 }}</span
               >
-              <UIBadge
-                variant="outline"
-                class="text-xs mx-2"
-                v-if="pharmacyData?.pharmacy"
-              >
+              <UIBadge variant="outline" class="text-xs mx-2">
                 <Icon
                   name="lucide:star"
                   class="h-3 w-3 fill-yellow-500 text-yellow-500 mr-1"
                 />
-                {{
-                  pharmacyData?.pharmacy.ratingSum &&
-                  (
-                    pharmacyData.pharmacy.ratingSum /
-                    pharmacyData.pharmacy.ratingCount
-                  ).toFixed(1)
-                }}
-              </UIBadge>
-              <UIBadge variant="outline" class="text-xs mx-2" v-else>
-                <Icon
-                  name="lucide:star"
-                  class="h-3 w-3 fill-yellow-500 text-yellow-500 mr-1"
-                />
-                {{
-                  locumData?.locum.ratingSum &&
-                  (
-                    locumData.locum.ratingSum / locumData.locum.ratingCount
-                  ).toFixed(1)
-                }}
+                {{ rating() }}
               </UIBadge>
               <UIBadge
                 v-if="pharmacyData?.pharmacy"

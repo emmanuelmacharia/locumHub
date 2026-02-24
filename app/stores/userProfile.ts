@@ -14,6 +14,7 @@ export const useUserProfileStore = defineStore("userProfile", () => {
   const error = ref<unknown>(null);
 
   let inflight: Promise<UserProfileState> | null = null;
+  let generation = 0;
 
   async function init() {
     if (data.value) return data.value; // already loaded
@@ -22,8 +23,14 @@ export const useUserProfileStore = defineStore("userProfile", () => {
     pending.value = true;
     error.value = null;
 
+    const currentGen = ++generation;
+
     inflight = (async () => {
       try {
+        if (currentGen !== generation) {
+          // A newer init() call has been made, so we should ignore this one.
+          return data.value;
+        }
         type GetUserProfileResponse = {
           user: User;
           profile: UserProfile;
@@ -44,6 +51,10 @@ export const useUserProfileStore = defineStore("userProfile", () => {
         data.value = res;
         return res;
       } catch (err) {
+        if (currentGen !== generation) {
+          // A newer init() call has been made, so we should ignore this one.
+          return null;
+        }
         error.value = err;
         data.value = null;
         return null;
@@ -61,6 +72,7 @@ export const useUserProfileStore = defineStore("userProfile", () => {
     error.value = null;
     inflight = null;
     pending.value = false;
+    generation++;
   }
 
   async function refresh() {

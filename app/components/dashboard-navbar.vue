@@ -21,19 +21,15 @@ import { Separator as UISeparator } from "@/components/ui/separator";
 
 const { profileData, pharmacyData, locumData } = useDashboardNavbarInfo();
 
-// fetch locum information
-
-const rating = ref(() => {
+const rating = computed(() => {
   if (pharmacyData.value?.pharmacy) {
     if (!pharmacyData.value.pharmacy.ratingCount) return "-";
-    if (pharmacyData.value.pharmacy.ratingCount === 0) return "-";
     return (
       pharmacyData.value.pharmacy.ratingSum /
       pharmacyData.value.pharmacy.ratingCount
     ).toFixed(1);
   } else if (locumData.value?.locum) {
-    if (!locumData.value.locum.ratingSum) return "-";
-    if (locumData.value.locum.ratingCount === 0) return "-";
+    if (!locumData.value.locum.ratingCount) return "-";
     return (
       locumData.value.locum.ratingSum / locumData.value.locum.ratingCount
     ).toFixed(1);
@@ -173,7 +169,7 @@ function closeMobile() {
                   name="lucide:star"
                   class="h-3 w-3 fill-yellow-500 text-yellow-500 mr-1"
                 />
-                {{ rating() }}
+                {{ rating }}
               </UIBadge>
               <UIBadge
                 v-if="pharmacyData?.pharmacy"
@@ -193,6 +189,7 @@ function closeMobile() {
             <Icon name="lucide:bell" class="h-4 w-4" />
             <span
               class="absolute -top-0.5 -right-0.5 h-4 w-4 bg-destructive text-destructive-foreground text-[9px] font-bold rounded-full flex items-center justify-center"
+              aria-label="Notifications"
             >
               9+
             </span>

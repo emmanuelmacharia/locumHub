@@ -1,4 +1,3 @@
-import { api } from "~~/convex/_generated/api";
 import { failure } from "~~/server/utils/apiResponse";
 
 export default defineEventHandler(async (event) => {
@@ -9,9 +8,12 @@ export default defineEventHandler(async (event) => {
     return failure(401, "Unauthorized");
   }
 
-  const convex = getConvexClient();
+  // const convex = getConvexClient();
 
   try {
     // const userProfile = await convex.query()
-  } catch (error) {}
+  } catch (error) {
+    setResponseStatus(event, 500);
+    return failure(500, error);
+  }
 });

@@ -1,4 +1,3 @@
-import { usePharmacyStore } from "~/stores/pharmacy";
 import { api } from "~~/convex/_generated/api";
 
 export const useDashboardNavbarInfo = () => {

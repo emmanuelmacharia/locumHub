@@ -1,5 +1,4 @@
 import type { Doc } from "~~/convex/_generated/dataModel";
-import type { $Fetch, NitroFetchRequest } from "nitropack";
 
 type User = Doc<"users">;
 type UserProfile = Doc<"userProfiles">;

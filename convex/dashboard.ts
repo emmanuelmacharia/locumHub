@@ -6,8 +6,6 @@ import { appError } from "./lib/errors";
 import type { AppErrorData } from "./lib/errors";
 import { getClerkAuthenticatedUser } from "./lib/auth";
 
-type User = Doc<"users">;
-type UserProfile = Doc<"userProfiles">;
 type Pharmacy = Doc<"pharmacies">;
 type PharmacyLocation = Doc<"pharmacyLocations">;
 type LocumProfile = Doc<"locumProfiles">;

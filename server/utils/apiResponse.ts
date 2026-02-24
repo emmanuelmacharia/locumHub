@@ -10,7 +10,7 @@ export type APIError = {
   error: {
     message: string;
     code?: string;
-    details?: any;
+    details?: unknown;
   };
 };
 

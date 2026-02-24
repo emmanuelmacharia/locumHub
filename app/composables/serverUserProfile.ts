@@ -38,6 +38,7 @@ export const useServerUserProfile = (options: Options = {}) => {
     accountType,
     isReady,
     hasProfile,
+    error,
     ensureLoaded,
     refresh: () => store.refresh(),
     clear: () => store.clear(),

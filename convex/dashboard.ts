@@ -4,6 +4,7 @@ import type { Doc } from "./_generated/dataModel";
 import { query } from "./_generated/server";
 import { appError } from "./lib/errors";
 import type { AppErrorData } from "./lib/errors";
+import { getClerkAuthenticatedUser } from "./lib/auth";
 
 type User = Doc<"users">;
 type UserProfile = Doc<"userProfiles">;
@@ -45,6 +46,8 @@ export const consolidatedDashboardNavbarInfo = query({
         statusMessage: "User ID is required",
       });
     }
+
+    await getClerkAuthenticatedUser(ctx);
 
     const profile = await ctx.runQuery(
       api.users.userProfile.getUserProfileByUserId,

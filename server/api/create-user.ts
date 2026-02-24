@@ -4,14 +4,21 @@ import { getConvexClient } from "../utils/convex";
 import { isAppError } from "../utils/convexErrors";
 
 export default defineEventHandler(async (event) => {
+  const { isAuthenticated, userId } = await verifyAuth(event);
+
+  if (!isAuthenticated || !userId) {
+    setResponseStatus(event, 401);
+    return failure(401, "Unauthorized");
+  }
+
   const result = await readValidatedBody(event, (body: unknown) =>
-    userPayloadSchema.safeParse(body)
+    userPayloadSchema.safeParse(body),
   );
 
   if (!result.success) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: "Validation Error",
+    setResponseStatus(event, 400);
+    throw failure(400, {
+      message: "Validation Error",
       data: result.error.issues,
     });
   }

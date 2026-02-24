@@ -2,14 +2,20 @@ import { createPharmacySchema } from "~/utils/types/onboardingPayloads";
 import { api } from "~~/convex/_generated/api";
 
 export default defineEventHandler(async (event) => {
+  const { isAuthenticated, userId } = await verifyAuth(event);
+
+  if (!isAuthenticated || !userId) {
+    setResponseStatus(event, 401);
+    return failure(401, "Unauthorized");
+  }
   const result = await readValidatedBody(event, (body: unknown) =>
-    createPharmacySchema.safeParse(body)
+    createPharmacySchema.safeParse(body),
   );
 
   if (!result.success) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: "Validation Error",
+    setResponseStatus(event, 400);
+    throw failure(400, {
+      message: "Validation Error",
       data: result.error.issues,
     });
   }
@@ -20,7 +26,7 @@ export default defineEventHandler(async (event) => {
     // creates pharmacy and pharmacy location
     const pharmaId = await convex.mutation(
       api.pharmacies.pharmacy.createPharmacy,
-      result.data
+      result.data,
     );
 
     return {

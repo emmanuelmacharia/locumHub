@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
 
   if (!result.success) {
     setResponseStatus(event, 400);
-    throw failure(400, {
+    return failure(400, {
       message: "Validation Error",
       data: result.error.issues,
     });
@@ -43,18 +43,16 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     if (isAppError(error)) {
       const { data } = error;
-      throw createError({
-        statusCode: data.statusCode,
-        statusMessage: data.statusMessage,
+      return failure(data.statusCode, {
+        message: data.statusMessage,
         data: {
           code: data.code,
         },
       });
     } else {
       // handle other error types
-      throw createError({
-        statusCode: 500,
-        statusMessage: "Something went wrong; Please try again later",
+      return failure(500, {
+        message: "Something went wrong; Please try again later",
       });
     }
   }

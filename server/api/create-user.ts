@@ -33,6 +33,7 @@ export default defineEventHandler(async (event) => {
       clerkUpdatedAt: new Date(result.data.clerkUpdatedAt).getTime(),
     });
 
+    setResponseStatus(event, 201);
     return {
       statusCode: 201,
       statusMessage: "User successfully created",
@@ -43,6 +44,7 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     if (isAppError(error)) {
       const { data } = error;
+      setResponseStatus(event, 400);
       return failure(data.statusCode, {
         message: data.statusMessage,
         data: {
@@ -51,6 +53,7 @@ export default defineEventHandler(async (event) => {
       });
     } else {
       // handle other error types
+      setResponseStatus(event, 500);
       return failure(500, {
         message: "Something went wrong; Please try again later",
       });

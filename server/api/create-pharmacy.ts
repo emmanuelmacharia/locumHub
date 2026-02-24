@@ -1,3 +1,4 @@
+import { set } from "zod";
 import { createPharmacySchema } from "~/utils/types/onboardingPayloads";
 import { api } from "~~/convex/_generated/api";
 
@@ -29,6 +30,7 @@ export default defineEventHandler(async (event) => {
       result.data,
     );
 
+    setResponseStatus(event, 201);
     return {
       statusCode: 201,
       statusMessage: "Pharmacy successfully created",
@@ -39,6 +41,7 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     if (isAppError(error)) {
       const { data } = error;
+      setResponseStatus(event, 400);
       return failure(400, {
         message: data.statusMessage,
         data: {
@@ -46,6 +49,7 @@ export default defineEventHandler(async (event) => {
         },
       });
     }
+    setResponseStatus(event, 500);
     return failure(500, {
       message: "Something went wrong; Please try again later",
       data: error,

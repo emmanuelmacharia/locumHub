@@ -30,6 +30,7 @@ export default defineEventHandler(async (event) => {
       result.data,
     );
 
+    setResponseStatus(event, 201);
     return {
       statusCode: 201,
       statusMessage: "Staff successfully created",
@@ -40,9 +41,9 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     if (isAppError(error)) {
       const { data } = error;
-      throw createError({
-        statusCode: data.statusCode,
-        statusMessage: data.statusMessage,
+      setResponseStatus(event, 400);
+      return failure(400, {
+        message: data.statusMessage,
         data: {
           code: data.code,
         },
@@ -50,9 +51,9 @@ export default defineEventHandler(async (event) => {
     }
     // eslint-disable-next-line no-console
     console.log(error);
-    throw createError({
-      statusCode: 500,
-      statusMessage: "Something went wrong; Please try again later",
+    setResponseStatus(event, 500);
+    return failure(500, {
+      message: "Something went wrong; Please try again later",
       data: {
         message: "Internal server error",
       },

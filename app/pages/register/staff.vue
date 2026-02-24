@@ -40,6 +40,7 @@ const formSchema = z.object({
 });
 
 export type StaffUserFormInput = z.input<typeof formSchema>;
+const router = useRouter();
 
 const form = useForm({
   defaultValues: {
@@ -96,6 +97,7 @@ const form = useForm({
         id: toastId,
         description: `Welcome to Pharmify! Your profile has been successfully created`,
       });
+      router.push("/dashboard/pharmacy");
     } catch (err) {
       if (err instanceof FetchError) {
         toast.error(`Registration failed`, {
@@ -179,14 +181,14 @@ const displayErrorMessage = (fieldError: any[]) => {
                         @input="
                           (e: Event) =>
                             field.handleChange(
-                              (e.target as HTMLInputElement).value
+                              (e.target as HTMLInputElement).value,
                             )
                         "
                       />
                       <div v-if="field.state.meta.errors.length">
                         <UIFieldError
                           v-for="message in displayErrorMessage(
-                            field.state.meta.errors
+                            field.state.meta.errors,
                           )"
                           :key="message"
                         >
@@ -213,14 +215,14 @@ const displayErrorMessage = (fieldError: any[]) => {
                         @input="
                           (e: Event) =>
                             field.handleChange(
-                              (e.target as HTMLInputElement).value
+                              (e.target as HTMLInputElement).value,
                             )
                         "
                       />
                       <div v-if="field.state.meta.errors.length">
                         <UIFieldError
                           v-for="message in displayErrorMessage(
-                            field.state.meta.errors
+                            field.state.meta.errors,
                           )"
                           :key="message"
                         >
@@ -257,7 +259,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                         @input="
                           (e: Event) =>
                             field.handleChange(
-                              (e.target as HTMLInputElement).value
+                              (e.target as HTMLInputElement).value,
                             )
                         "
                       />
@@ -265,7 +267,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                       <div v-if="field.state.meta.errors.length">
                         <UIFieldError
                           v-for="message in displayErrorMessage(
-                            field.state.meta.errors
+                            field.state.meta.errors,
                           )"
                           :key="message"
                         >
@@ -305,7 +307,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                       <div v-if="field.state.meta.errors.length">
                         <UIFieldError
                           v-for="message in displayErrorMessage(
-                            field.state.meta.errors
+                            field.state.meta.errors,
                           )"
                           :key="message"
                         >
@@ -344,7 +346,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                       <div v-if="field.state.meta.errors.length">
                         <UIFieldError
                           v-for="message in displayErrorMessage(
-                            field.state.meta.errors
+                            field.state.meta.errors,
                           )"
                           :key="message"
                         >
@@ -383,7 +385,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                         @input="
                           (e: Event) =>
                             field.handleChange(
-                              (e.target as HTMLInputElement).value
+                              (e.target as HTMLInputElement).value,
                             )
                         "
                       />
@@ -391,7 +393,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                       <div v-if="field.state.meta.errors.length">
                         <UIFieldError
                           v-for="message in displayErrorMessage(
-                            field.state.meta.errors
+                            field.state.meta.errors,
                           )"
                           :key="message"
                         >
@@ -417,7 +419,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                         @input="
                           (e: Event) =>
                             field.handleChange(
-                              (e.target as HTMLInputElement).value
+                              (e.target as HTMLInputElement).value,
                             )
                         "
                       />
@@ -425,7 +427,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                       <div v-if="field.state.meta.errors.length">
                         <UIFieldError
                           v-for="message in displayErrorMessage(
-                            field.state.meta.errors
+                            field.state.meta.errors,
                           )"
                           :key="message"
                         >
@@ -460,7 +462,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                       <div v-if="field.state.meta.errors.length">
                         <UIFieldError
                           v-for="message in displayErrorMessage(
-                            field.state.meta.errors
+                            field.state.meta.errors,
                           )"
                           :key="message"
                         >
@@ -499,7 +501,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                       <div v-if="field.state.meta.errors.length">
                         <UIFieldError
                           v-for="message in displayErrorMessage(
-                            field.state.meta.errors
+                            field.state.meta.errors,
                           )"
                           :key="message"
                         >
@@ -526,7 +528,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                         @input="
                           (e: Event) =>
                             field.handleChange(
-                              (e.target as HTMLTextAreaElement).value
+                              (e.target as HTMLTextAreaElement).value,
                             )
                         "
                       />
@@ -534,7 +536,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                       <div v-if="field.state.meta.errors.length">
                         <UIFieldError
                           v-for="message in displayErrorMessage(
-                            field.state.meta.errors
+                            field.state.meta.errors,
                           )"
                           :key="message"
                         >
@@ -578,7 +580,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                                 const updateServices = checked
                                   ? [...field.state.value, service.name]
                                   : field.state.value.filter(
-                                      (s) => s !== service.name
+                                      (s) => s !== service.name,
                                     );
                                 field.handleChange(updateServices);
                               }
@@ -596,7 +598,7 @@ const displayErrorMessage = (fieldError: any[]) => {
                     <div v-if="field.state.meta.errors.length">
                       <UIFieldError
                         v-for="message in displayErrorMessage(
-                          field.state.meta.errors
+                          field.state.meta.errors,
                         )"
                         :key="message"
                       >

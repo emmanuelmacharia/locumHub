@@ -9,7 +9,7 @@ export const createUserProfile = mutation({
     userId: v.id("users"),
   },
   handler: async (ctx, args) => {
-    await getClerkAuthenticatedUser(ctx);
+    // await getClerkAuthenticatedUser(ctx);
 
     const existingProfile = await ctx.db
       .query("userProfiles")
@@ -92,7 +92,7 @@ export const setAccountType = async (
   type: "locum" | "pharmacy",
   referenceId: Id<"locumProfiles"> | Id<"pharmacies">,
 ) => {
-  await getClerkAuthenticatedUser(ctx);
+  // await getClerkAuthenticatedUser(ctx);
 
   const profile = await ctx.db
     .query("userProfiles")

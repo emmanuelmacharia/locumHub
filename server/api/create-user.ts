@@ -4,14 +4,21 @@ import { getConvexClient } from "../utils/convex";
 import { isAppError } from "../utils/convexErrors";
 
 export default defineEventHandler(async (event) => {
+  const { isAuthenticated, userId } = await verifyAuth(event);
+
+  if (!isAuthenticated || !userId) {
+    setResponseStatus(event, 401);
+    return failure(401, "Unauthorized");
+  }
+
   const result = await readValidatedBody(event, (body: unknown) =>
-    userPayloadSchema.safeParse(body)
+    userPayloadSchema.safeParse(body),
   );
 
   if (!result.success) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: "Validation Error",
+    setResponseStatus(event, 400);
+    return failure(400, {
+      message: "Validation Error",
       data: result.error.issues,
     });
   }
@@ -26,6 +33,7 @@ export default defineEventHandler(async (event) => {
       clerkUpdatedAt: new Date(result.data.clerkUpdatedAt).getTime(),
     });
 
+    setResponseStatus(event, 201);
     return {
       statusCode: 201,
       statusMessage: "User successfully created",
@@ -36,18 +44,18 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     if (isAppError(error)) {
       const { data } = error;
-      throw createError({
-        statusCode: data.statusCode,
-        statusMessage: data.statusMessage,
+      setResponseStatus(event, 400);
+      return failure(data.statusCode, {
+        message: data.statusMessage,
         data: {
           code: data.code,
         },
       });
     } else {
       // handle other error types
-      throw createError({
-        statusCode: 500,
-        statusMessage: "Something went wrong; Please try again later",
+      setResponseStatus(event, 500);
+      return failure(500, {
+        message: "Something went wrong; Please try again later",
       });
     }
   }

@@ -242,8 +242,8 @@ const { handleSignUp, goToDashboard, userProfileData } =
         </div>
       </section>
       <section
-        class="py-20 md:py-28"
         v-if="!userProfileData || userProfileData?.accountType === 'pharmacy'"
+        class="py-20 md:py-28"
       >
         <div class="container px-4 md:px-6 mx-auto">
           <div class="text-center max-w-2xl mx-auto mb-12">

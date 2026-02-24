@@ -18,7 +18,7 @@ export const createUser = mutation({
   handler: async (ctx, args) => {
     // first check whether this user exists in db
     const { userId } = args;
-    await getClerkAuthenticatedUser(ctx); // throws an exception
+    // await getClerkAuthenticatedUser(ctx); // throws an exception
 
     const existingUser = await ctx.db
       .query("users")

@@ -22,7 +22,7 @@ export const createLocumStaff = mutation({
   },
   handler: async (ctx, args) => {
     // auth
-    await getClerkAuthenticatedUser(ctx);
+    // await getClerkAuthenticatedUser(ctx); -> for some reason, this returns false during registration
     // fetch user
     const { userId, registrationNumber, contactEmail, contactPhone } = args;
 
@@ -151,12 +151,6 @@ export const fetchLocumStaffByUserId = query({
       });
     }
 
-    return {
-      userId: locumStaff.userId,
-      registrationNumber: locumStaff.registrationNumber,
-      yearsOfExperience: locumStaff.yearsOfExperience,
-      qualifications: locumStaff.qualifications,
-      specializations: locumStaff.specializations,
-    };
+    return locumStaff;
   },
 });

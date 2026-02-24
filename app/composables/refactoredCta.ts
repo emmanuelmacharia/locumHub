@@ -1,35 +1,35 @@
 export const useRefactoredCta = () => {
   const clerk = useClerk();
 
-  const { profileData, isLoading } = useServerUserProfile();
+  const { profileData, pending } = useServerUserProfile();
 
   const isFullyOnboarded = computed(() => {
-    if (isLoading.value) return;
+    if (pending.value) return;
     if (!profileData.value) return false;
     if (profileData.value.profile) return true;
   });
 
   const userAccountType = computed(() => {
-    if (isLoading.value) return;
+    if (pending.value) return;
     if (!profileData.value?.profile) return;
     return profileData.value.profile.accountType;
   });
 
   const user = computed(() => {
-    if (isLoading.value) return;
+    if (pending.value) return;
     if (!profileData.value?.user) return;
     return profileData.value.user;
   });
 
   const userProfile = computed(() => {
-    if (isLoading.value) return;
+    if (pending.value) return;
     if (!profileData.value?.profile) return;
     return profileData.value.profile;
   });
   const router = useRouter();
 
   const handleSignUp = (userType?: "pharmacy" | "staff", url?: string) => {
-    if (isLoading.value) {
+    if (pending.value) {
       return;
     }
 
@@ -65,7 +65,7 @@ export const useRefactoredCta = () => {
   return {
     handleSignUp,
     goToDashboard,
-    isLoading: computed(() => isLoading.value),
+    pending: computed(() => pending.value),
     isAuthenticated: computed(() => user.value),
     userProfileData: computed(() => userProfile.value),
   };

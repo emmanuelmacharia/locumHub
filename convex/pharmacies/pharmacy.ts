@@ -26,7 +26,7 @@ export const createPharmacy = mutation({
   },
   handler: async (ctx, args) => {
     // auth
-    await getClerkAuthenticatedUser(ctx);
+    // await getClerkAuthenticatedUser(ctx);
     // first we ensure uniqueness of unique params
     const pharmaLicense = await ctx.db
       .query("pharmacies")

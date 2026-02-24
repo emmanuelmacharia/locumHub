@@ -18,7 +18,7 @@ export const createPharmacyLocation = mutation({
   },
   handler: async (ctx, args) => {
     // auth
-    await getClerkAuthenticatedUser(ctx);
+    // await getClerkAuthenticatedUser(ctx);
 
     // fetch the pharmacy and validate that it exists
     const pharma = await ctx.db.get(args.pharmacyId);

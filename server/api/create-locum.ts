@@ -14,7 +14,8 @@ export default defineEventHandler(async (event) => {
   );
 
   if (!result.success) {
-    throw failure(400, {
+    setResponseStatus(event, 400);
+    return failure(400, {
       message: "Validation Error",
       data: result.error.issues,
     });

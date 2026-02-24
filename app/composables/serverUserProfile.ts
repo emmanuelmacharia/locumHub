@@ -29,7 +29,7 @@ export const useServerUserProfile = (options: Options = {}) => {
     // in Nuxt, it's fine to call and return the promise.
     // In a component/layout you can `await useServerUserProfile({ preload: true }).ensureLoaded()`
     // In middleware you can `await ensureLoaded()` right after calling composable.
-    void store.init();
+    void ensureLoaded();
   }
 
   return {

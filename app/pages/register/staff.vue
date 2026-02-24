@@ -97,7 +97,7 @@ const form = useForm({
         id: toastId,
         description: `Welcome to Pharmify! Your profile has been successfully created`,
       });
-      router.push("/dashboard/pharmacy");
+      router.push("/dashboard/staff");
     } catch (err) {
       if (err instanceof FetchError) {
         toast.error(`Registration failed`, {

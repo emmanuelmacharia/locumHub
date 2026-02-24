@@ -19,6 +19,10 @@ import {
 } from "@/components/ui/sheet";
 import { Separator as UISeparator } from "@/components/ui/separator";
 
+const { profileData, pharmacyData, locumData } = useDashboardNavbarInfo();
+
+// fetch locum information
+
 const mobileOpen = ref(false);
 
 function closeMobile() {
@@ -140,15 +144,43 @@ function closeMobile() {
         <UINavigationMenu class="flex">
           <UINavigationMenuList>
             <UINavigationMenuItem class="flex items-center gap-1">
-              <span class="text-sm font-medium">Pharmacy Name</span>
-              <UIBadge variant="outline" class="text-xs mx-2">
+              <span class="text-sm font-medium">
+                {{
+                  pharmacyData?.pharmacy?.businessName ||
+                  `${profileData?.user?.firstName} ${profileData?.user?.lastName}`
+                }}</span
+              >
+              <UIBadge
+                variant="outline"
+                class="text-xs mx-2"
+                v-if="pharmacyData?.pharmacy"
+              >
                 <Icon
                   name="lucide:star"
                   class="h-3 w-3 fill-yellow-500 text-yellow-500 mr-1"
                 />
-                4.5
+                {{
+                  pharmacyData?.pharmacy.ratingSum &&
+                  (
+                    pharmacyData.pharmacy.ratingSum /
+                    pharmacyData.pharmacy.ratingCount
+                  ).toFixed(1)
+                }}
+              </UIBadge>
+              <UIBadge variant="outline" class="text-xs mx-2" v-else>
+                <Icon
+                  name="lucide:star"
+                  class="h-3 w-3 fill-yellow-500 text-yellow-500 mr-1"
+                />
+                {{
+                  locumData?.locum.ratingSum &&
+                  (
+                    locumData.locum.ratingSum / locumData.locum.ratingCount
+                  ).toFixed(1)
+                }}
               </UIBadge>
               <UIBadge
+                v-if="pharmacyData?.pharmacy"
                 class="bg-linear-to-r from-emerald-500 to-emerald-500/70 text-primary-foreground text-[10px]"
               >
                 Subscription tier

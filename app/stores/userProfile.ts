@@ -27,10 +27,6 @@ export const useUserProfileStore = defineStore("userProfile", () => {
 
     inflight = (async () => {
       try {
-        if (currentGen !== generation) {
-          // A newer init() call has been made, so we should ignore this one.
-          return data.value;
-        }
         type GetUserProfileResponse = {
           user: User;
           profile: UserProfile;
@@ -48,6 +44,7 @@ export const useUserProfileStore = defineStore("userProfile", () => {
             credentials: "include",
           });
         }
+        if (currentGen !== generation) return data.value;
         data.value = res;
         return res;
       } catch (err) {
@@ -59,8 +56,10 @@ export const useUserProfileStore = defineStore("userProfile", () => {
         data.value = null;
         return null;
       } finally {
-        pending.value = false;
-        inflight = null;
+        if (currentGen === generation) {
+          pending.value = false;
+          inflight = null;
+        }
       }
     })();
 

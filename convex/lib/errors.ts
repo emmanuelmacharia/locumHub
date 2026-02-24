@@ -8,6 +8,7 @@ export type AppErrorData = {
     | "NOT_FOUND"
     | "INVALID_PATCH"
     | "FORBIDDEN"
+    | "INVALID_ACCOUNT_TYPE"
     | "CONVEX_ERROR";
   statusMessage: string;
   statusCode: number;

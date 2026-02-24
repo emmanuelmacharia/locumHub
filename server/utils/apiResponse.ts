@@ -50,7 +50,7 @@ export function failure(statusCode: number, error: unknown): APIError {
       statusCode,
       error: {
         message: errMessage,
-        details: message.details,
+        details: message.details ?? message.data,
       },
     };
   }

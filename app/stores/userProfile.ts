@@ -1,4 +1,5 @@
 import type { Doc } from "~~/convex/_generated/dataModel";
+import type { $Fetch, NitroFetchRequest } from "nitropack";
 
 type User = Doc<"users">;
 type UserProfile = Doc<"userProfiles">;
@@ -24,11 +25,23 @@ export const useUserProfileStore = defineStore("userProfile", () => {
 
     inflight = (async () => {
       try {
-        const reqFetch = import.meta.server ? useRequestFetch() : $fetch;
-        const res = await reqFetch<{ user: User; profile: UserProfile } | null>(
-          "/api/auth/getUserProfile",
-          { credentials: "include" },
-        );
+        type GetUserProfileResponse = {
+          user: User;
+          profile: UserProfile;
+        } | null;
+        const url: string = "/api/auth/getUserProfile";
+
+        let res: GetUserProfileResponse;
+        if (import.meta.server) {
+          const reqFetch = useRequestFetch();
+          res = await reqFetch<GetUserProfileResponse>(url, {
+            credentials: "include",
+          });
+        } else {
+          res = await $fetch<GetUserProfileResponse>(url, {
+            credentials: "include",
+          });
+        }
         data.value = res;
         return res;
       } catch (err) {

@@ -24,13 +24,22 @@ export const usePharmacyStore = defineStore("pharmacy", () => {
 
     inflight = (async () => {
       try {
-        const reqFetch = import.meta.server ? useRequestFetch() : $fetch;
-        const res = await reqFetch<{
+        type GetPharmacyResponse = {
           pharmacy: Pharmacy;
           location: PharmacyLocation[];
-        } | null>(`/api/pharmacy/getPharmacy?id=${id}`, {
-          credentials: "include",
-        });
+        } | null;
+        const url = `/api/pharmacy/getPharmacy?id=${id}`;
+        let res: GetPharmacyResponse;
+        if (import.meta.server) {
+          const reqFetch = useRequestFetch();
+          res = await reqFetch<GetPharmacyResponse>(url, {
+            credentials: "include",
+          });
+        } else {
+          res = await $fetch<GetPharmacyResponse>(url, {
+            credentials: "include",
+          });
+        }
         data.value = res;
         return res;
       } catch (err) {

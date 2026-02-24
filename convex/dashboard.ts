@@ -2,7 +2,8 @@ import { v } from "convex/values";
 import { api } from "./_generated/api";
 import type { Doc } from "./_generated/dataModel";
 import { query } from "./_generated/server";
-import { AppErrorData, appError } from "./lib/errors";
+import { appError } from "./lib/errors";
+import type { AppErrorData } from "./lib/errors";
 
 type User = Doc<"users">;
 type UserProfile = Doc<"userProfiles">;

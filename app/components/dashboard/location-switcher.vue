@@ -70,7 +70,6 @@ const handleLocationSelection = (location: Location) => {
           class="w-4 h-4 text-muted-foreground"
         />
       </UIButton>
-      <ChevronDownIcon class="w-4 h-4" />
     </UIDropdownMenuTrigger>
     <UIDropdownMenuContent align="start" class="w-72">
       <UIDropdownMenuLabel class="text-xs text-muted-foreground"

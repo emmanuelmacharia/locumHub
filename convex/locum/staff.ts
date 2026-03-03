@@ -136,7 +136,7 @@ export const fetchLocumStaffByUserId = query({
     userId: v.id("users"),
   },
   handler: async (ctx, args) => {
-    await getClerkAuthenticatedUser(ctx);
+    // await getClerkAuthenticatedUser(ctx);
 
     const locumStaff = await ctx.db
       .query("locumProfiles")

@@ -70,7 +70,7 @@ export const getPharmacyLocationsByPharmacyId = query({
   handler: async (ctx, { pharmacyId }) => {
     if (!pharmacyId) return [];
 
-    await getClerkAuthenticatedUser(ctx);
+    // await getClerkAuthenticatedUser(ctx);
 
     const locations = await ctx.db
       .query("pharmacyLocations")

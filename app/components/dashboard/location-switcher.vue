@@ -48,7 +48,7 @@ const handleLocationSelection = (location: Location) => {
 
 <template>
   <UIDropdownMenu v-model:open="open">
-    <UIDropdownMenuTrigger asChild>
+    <UIDropdownMenuTrigger as-child>
       <UIButton
         variant="outline"
         class="gap-2 h-9 text-sm justify-between min-w-[180px]"
@@ -78,6 +78,8 @@ const handleLocationSelection = (location: Location) => {
       <UIDropdownMenuSeparator />
 
       <UIDropdownMenuItem
+        class="py-2.5 cursor-pointer hover:bg-emerald-500/10!"
+        :class="selectedLocationId === 'all' && 'bg-emerald-500/30!'"
         @click="
           handleLocationSelection({
             name: 'All Locations',
@@ -88,8 +90,6 @@ const handleLocationSelection = (location: Location) => {
             selected: true,
           })
         "
-        class="py-2.5 cursor-pointer hover:bg-emerald-500/10!"
-        :class="selectedLocationId === 'all' && 'bg-emerald-500/30!'"
       >
         <div class="flex items-center justify-between w-full">
           <div class="flex items-center gap-2">
@@ -106,8 +106,8 @@ const handleLocationSelection = (location: Location) => {
 
       <template v-for="location in locations" :key="location.id">
         <UIDropdownMenuItem
-          @click="handleLocationSelection(location)"
           class="cursor-pointer py-2.5 hover:bg-emerald-500/10!"
+          @click="handleLocationSelection(location)"
         >
           <div class="flex flex-col w-full gap-2">
             <div class="flex items-center justify-between">

@@ -257,10 +257,10 @@ const mockFavourites: FavouriteLocum[] = [
         <section>
           <ClientOnly>
             <DashboardEntryCard
+              id="joblisting-entry"
               header="My posted Jobs"
               subtitle="3 open positions. manage and close listings"
               icon="lucide:briefcase"
-              id="joblisting-entry"
             />
           </ClientOnly>
         </section>

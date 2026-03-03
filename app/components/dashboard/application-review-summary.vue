@@ -113,17 +113,16 @@ const avatarLimit = computed(() =>
             <div class="flex items-center mb-4">
               <div class="flex -space-x-3">
                 <div
-                  class="relative"
-                  :style="{ 'z-index': `${props.review.count - num}` }"
                   v-for="num in avatarLimit"
                   :key="num"
+                  class="relative"
+                  :style="{ 'z-index': `${props.review.count - num}` }"
                 >
                   <UIAvatar class="h-11 w-11 ring-2 ring-background bg-muted">
                     <UIAvatarImage src="" />
                     <UIAvatarFallback
                       class="bg-primary/10 text-primary text-xs font-semibold"
-                    >
-                    </UIAvatarFallback>
+                    />
                   </UIAvatar>
                   <Icon
                     v-if="props.review.type === 'Job'"

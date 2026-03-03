@@ -115,8 +115,8 @@ const handleClick = () => (showAll.value = !showAll.value);
           </div>
           <div class="flex items-center gap-2 text-xs text-muted-foreground">
             <span
-              class="flex items-center gap-1"
               v-if="favourite.availability !== 'unknown'"
+              class="flex items-center gap-1"
             >
               <Icon
                 :name="favourite.config.icon"
@@ -125,8 +125,8 @@ const handleClick = () => (showAll.value = !showAll.value);
               {{ favourite.config.text }}
             </span>
             <span
-              class="text-border"
               v-if="favourite.availability !== 'unknown'"
+              class="text-border"
               >•</span
             >
             <span>Last: {{ favourite.last }}</span>

@@ -102,7 +102,7 @@ const shiftsWithConfig = computed(() =>
       <span class="relative flex h-2 w-2">
         <span
           class="relative inline-flex rounded-full h-2 w-2 bg-muted-foreground/30"
-        ></span>
+        />
       </span>
       <h3 class="text-base font-semibold">Today's Shifts</h3>
     </div>
@@ -118,15 +118,15 @@ const shiftsWithConfig = computed(() =>
           <template v-if="activeShiftsCount > 0">
             <span
               class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-600 opacity-75"
-            ></span>
+            />
             <span
               class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"
-            ></span>
+            />
           </template>
           <template v-else>
             <span
               class="relative indline-flex rounded-full h-2 w-2 bg-muted-foreground/40"
-            ></span>
+            />
           </template>
         </span>
         Today's Shifts
@@ -179,10 +179,10 @@ const shiftsWithConfig = computed(() =>
                   <span class="relative flex h-1 5 w-1 5 mr-1">
                     <span
                       class="animate-ping absolute inline-flex h-full w-full rounded-full bg-current opacity-75"
-                    ></span>
+                    />
                     <span
                       class="relative inline-flex rounded-full h-1 5 w-1 5 bg-current"
-                    ></span>
+                    />
                   </span>
                 </template>
                 {{ shift.shiftConfig.label }}

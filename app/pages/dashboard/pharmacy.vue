@@ -194,7 +194,7 @@ const mockFavourites: FavouriteLocum[] = [
 </script>
 
 <template>
-  <div class="container mx-auto max-w-7xl px-4 py-8 pb-24 sm:px-6 mg:pb-8">
+  <div class="container mx-auto max-w-7xl px-4 py-8 pb-24 sm:px-6 md:pb-8">
     <section class="mb-10">
       <div class="flex items-center justify-between mb-6">
         <ClientOnly>
@@ -265,12 +265,15 @@ const mockFavourites: FavouriteLocum[] = [
           </ClientOnly>
         </section>
         <UISeparator class="mb-8" />
-        <section hydrate-on-idle>
-          <DashboardLiveShiftTracker :shifts="mockShifts" />
+        <section>
+          <LazyDashboardLiveShiftTracker :shifts="mockShifts" hydrate-on-idle />
         </section>
         <UISeparator />
-        <section hydrate-on-idle>
-          <DashboardLocumBookCard :favourites="mockFavourites" />
+        <section>
+          <LazyDashboardLocumBookCard
+            :favourites="mockFavourites"
+            hydrate-on-idle
+          />
         </section>
       </div>
     </div>

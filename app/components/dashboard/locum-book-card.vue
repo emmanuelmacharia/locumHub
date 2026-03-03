@@ -104,7 +104,7 @@ const handleClick = () => (showAll.value = !showAll.value);
           <div class="flex items-center gap-1.5 mb-0.5">
             <p class="font-medium text-sm truncate">{{ favourite.name }}</p>
             <div
-              class="flex items-center gap-0 5 text-xs text-muted-foreground"
+              class="flex items-center gap-0.5 text-xs text-muted-foreground"
             >
               <Icon
                 name="lucide:star"
@@ -144,7 +144,7 @@ const handleClick = () => (showAll.value = !showAll.value);
     </div>
     <ClientOnly>
       <UIButton
-        v-if="favourites.length > 4"
+        v-if="favourites.length > 3"
         variant="ghost"
         size="sm"
         class="w-full text-xs text-emerald-500 hover:text-emerald-500/90 gap-1"

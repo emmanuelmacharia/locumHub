@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Shift } from "~/components/dashboard/live-shift-tracker.vue";
+import type { FavouriteLocum } from "~/components/dashboard/locum-book-card.vue";
 
 definePageMeta({
   layout: "logged-in",
@@ -147,6 +148,49 @@ const mockShifts = [
     timesheet: [],
   },
 ] satisfies Shift[];
+
+const mockFavourites: FavouriteLocum[] = [
+  {
+    name: "Jane Mwangi",
+    rating: 4.8,
+    availability: "available",
+    locumId: "locum-001",
+    lastWorked: "2026-03-02T09:00:00Z",
+    image: "https://randomuser.me/api/portraits/women/1.jpg",
+  },
+  {
+    name: "John Otieno",
+    rating: 4.5,
+    availability: "busy",
+    locumId: "locum-002",
+    lastWorked: "2026-02-28T14:00:00Z",
+    image: "https://randomuser.me/api/portraits/men/2.jpg",
+  },
+  {
+    name: "Faith Wanjiru",
+    rating: 4.9,
+    availability: "available",
+    locumId: "locum-003",
+    lastWorked: "2026-03-01T11:30:00Z",
+    image: "https://randomuser.me/api/portraits/women/3.jpg",
+  },
+  {
+    name: "Peter Kimani",
+    rating: 4.2,
+    availability: "unknown",
+    locumId: "locum-004",
+    lastWorked: "",
+    image: "https://randomuser.me/api/portraits/men/4.jpg",
+  },
+  {
+    name: "Mercy Aloo",
+    rating: 4.0,
+    availability: "available",
+    locumId: "locum-005",
+    lastWorked: "",
+    image: "https://randomuser.me/api/portraits/men/5.jpg",
+  },
+];
 </script>
 
 <template>
@@ -189,29 +233,25 @@ const mockShifts = [
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 my-6">
       <div class="lg:col-span-2 space-y-10">
         <section>
-          <ClientOnly>
-            <DashboardApplicationReviewSummary
-              :review="{
-                type: 'Job',
-                count: 20,
-                urgency: 'info',
-                stats: { averageRating: 4.1, returning: 2 },
-              }"
-            />
-          </ClientOnly>
+          <DashboardApplicationReviewSummary
+            :review="{
+              type: 'Job',
+              count: 20,
+              urgency: 'info',
+              stats: { averageRating: 4.1, returning: 2 },
+            }"
+          />
         </section>
         <UISeparator class="mb-8" />
         <section>
-          <ClientOnly>
-            <DashboardApplicationReviewSummary
-              :review="{
-                type: 'Timesheet',
-                count: 2,
-                urgency: 'info',
-                stats: { totalHours: '41', locations: 4 },
-              }"
-            />
-          </ClientOnly>
+          <DashboardApplicationReviewSummary
+            :review="{
+              type: 'Timesheet',
+              count: 2,
+              urgency: 'info',
+              stats: { totalHours: '41', locations: 4 },
+            }"
+          />
         </section>
         <UISeparator class="mb-8" />
         <section>
@@ -225,10 +265,13 @@ const mockShifts = [
           </ClientOnly>
         </section>
         <UISeparator class="mb-8" />
-        <section>
+        <section hydrate-on-idle>
           <DashboardLiveShiftTracker :shifts="mockShifts" />
         </section>
         <UISeparator />
+        <section hydrate-on-idle>
+          <DashboardLocumBookCard :favourites="mockFavourites" />
+        </section>
       </div>
     </div>
   </div>

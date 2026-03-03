@@ -44,6 +44,19 @@ const handleLocationSelection = (location: Location) => {
   open.value = false;
   emits("selectLocation", location);
 };
+
+const handleAllLocationsSelected = () => {
+  selectedLocationId.value = "all";
+  open.value = false;
+  emits("selectLocation", {
+    name: "All Locations",
+    id: 0,
+    favouriteCount: 0,
+    complianceStatus: 0,
+    shifts: 0,
+    selected: true,
+  });
+};
 </script>
 
 <template>
@@ -80,16 +93,7 @@ const handleLocationSelection = (location: Location) => {
       <UIDropdownMenuItem
         class="py-2.5 cursor-pointer hover:bg-emerald-500/10!"
         :class="selectedLocationId === 'all' && 'bg-emerald-500/30!'"
-        @click="
-          handleLocationSelection({
-            name: 'All Locations',
-            id: 0,
-            favouriteCount: 0,
-            complianceStatus: 0,
-            shifts: 0,
-            selected: true,
-          })
-        "
+        @click="handleAllLocationsSelected()"
       >
         <div class="flex items-center justify-between w-full">
           <div class="flex items-center gap-2">

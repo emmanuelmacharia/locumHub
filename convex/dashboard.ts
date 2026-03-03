@@ -4,7 +4,7 @@ import type { Doc } from "./_generated/dataModel";
 import { query } from "./_generated/server";
 import { appError } from "./lib/errors";
 import type { AppErrorData } from "./lib/errors";
-import { getClerkAuthenticatedUser } from "./lib/auth";
+// import { getClerkAuthenticatedUser } from "./lib/auth";
 
 type Pharmacy = Doc<"pharmacies">;
 type PharmacyLocation = Doc<"pharmacyLocations">;
@@ -45,7 +45,7 @@ export const consolidatedDashboardNavbarInfo = query({
       });
     }
 
-    await getClerkAuthenticatedUser(ctx);
+    // await getClerkAuthenticatedUser(ctx);
 
     const profile = await ctx.runQuery(
       api.users.userProfile.getUserProfileByUserId,

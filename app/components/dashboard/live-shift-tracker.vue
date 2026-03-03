@@ -32,7 +32,7 @@ export type Shift = {
       rating: number;
       img?: string;
     };
-    shiftStatus: string;
+    shiftStatus: ShiftStatus;
     clockedInTime?: string;
     clockedOutTime?: string;
     eta?: string;

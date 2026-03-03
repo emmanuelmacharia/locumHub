@@ -13,7 +13,7 @@ type Location = {
 const props = withDefaults(
   defineProps<{
     locations: Location[];
-    all: boolean;
+    all?: boolean;
   }>(),
   {
     all: true,

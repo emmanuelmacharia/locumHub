@@ -6,11 +6,12 @@ const props = defineProps<{
   id: string;
 }>();
 
-// const emit = defineEmits<{ (e: "entrypointClick"): void }>();
+const emit = defineEmits<{ (e: "entrypointClick"): void }>();
 </script>
 
 <template>
   <button
+    @click="emit('entrypointClick')"
     class="w-full flex items-center gap-4 p-4 rounded-xl border bg-muted/30 hover:bg-muted/50 transition-colors text-left group cursor-pointer"
   >
     <div class="p-2 5 rounded-xl bg-emerald-500/10">

@@ -130,7 +130,7 @@ const avatarLimit = computed(() =>
                   />
                 </div>
                 <div
-                  v-if="props.review.count - 4 > 0"
+                  v-if="props.review.count > 3"
                   class="h-11 w-11 rounded-full ring-2 ring-background bg-muted flex items-center justify-center"
                 >
                   <span class="text-xs font-medium text-muted-foreground">

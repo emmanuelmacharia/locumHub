@@ -101,123 +101,141 @@ const avatarLimit = computed(() =>
           </UIBadge>
         </div>
       </div>
-      <button
-        class="w-full group relative overflow-hidden rounded-2xl border text-left transition-all hover:shadow-lg"
-        :class="`${computedCardTypeColor.buttongrad} ${computedCardTypeColor.hoverColor}`"
-      >
-        <div
-          class="absolute inset-0 bg-grid-primary/[0.02] pointer-events-none"
-        />
-        <div class="relative p-4">
-          <div class="flex items-center mb-4">
-            <div class="flex -space-x-3">
-              <div
-                class="relative"
-                :style="{ 'z-index': `${props.review.count - num}` }"
-                v-for="num in avatarLimit"
-                :key="num"
-              >
-                <UIAvatar class="h-11 w-11 ring-2 ring-background bg-muted">
-                  <UIAvatarImage src="" />
-                  <UIAvatatFallback
-                    class="bg-primary/10 text-primary text-xs font-semibold"
-                  >
-                  </UIAvatatFallback>
-                </UIAvatar>
-                <Icon
-                  v-if="props.review.type === 'Job'"
-                  name="lucide:circle-check"
-                  class="text-emerald-500/50 absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full"
-                />
-              </div>
-              <div
-                v-if="props.review.count - 4 > 0"
-                class="h-11 w-11 rounded-full ring-2 ring-background bg-muted flex items-center justify-center"
-              >
-                <span class="text-xs font-medium text-muted-foreground">
-                  +{{ props.review.count - 3 }}
-                </span>
+      <ClientOnly>
+        <button
+          class="w-full group relative overflow-hidden rounded-2xl border text-left transition-all hover:shadow-lg"
+          :class="`${computedCardTypeColor.buttongrad} ${computedCardTypeColor.hoverColor}`"
+        >
+          <div
+            class="absolute inset-0 bg-grid-primary/[0.02] pointer-events-none"
+          />
+          <div class="relative p-4">
+            <div class="flex items-center mb-4">
+              <div class="flex -space-x-3">
+                <div
+                  class="relative"
+                  :style="{ 'z-index': `${props.review.count - num}` }"
+                  v-for="num in avatarLimit"
+                  :key="num"
+                >
+                  <UIAvatar class="h-11 w-11 ring-2 ring-background bg-muted">
+                    <UIAvatarImage src="" />
+                    <UIAvatarFallback
+                      class="bg-primary/10 text-primary text-xs font-semibold"
+                    >
+                    </UIAvatarFallback>
+                  </UIAvatar>
+                  <Icon
+                    v-if="props.review.type === 'Job'"
+                    name="lucide:circle-check"
+                    class="text-emerald-500/50 absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full"
+                  />
+                </div>
+                <div
+                  v-if="props.review.count - 4 > 0"
+                  class="h-11 w-11 rounded-full ring-2 ring-background bg-muted flex items-center justify-center"
+                >
+                  <span class="text-xs font-medium text-muted-foreground">
+                    +{{ props.review.count - 3 }}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="flex items-center gap-4 px-4 text-sm">
-          <div class="">
-            <p class="text-2xl font-bold text-foreground">
-              {{ props.review.count }}
-            </p>
-            <p class="text-xs text-muted-foreground">Awaiting review</p>
-          </div>
-          <div class="h-10 w-px bg-border" />
-          <div class="">
-            <div class="flex flex-col items-center gap-1">
-              <div class="flex items-center gap-2">
-                <Icon
+          <div class="flex items-center gap-4 px-4 text-sm">
+            <div class="">
+              <p class="text-2xl font-bold text-foreground">
+                {{ props.review.count }}
+              </p>
+              <p class="text-xs text-muted-foreground">Awaiting review</p>
+            </div>
+            <div class="h-10 w-px bg-border" />
+            <div class="">
+              <div class="flex flex-col items-center gap-1">
+                <div class="flex items-center gap-2">
+                  <Icon
+                    v-if="props.review.type === 'Job'"
+                    name="lucide:star"
+                    class="text-lg text-muted-foreground fill-yellow-500 text-yellow-500"
+                  />
+                  <Icon
+                    v-else
+                    name="lucide:clock-check"
+                    class="text-lg text-muted-foreground"
+                  />
+                  <span class="text-2xl font-semibold">
+                    {{
+                      props.review.type === "Job"
+                        ? (props.review.stats as ApplicationStats).averageRating
+                        : `${(props.review.stats as TimesheetStats).totalHours}h`
+                    }}
+                  </span>
+                </div>
+                <p
                   v-if="props.review.type === 'Job'"
-                  name="lucide:star"
-                  class="text-lg text-muted-foreground fill-yellow-500 text-yellow-500"
-                />
+                  class="text-xs text-muted-foreground"
+                >
+                  Avg rating
+                </p>
+                <p v-else class="text-xs text-muted-foreground">Total hours</p>
+              </div>
+            </div>
+            <div class="h-10 w-px bg-border" />
+            <div class="">
+              <div class="flex gap-2 items-center">
                 <Icon
-                  v-else
-                  name="lucide:clock-check"
+                  v-if="props.review.type === 'Timesheet'"
+                  name="lucide:map-pin"
                   class="text-lg text-muted-foreground"
                 />
-                <span class="text-2xl font-semibold">
+                <span class="text-2xl font-semibold text-emerald-500">
                   {{
                     props.review.type === "Job"
-                      ? (props.review.stats as ApplicationStats).averageRating
-                      : `${(props.review.stats as TimesheetStats).totalHours}h`
+                      ? (props.review.stats as ApplicationStats).returning
+                      : (props.review.stats as TimesheetStats).locations
                   }}
                 </span>
               </div>
-              <p
-                v-if="props.review.type === 'Job'"
-                class="text-xs text-muted-foreground"
-              >
-                Avg rating
+              <p class="text-xs text-muted-foreground">
+                {{ props.review.type === "Job" ? "Returning" : "Locations" }}
               </p>
-              <p v-else class="text-xs text-muted-foreground">Total hours</p>
             </div>
           </div>
-          <div class="h-10 w-px bg-border" />
-          <div class="">
-            <div class="flex gap-2 items-center">
-              <Icon
-                v-if="props.review.type === 'Timesheet'"
-                name="lucide:map-pin"
-                class="text-lg text-muted-foreground"
-              />
-              <span class="text-2xl font-semibold text-emerald-500">
-                {{
-                  props.review.type === "Job"
-                    ? (props.review.stats as ApplicationStats).returning
-                    : (props.review.stats as TimesheetStats).locations
-                }}
-              </span>
-            </div>
-            <p class="text-xs text-muted-foreground">
-              {{ props.review.type === "Job" ? "Returning" : "Locations" }}
+          <div class="flex items-center justify-between p-4">
+            <p
+              v-if="props.review.type === 'Job'"
+              class="text-sm text-muted-foreground"
+            >
+              Review and respond to applicants
             </p>
+            <p v-else class="text-sm text-muted-foreground">
+              Review timesheets & verify activities
+            </p>
+            <div
+              class="flex items-center gap-2 font-semibold text-sm group-hover:gap-3 transition-all"
+            >
+              Review All
+              <Icon name="lucide:chevron-right" class="h-4 w-4" />
+            </div>
           </div>
-        </div>
-        <div class="flex items-center justify-between p-4">
-          <p
-            v-if="props.review.type === 'Job'"
-            class="text-sm text-muted-foreground"
-          >
-            Review and respond to applicants
-          </p>
-          <p v-else class="text-sm text-muted-foreground">
-            Review timesheets & verify activities
-          </p>
+        </button>
+        <template #fallback>
           <div
-            class="flex items-center gap-2 font-semibold text-sm group-hover:gap-3 transition-all"
+            class="p-6 rounded-xl border border-dashed bg-muted/20 text-center"
           >
-            Review All
-            <Icon name="lucide:chevron-right" class="h-4 w-4" />
+            <div class="text-sm text-muted-foreground mb-1">
+              Loading data...
+            </div>
+            <div class="text-xs text-muted-foreground">
+              {{
+                props.review.type === "Job"
+                  ? `Applications will appear here when locums apply to your shifts`
+                  : `Completed shifts will appear here for your review`
+              }}
+            </div>
           </div>
-        </div>
-      </button>
+        </template>
+      </ClientOnly>
     </div>
   </div>
 </template>

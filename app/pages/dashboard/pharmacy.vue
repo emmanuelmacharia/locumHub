@@ -54,7 +54,7 @@ const mockLocations = [
           <p class="text-sm text-muted-foreground">Open Shifts</p>
         </div>
         <div>
-          <p class="text-3xl font-bold text-foreground">
+          <p class="text-3xl font-bold text-emerald-500">
             KES {{ 3000 / 1000 }}k
           </p>
           <p class="text-sm text-muted-foreground">Weekly spend</p>

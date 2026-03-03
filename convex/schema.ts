@@ -9,7 +9,7 @@ const verificationStatus = v.union(
   v.literal("verified"),
   v.literal("rejected"),
   v.literal("needs_review"),
-  v.literal("expired")
+  v.literal("expired"),
 );
 
 const documentTypes = v.union(
@@ -18,7 +18,7 @@ const documentTypes = v.union(
   v.literal("proof_of_address"),
   v.literal("qualification"),
   v.literal("pharmacy_license"),
-  v.literal("right_to_work")
+  v.literal("right_to_work"),
 );
 
 const dayOfWeek = v.union(
@@ -28,7 +28,7 @@ const dayOfWeek = v.union(
   v.literal("thursday"),
   v.literal("friday"),
   v.literal("saturday"),
-  v.literal("sunday")
+  v.literal("sunday"),
 );
 
 const operatingHours = v.optional(
@@ -37,7 +37,7 @@ const operatingHours = v.optional(
     close: v.string(),
     is24Hours: v.boolean(),
     enabled: v.boolean(),
-  })
+  }),
 );
 
 export const operatingDayHours = v.object({
@@ -58,7 +58,7 @@ const paymentMethodType = v.union(
   v.literal("revolut_business"),
   v.literal("stripe_connect"), // If used later
   v.literal("cheque"),
-  v.literal("mpesa") // default for Kenya
+  v.literal("mpesa"), // default for Kenya
 );
 
 const userType = v.union(v.literal("locum"), v.literal("pharmacy"));
@@ -67,7 +67,7 @@ const paymentFrequency = v.union(
   v.literal("per_shift"),
   v.literal("weekly"),
   v.literal("biweekly"),
-  v.literal("monthly")
+  v.literal("monthly"),
 );
 
 const notificationType = v.union(
@@ -90,13 +90,13 @@ const notificationType = v.union(
   v.literal("document_rejected"),
   v.literal("message_received"),
   v.literal("subscription_expiring"),
-  v.literal("subscription_expired")
+  v.literal("subscription_expired"),
 );
 
 const notificationChannel = v.union(
   v.literal("email"),
   v.literal("sms"),
-  v.literal("in_app")
+  v.literal("in_app"),
 );
 
 const auditAction = v.union(
@@ -118,7 +118,7 @@ const auditAction = v.union(
   v.literal("payment_refunded"),
   v.literal("review_submitted"),
   v.literal("block_created"),
-  v.literal("block_removed")
+  v.literal("block_removed"),
 );
 
 /**
@@ -171,7 +171,7 @@ const applicationTables = {
     context: v.union(
       v.literal("personal"),
       v.literal("locum_professional"),
-      v.literal("pharmacy")
+      v.literal("pharmacy"),
     ),
     pharmacyId: v.optional(v.id("pharmacies")),
 
@@ -296,7 +296,7 @@ const applicationTables = {
       v.literal("pharmacist"),
       v.literal("technician"),
       v.literal("dispenser"),
-      v.literal("admin_staff")
+      v.literal("admin_staff"),
     ),
 
     permissions: v.object({
@@ -312,7 +312,7 @@ const applicationTables = {
       v.literal("permanent"),
       v.literal("part_time"),
       v.literal("contractor"),
-      v.literal("locum_regular")
+      v.literal("locum_regular"),
     ),
 
     jobTitle: v.optional(v.string()),
@@ -476,7 +476,7 @@ const applicationTables = {
     urgency: v.union(
       v.literal("standard"),
       v.literal("urgent"),
-      v.literal("emergency")
+      v.literal("emergency"),
     ),
 
     // Financials
@@ -488,7 +488,7 @@ const applicationTables = {
     postingType: v.union(
       v.literal("broadcast"),
       v.literal("direct_offer"),
-      v.literal("recurring")
+      v.literal("recurring"),
     ),
     targetLocumId: v.optional(v.id("locumProfiles")),
     recurringTemplateId: v.optional(v.id("recurringShiftTemplates")),
@@ -511,7 +511,7 @@ const applicationTables = {
       v.literal("completed"),
       v.literal("cancelled"),
       v.literal("disputed"),
-      v.literal("no_show")
+      v.literal("no_show"),
     ),
 
     // Actual Times (clock in/out)
@@ -531,8 +531,8 @@ const applicationTables = {
       v.union(
         v.literal("pharmacy_cancelled"),
         v.literal("locum_cancelled"),
-        v.literal("system_cancelled")
-      )
+        v.literal("system_cancelled"),
+      ),
     ),
 
     // Application Stats (denormalized)
@@ -569,7 +569,7 @@ const applicationTables = {
       v.literal("accepted"),
       v.literal("rejected"),
       v.literal("withdrawn"),
-      v.literal("expired")
+      v.literal("expired"),
     ),
 
     // Tracking
@@ -631,11 +631,13 @@ const applicationTables = {
       v.literal("operational"),
       v.literal("incident"),
       v.literal("break"),
-      v.literal("other")
+      v.literal("other"),
     ),
 
-    actionCode: v.string(),
+    actionCode: v.optional(v.string()),
     actionName: v.string(),
+    timestamp: v.string(),
+    description: v.string(),
 
     // Metrics
     quantity: v.optional(v.number()),
@@ -649,7 +651,7 @@ const applicationTables = {
 
     // For incidents
     severity: v.optional(
-      v.union(v.literal("low"), v.literal("medium"), v.literal("high"))
+      v.union(v.literal("low"), v.literal("medium"), v.literal("high")),
     ),
     incidentReported: v.optional(v.boolean()),
 
@@ -690,7 +692,7 @@ const applicationTables = {
       v.literal("submitted"),
       v.literal("acknowledged"),
       v.literal("disputed"),
-      v.literal("resolved")
+      v.literal("resolved"),
     ),
 
     submittedAt: v.optional(v.number()),
@@ -761,7 +763,7 @@ const applicationTables = {
       v.literal("failed"),
       v.literal("refunded"),
       v.literal("partially_refunded"),
-      v.literal("disputed")
+      v.literal("disputed"),
     ),
 
     issuedAt: v.number(),
@@ -803,7 +805,7 @@ const applicationTables = {
         communication: v.optional(v.number()),
         clinicalSkills: v.optional(v.number()),
         workEnvironment: v.optional(v.number()),
-      })
+      }),
     ),
 
     comment: v.optional(v.string()),
@@ -873,7 +875,7 @@ const applicationTables = {
       v.literal("system"),
       v.literal("file"),
       v.literal("shift_invite"),
-      v.literal("shift_update")
+      v.literal("shift_update"),
     ),
 
     content: v.string(),
@@ -934,8 +936,8 @@ const applicationTables = {
         v.literal("pharmacy_member"),
         v.literal("locum"),
         v.literal("platform_admin"),
-        v.literal("system")
-      )
+        v.literal("system"),
+      ),
     ),
 
     action: auditAction,

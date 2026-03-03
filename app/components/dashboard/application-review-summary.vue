@@ -26,7 +26,7 @@ const props = defineProps<{ review: Reviews }>();
 // }>();
 
 const type = computed(() =>
-  props.review.type === "Job" ? "Applicaitons" : "Shift Reviews",
+  props.review.type === "Job" ? "Applications" : "Shift Reviews",
 );
 
 const CRITICAL_COLORS: Record<Urgency, string> = {

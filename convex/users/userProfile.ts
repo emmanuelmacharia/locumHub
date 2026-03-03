@@ -2,7 +2,7 @@ import type { Id } from "../_generated/dataModel";
 import { mutation, query, type MutationCtx } from "../_generated/server";
 import { v } from "convex/values";
 import { appError } from "../lib/errors";
-import { getClerkAuthenticatedUser } from "../lib/auth";
+// import { getClerkAuthenticatedUser } from "../lib/auth";
 
 export const createUserProfile = mutation({
   args: {
@@ -45,7 +45,7 @@ export const getUserProfileByUserId = query({
   },
   handler: async (ctx, args) => {
     if (!args.userId) return;
-    await getClerkAuthenticatedUser(ctx);
+    // await getClerkAuthenticatedUser(ctx);
     const profile = await ctx.db
       .query("userProfiles")
       .withIndex("by_user_id", (q) => q.eq("userId", args.userId!))

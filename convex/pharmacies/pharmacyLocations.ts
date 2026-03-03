@@ -2,7 +2,7 @@ import { v } from "convex/values";
 import { mutation, query } from "../_generated/server";
 import { operatingDayHours } from "../schema";
 import { appError } from "../lib/errors";
-import { getClerkAuthenticatedUser } from "../lib/auth";
+// import { getClerkAuthenticatedUser } from "../lib/auth";
 
 export const createPharmacyLocation = mutation({
   args: {
@@ -70,7 +70,7 @@ export const getPharmacyLocationsByPharmacyId = query({
   handler: async (ctx, { pharmacyId }) => {
     if (!pharmacyId) return [];
 
-    await getClerkAuthenticatedUser(ctx);
+    // await getClerkAuthenticatedUser(ctx);
 
     const locations = await ctx.db
       .query("pharmacyLocations")

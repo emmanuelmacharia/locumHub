@@ -9,34 +9,31 @@ type TimesheetStats = {
   locations?: number;
 };
 
+type Urgency = "info" | "warning" | "critical";
+
 type Reviews = {
   header?: string;
   type: "Job" | "Timesheet";
   count: number;
-  urgency: "info" | "warning" | "critical";
+  urgency: Urgency;
   stats: ApplicationStats | TimesheetStats;
 };
 
 const props = defineProps<{ review: Reviews }>();
 
-const emit = defineEmits<{
-  (e: "routeToReview"): void;
-}>();
+// const emit = defineEmits<{
+//   (e: "routeToReview"): void;
+// }>();
 
 const type = computed(() =>
   props.review.type === "Job" ? "Applicaitons" : "Shift Reviews",
 );
 
-const computeCriticalColors = computed(() => {
-  switch (props.review.urgency) {
-    case "info":
-      return `bg-teal-500`;
-    case "warning":
-      return `bg-yellow-500`;
-    case "critical":
-      return `bg-red-400`;
-  }
-});
+const CRITICAL_COLORS: Record<Urgency, string> = {
+  info: "bg-teal-500",
+  warning: "bg-yellow-500",
+  critical: "bg-red-400",
+};
 
 const computedCardTypeColor = computed(() => {
   if (props.review.type === "Timesheet")
@@ -96,7 +93,9 @@ const avatarLimit = computed(() =>
           <h3 class="text-base font-semibold">
             {{ type }}
           </h3>
-          <UIBadge :class="`${computeCriticalColors} text-xs px-2`">
+          <UIBadge
+            :class="`${CRITICAL_COLORS[props.review.urgency]} text-xs px-2`"
+          >
             {{ props.review.count }} pending
           </UIBadge>
         </div>

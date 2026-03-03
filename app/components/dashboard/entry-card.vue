@@ -6,7 +6,7 @@ const props = defineProps<{
   id: string;
 }>();
 
-const emit = defineEmits<{ (e: "entrypointClick"): void }>();
+// const emit = defineEmits<{ (e: "entrypointClick"): void }>();
 </script>
 
 <template>

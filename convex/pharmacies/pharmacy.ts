@@ -4,7 +4,7 @@ import { mutation, query } from "../_generated/server";
 import { operatingDayHours } from "../schema";
 import { api } from "../_generated/api";
 import { setAccountType } from "../users/userProfile";
-import { getClerkAuthenticatedUser } from "../lib/auth";
+// import { getClerkAuthenticatedUser } from "../lib/auth";
 import type { Doc } from "../_generated/dataModel";
 
 type Pharmacy = Doc<"pharmacies">;

@@ -2,7 +2,7 @@ import type { Id } from "../_generated/dataModel";
 import { mutation, query, type MutationCtx } from "../_generated/server";
 import { v } from "convex/values";
 import { appError } from "../lib/errors";
-import { getClerkAuthenticatedUser } from "../lib/auth";
+// import { getClerkAuthenticatedUser } from "../lib/auth";
 
 export const createUserProfile = mutation({
   args: {

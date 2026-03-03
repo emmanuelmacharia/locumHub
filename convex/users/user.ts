@@ -2,7 +2,7 @@ import { internalMutation, mutation, query } from "../_generated/server";
 import { v } from "convex/values";
 import { appError } from "../lib/errors";
 import { api } from "../_generated/api";
-import { getClerkAuthenticatedUser } from "../lib/auth";
+// import { getClerkAuthenticatedUser } from "../lib/auth";
 
 export const createUser = mutation({
   args: {

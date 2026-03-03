@@ -3,7 +3,7 @@ import { v } from "convex/values";
 import { appError } from "../lib/errors";
 import { internal } from "../_generated/api";
 import { setAccountType } from "../users/userProfile";
-import { getClerkAuthenticatedUser } from "../lib/auth";
+// import { getClerkAuthenticatedUser } from "../lib/auth";
 
 export const createLocumStaff = mutation({
   args: {

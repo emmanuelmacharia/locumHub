@@ -45,7 +45,7 @@ export const consolidatedDashboardNavbarInfo = query({
       });
     }
 
-    await getClerkAuthenticatedUser(ctx);
+    // await getClerkAuthenticatedUser(ctx);
 
     const profile = await ctx.runQuery(
       api.users.userProfile.getUserProfileByUserId,

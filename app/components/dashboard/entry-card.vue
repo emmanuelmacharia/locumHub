@@ -11,10 +11,10 @@ const emit = defineEmits<{ (e: "entrypointClick"): void }>();
 
 <template>
   <button
-    @click="emit('entrypointClick')"
     class="w-full flex items-center gap-4 p-4 rounded-xl border bg-muted/30 hover:bg-muted/50 transition-colors text-left group cursor-pointer"
+    @click="emit('entrypointClick')"
   >
-    <div class="p-2 5 rounded-xl bg-emerald-500/10">
+    <div class="p-2.5 rounded-xl bg-emerald-500/10">
       <Icon :name="props.icon" class="h-5 w-5 text-emerald-500" />
     </div>
     <div class="flex-1">

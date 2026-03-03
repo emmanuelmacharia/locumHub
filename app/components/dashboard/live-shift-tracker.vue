@@ -162,7 +162,7 @@ const shiftsWithConfig = computed(() =>
                   {{ shift.shiftDetails.staff.name }}
                 </p>
                 <div
-                  class="flex items-center gap-0 5 text-xs text-muted-foreground shrink-0"
+                  class="flex items-center gap-0.5 text-xs text-muted-foreground shrink-0"
                 >
                   <Icon
                     name="lucide:star"

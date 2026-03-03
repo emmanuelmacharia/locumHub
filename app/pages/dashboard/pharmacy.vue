@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Shift } from "~/components/dashboard/live-shift-tracker.vue";
+
 definePageMeta({
   layout: "logged-in",
   middleware: ["01-user-type"],
@@ -38,6 +40,113 @@ const mockLocations = [
     selected: false,
   },
 ];
+
+const mockShifts = [
+  {
+    shiftDetails: {
+      id: "shift-001",
+      pharmacyName: "Central Clinic",
+      pharmacyLocation: "Downtown",
+      startTime: "2026-03-03T08:00:00Z",
+      endTime: "2026-03-03T16:00:00Z",
+      staff: {
+        name: "Dr. Jane Mwangi",
+        rating: 4.7,
+        img: "https://randomuser.me/api/portraits/women/1.jpg",
+      },
+      shiftStatus: "started", // must be "en-route" | "started" | "completed" | "no-show"
+      clockedInTime: "2026-03-03T08:05:00Z",
+      clockedOutTime: undefined,
+      eta: "5 min",
+    },
+    timesheet: [
+      {
+        actionName: "Dispensed Medication",
+        actionCode: "DISP001",
+        timestamp: "2026-03-03T09:15:00Z",
+        description: "Dispensed antibiotics to patient",
+        category: "dispensing",
+        quantity: 1,
+        value: "Amoxicillin",
+        notes: "No adverse reaction",
+      },
+    ],
+  },
+  {
+    shiftDetails: {
+      id: "shift-002",
+      pharmacyName: "Westside Medical",
+      pharmacyLocation: "West End",
+      startTime: "2026-03-03T09:00:00Z",
+      endTime: "2026-03-03T17:00:00Z",
+      staff: {
+        name: "Mr. John Otieno",
+        rating: 4.3,
+        img: "https://randomuser.me/api/portraits/men/2.jpg",
+      },
+      shiftStatus: "completed",
+      clockedInTime: "2026-03-03T09:02:00Z",
+      clockedOutTime: "2026-03-03T17:01:00Z",
+      eta: undefined,
+    },
+    timesheet: [
+      {
+        actionName: "Clinical Service",
+        timestamp: "2026-03-03T11:00:00Z",
+        description: "Blood pressure check",
+        category: "clinical_service",
+        quantity: 3,
+        notes: "All readings normal",
+      },
+    ],
+  },
+  {
+    shiftDetails: {
+      id: "shift-003",
+      pharmacyName: "Lakeside Practice",
+      pharmacyLocation: "Lakeview",
+      startTime: "2026-03-03T10:00:00Z",
+      endTime: "2026-03-03T18:00:00Z",
+      staff: {
+        name: "Ms. Faith Wanjiru",
+        rating: 4.9,
+        img: "https://randomuser.me/api/portraits/women/3.jpg",
+      },
+      shiftStatus: "en-route",
+      clockedInTime: undefined,
+      clockedOutTime: undefined,
+      eta: "15 min",
+    },
+    timesheet: [
+      {
+        actionName: "Other",
+        timestamp: "2026-03-03T13:00:00Z",
+        description: "General admin work",
+        category: "other",
+        notes: "Filed prescriptions",
+      },
+    ],
+  },
+  {
+    shiftDetails: {
+      id: "shift-004",
+      pharmacyName: "Greenfield Pharmacy",
+      pharmacyLocation: "Greenfield",
+      startTime: "2026-03-03T11:00:00Z",
+      endTime: "2026-03-03T19:00:00Z",
+      staff: {
+        name: "Mr. Peter Kimani",
+        rating: 4.2,
+        img: "https://randomuser.me/api/portraits/men/4.jpg",
+      },
+      shiftStatus: "no-show",
+      clockedInTime: undefined,
+      clockedOutTime: undefined,
+      eta: undefined,
+    },
+    timesheet: [],
+  },
+] satisfies Shift[];
 </script>
 
 <template>
@@ -91,23 +200,35 @@ const mockLocations = [
             />
           </ClientOnly>
         </section>
-      </div>
-    </div>
-    <UISeparator class="mb-8" />
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-      <div class="lg:col-span-2 space-y-10">
+        <UISeparator class="mb-8" />
         <section>
           <ClientOnly>
             <DashboardApplicationReviewSummary
               :review="{
                 type: 'Timesheet',
-                count: 20,
+                count: 2,
                 urgency: 'info',
                 stats: { totalHours: '41', locations: 4 },
               }"
             />
           </ClientOnly>
         </section>
+        <UISeparator class="mb-8" />
+        <section>
+          <ClientOnly>
+            <DashboardEntryCard
+              header="My posted Jobs"
+              subtitle="3 open positions. manage and close listings"
+              icon="lucide:briefcase"
+              id="joblisting-entry"
+            />
+          </ClientOnly>
+        </section>
+        <UISeparator class="mb-8" />
+        <section>
+          <DashboardLiveShiftTracker :shifts="mockShifts" />
+        </section>
+        <UISeparator />
       </div>
     </div>
   </div>

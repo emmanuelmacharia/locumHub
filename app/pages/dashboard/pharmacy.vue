@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { Shift } from "~/components/dashboard/live-shift-tracker.vue";
 import type { FavouriteLocum } from "~/components/dashboard/locum-book-card.vue";
+import type {
+  Message,
+  MessagingPanelProps,
+} from "~/components/dashboard/message-panel.vue";
 
 definePageMeta({
   layout: "logged-in",
@@ -191,6 +195,49 @@ const mockFavourites: FavouriteLocum[] = [
     image: "https://randomuser.me/api/portraits/men/5.jpg",
   },
 ];
+
+const mockMessages: Message[] = [
+  {
+    id: "msg1",
+    senderId: "user1",
+    recepientId: "user2",
+    senderName: "Pharmacy One",
+    senderImage: "https://example.com/pharmacy1.png",
+    senderType: "pharmacy",
+    preview: "Your shift request has been approved.",
+    timestamp: "2026-03-05T09:15:00Z",
+    unread: true,
+    shiftContext: "Shift #1234",
+  },
+  {
+    id: "msg2",
+    senderId: "user2",
+    recepientId: "user1",
+    senderName: "Dr. Locum",
+    senderImage: "https://example.com/locum1.png",
+    senderType: "locum",
+    preview: "Thank you! Looking forward to working.",
+    timestamp: "2026-03-05T09:17:00Z",
+    unread: false,
+  },
+  {
+    id: "msg3",
+    senderId: "user3",
+    recepientId: "user1",
+    senderName: "Pharmacy Two",
+    senderType: "pharmacy",
+    preview: "Can you confirm your availability for next week?",
+    timestamp: "2026-03-04T16:30:00Z",
+    unread: true,
+  },
+];
+
+const mockMessagingPanelProps: MessagingPanelProps = {
+  messages: mockMessages,
+  unreadCount: mockMessages.filter((m) => m.unread).length,
+  className: "message-panel-mock",
+  onViewAll: () => console.log("view all"),
+};
 </script>
 
 <template>
@@ -274,6 +321,11 @@ const mockFavourites: FavouriteLocum[] = [
             :favourites="mockFavourites"
             hydrate-on-idle
           />
+        </section>
+      </div>
+      <div class="space-y-10">
+        <section>
+          <DashboardMessagePanel :data="mockMessagingPanelProps" />
         </section>
       </div>
     </div>

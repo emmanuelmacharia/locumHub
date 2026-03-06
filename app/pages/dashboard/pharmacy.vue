@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import type {
+  CoverageAlert,
+  DashboardStats,
+  InsightsPanelProps,
+} from "~/components/dashboard/insights-panel.vue";
 import type { Shift } from "~/components/dashboard/live-shift-tracker.vue";
 import type { FavouriteLocum } from "~/components/dashboard/locum-book-card.vue";
 import type {
@@ -238,6 +243,54 @@ const mockMessagingPanelProps: MessagingPanelProps = {
   className: "message-panel-mock",
   onViewAll: () => console.log("view all"),
 };
+
+const mockDashboardStats: DashboardStats = {
+  weeklySpend: 120000,
+  lastWeekSpend: 95000,
+  averageHourlyRate: 1500,
+  avgRatingThisMonth: 4.7,
+  repeatBookingRate: 65,
+  totalPlacements: 42,
+  activeRequests: 7,
+  unreadMessages: 3,
+  fillRate: 88,
+  avgTimeToFill: 2.5,
+  shiftsThisWeek: 25,
+  shiftsFilled: 22,
+};
+
+const mockCoverageAlerts: CoverageAlert[] = [
+  {
+    id: "1",
+    type: "coverage_risk",
+    message: "High risk of coverage gap at Pharmacy A",
+    severity: "critical",
+    locationId: "pharmacyA",
+    date: "2026-03-05",
+    probability: 80,
+  },
+  {
+    id: "2",
+    type: "compliance",
+    message: "Compliance document expiring soon for Pharmacy B",
+    severity: "warning",
+    locationId: "pharmacyB",
+    date: "2026-03-10",
+  },
+  {
+    id: "3",
+    type: "rate_change",
+    message: "Hourly rate increased for Pharmacy C",
+    severity: "info",
+    locationId: "pharmacyC",
+    date: "2026-03-01",
+  },
+];
+
+const mockInsightsPanelProps: InsightsPanelProps = {
+  stats: mockDashboardStats,
+  alerts: mockCoverageAlerts,
+};
 </script>
 
 <template>
@@ -326,6 +379,10 @@ const mockMessagingPanelProps: MessagingPanelProps = {
       <div class="space-y-10">
         <section>
           <DashboardMessagePanel :data="mockMessagingPanelProps" />
+        </section>
+        <UISeparator />
+        <section>
+          <DashboardInsightsPanel :config="mockInsightsPanelProps" />
         </section>
       </div>
     </div>

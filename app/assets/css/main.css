@@ -46,7 +46,7 @@
   --gradient-hero: var(--gradient-hero);
   --shadow-glow: var(--shadow-glow);
   --accent-highlight: var(--accent-highlight);
-  --warning: var(--warning);
+  --color-warning: var(--warning);
 }
 
 :root {

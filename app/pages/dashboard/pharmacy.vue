@@ -382,10 +382,33 @@ const mockInsightsPanelProps: InsightsPanelProps = {
         </section>
         <UISeparator />
         <section>
+          <h3 class="text-base font-semibold mb-4 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            Insights & Alerts
+          </h3>
           <DashboardInsightsPanel :config="mockInsightsPanelProps" />
         </section>
       </div>
     </div>
+  </div>
+  <div
+    class="fixed bottom-0 left-0 right-0 p-4 bg-linear-to-t from-background via-background to-transparent lg:hidden"
+  >
+    <ClientOnly>
+      <DashboardShiftRequestForm :locations="mockLocations" />
+    </ClientOnly>
+  </div>
+  <div class="hidden lg:block fixed bottom-6 right-6">
+    <UIButton
+      as-child
+      size="lg"
+      class="gap-2 h-12 px-6 text-base font-semibold shadow-lg hover:shadow-lg transition-all bg-linear-to-r from-emerald-500 to-emerald-500/80 hover:from-emerald-500/90 hover:to-emerald-500/70"
+    >
+      <NuxtLink to="/dashboard/post-shift" prefetch-on="interaction">
+        <Icon name="lucide:plus" class="h-5 w-5" />
+        Request staff
+      </NuxtLink>
+    </UIButton>
   </div>
 </template>
 

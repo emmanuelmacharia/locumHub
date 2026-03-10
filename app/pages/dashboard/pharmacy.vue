@@ -241,7 +241,7 @@ const mockMessagingPanelProps: MessagingPanelProps = {
   messages: mockMessages,
   unreadCount: mockMessages.filter((m) => m.unread).length,
   className: "message-panel-mock",
-  onViewAll: () => console.log("view all"),
+  onViewAll: () => {},
 };
 
 const mockDashboardStats: DashboardStats = {

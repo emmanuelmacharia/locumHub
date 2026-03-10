@@ -14,12 +14,15 @@ const props = withDefaults(
   }>(),
   {
     verticalAlign: "bottom",
+    class: "",
+    nameKey: "",
   },
 );
 
 const { id, config } = useChart();
 
 const payload = computed(() =>
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Object.entries(config.value).map(([key, value]) => {
     return {
       key: props.nameKey || key,

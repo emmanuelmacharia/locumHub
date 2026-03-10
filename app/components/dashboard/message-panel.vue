@@ -70,6 +70,7 @@ defineProps<{ data: MessagingPanelProps }>();
       <ClientOnly>
         <button
           v-for="message in data.messages"
+          :key="message.id"
           class="w-full flex items-start gap-3 p-3 rounded-xl border transition-all text-left hover:bg-muted/50 hover:border-emerald-500/20"
           :class="
             message.unread

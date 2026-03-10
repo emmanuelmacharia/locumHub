@@ -23,15 +23,6 @@ function handleOpenChange(nextOpen: boolean) {
     isUrgent.value = false;
   }
 }
-
-watch(
-  () => isMobile,
-  () =>
-    console.log(
-      "here is the whether we are in mobile view =====>",
-      isMobile.value,
-    ),
-);
 </script>
 
 <template>
@@ -57,7 +48,7 @@ watch(
                   v-model="isUrgent"
                   :class="isUrgent && 'data-[state=checked]:bg-red-500'"
                 />
-                <UIBadge variant="destructive" class="gap-1" v-if="isUrgent">
+                <UIBadge v-if="isUrgent" variant="destructive" class="gap-1">
                   <Icon name="lucide:zap" />
                   +15%
                 </UIBadge>
@@ -70,7 +61,7 @@ watch(
         </UIDrawerHeader>
         <DashboardShiftRequestFormContent
           :open="open"
-          :isUrgent="isUrgent"
+          :is-urgent="isUrgent"
           :locations="locations"
           @step-event="($event) => (step = $event)"
         />
@@ -99,7 +90,7 @@ watch(
                   v-model="isUrgent"
                   :class="isUrgent && 'data-[state=checked]:bg-red-500'"
                 />
-                <UIBadge variant="destructive" class="gap-1" v-if="isUrgent">
+                <UIBadge v-if="isUrgent" variant="destructive" class="gap-1">
                   <Icon name="lucide:zap" />
                   +15%
                 </UIBadge>
@@ -112,7 +103,7 @@ watch(
         </UIDialogHeader>
         <DashboardShiftRequestFormContent
           :open="open"
-          :isUrgent="isUrgent"
+          :is-urgent="isUrgent"
           :locations="locations"
           @step-event="($event) => (step = $event)"
         />

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Badge from "../ui/badge/Badge.vue";
 
-type Location = {
+export type Location = {
   id: number;
   name: string;
   favouriteCount: number;

@@ -78,7 +78,6 @@ watch(
     </UIDrawer>
   </div>
   <div v-else>
-    {{ isMobile }}
     <UIDialog v-model:open="open" @update:open="handleOpenChange">
       <UIDialogTrigger as-child>
         <DashboardQuickRequestButton class="w-full" />
@@ -119,9 +118,6 @@ watch(
         />
       </UIDialogContent>
     </UIDialog>
-  </div>
-  <div>
-    <button>Here is another button</button>
   </div>
 </template>
 

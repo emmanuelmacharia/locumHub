@@ -41,9 +41,9 @@ defineProps<{
         {{ config.description }}
       </p>
       <UIButton
+        v-if="config.actionLabel && config.onAction"
         :size="config.variant === 'default' ? 'default' : 'sm'"
         class="mt-6 bg-gradient-primary hover:opacity-90"
-        v-if="config.actionLabel && config.onAction"
         @click="config.onAction"
         >{{ config.actionLabel }}</UIButton
       >

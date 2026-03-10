@@ -323,7 +323,7 @@ const handleCalendarUpdate = (
                 <UISelectContent>
                   <UISelectItem
                     v-for="hour in timeOptions"
-                    :key="`start-${hour}`"
+                    :key="`end-${hour}`"
                     :value="hour"
                   >
                     {{ hour }}
@@ -434,6 +434,7 @@ const handleCalendarUpdate = (
                   <UIScrollArea class="h-[250px]">
                     <div
                       v-for="service of skills.pharmacistServices"
+                      :key="service.id"
                       class="flex items-center space-x-2"
                     >
                       <UICheckbox

@@ -217,20 +217,22 @@ const handleCalendarUpdate = (
   <div class="flex items-center gap-2 mb-6 px-6">
     <div
       v-for="i in totalSteps"
+      :key="`step-${i}`"
       :class="`h-1.5 flex-1 rounded-full transition-colors ${i <= currentStep ? 'bg-emerald-500' : 'bg-muted'}`"
-    ></div>
+    />
   </div>
   <form
-    class="px-4 py-4"
     id="quick-shift-request-form"
+    class="px-4 py-4"
     @submit.prevent.stop="form.handleSubmit()"
   >
-    <div class="mb-4" v-if="currentStep === 0">
+    <div v-if="currentStep === 0" class="mb-4">
       <UIFieldGroup>
         <form.Field name="locationId">
           <template #default="{ field }">
             <button
               v-for="location in locations"
+              :key="location.id"
               type="button"
               :class="`w-full flex items-center gap-3 p-4 rounded-xl border-2 text-left transition-all ${field.state.value === location.id.toString() ? 'border-emerald-500 bg-emerald-500/5' : 'border-border hover:border-emerald-500/50 hover:bg-muted/50'}`"
               :value="field.state.value"
@@ -259,7 +261,7 @@ const handleCalendarUpdate = (
         </form.Field>
       </UIFieldGroup>
     </div>
-    <div class="mb-4" v-if="currentStep === 1">
+    <div v-if="currentStep === 1" class="mb-4">
       <UIFieldGroup class="flex flex-col gap-4">
         <form.Field name="date">
           <template #default="{ field }">
@@ -360,7 +362,7 @@ const handleCalendarUpdate = (
         >
       </div>
     </div>
-    <div class="mb-4" v-if="currentStep === 2">
+    <div v-if="currentStep === 2" class="mb-4">
       <UIFieldGroup class="flex flex-col gap-4">
         <form.Field name="description">
           <template #default="{ field }">
@@ -398,10 +400,10 @@ const handleCalendarUpdate = (
                 <UITagsInput
                   id="jd"
                   :model-value="field.state.value"
+                  class="min-h-24"
                   @update:model-value="
                     (value) => field.handleChange(value.map(String))
                   "
-                  class="min-h-24"
                 >
                   <UITagsInputItem
                     v-for="item in field.state.value"
@@ -413,9 +415,9 @@ const handleCalendarUpdate = (
                     <UITagsInputItemDelete />
                   </UITagsInputItem>
                   <UITagsInputInput
-                    @blur="field.handleBlur"
                     class="py-4"
                     placeholder="Enter required skills (press enter after each entry)"
+                    @blur="field.handleBlur"
                   />
                 </UITagsInput>
               </UIField>
@@ -436,6 +438,7 @@ const handleCalendarUpdate = (
                     >
                       <UICheckbox
                         :id="`${service.name}-${service.id}`"
+                        :key="`${service.name}-${service.id}`"
                         :value="service.name"
                         :checked="field.state.value.includes(service.name)"
                         @update:model-value="
@@ -493,7 +496,7 @@ const handleCalendarUpdate = (
         >
       </div>
     </div>
-    <div class="mb-4" v-if="currentStep === 3">
+    <div v-if="currentStep === 3" class="mb-4">
       <!-- review screen -->
       <div class="space-y-4">
         <div class="p-4 rounded-xl bg-muted space-y-3">
@@ -533,9 +536,9 @@ const handleCalendarUpdate = (
             <span class="text-sm text-muted-foreground">Job Requirements</span>
             <div class="grid grid-cols-2 gap-4">
               <span
+                v-for="(r, index) in displayFields.jobRequirements"
+                :key="`${index}-r`"
                 class="text-sm"
-                v-for="r in form.getFieldInfo('requirements').instance?.state
-                  .value"
               >
                 {{ r }}
               </span>
@@ -545,9 +548,9 @@ const handleCalendarUpdate = (
             <span class="text-sm text-muted-foreground">Required skills</span>
             <div class="grid grid-cols-2 gap-4">
               <span
+                v-for="(r, index) in displayFields.requiredSpecializaion"
+                :key="`${index}-r`"
                 class="text-sm"
-                v-for="r in form.getFieldInfo('requiredSpecialization').instance
-                  ?.state.value"
               >
                 {{ r }}
               </span>

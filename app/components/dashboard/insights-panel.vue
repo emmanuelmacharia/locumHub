@@ -51,7 +51,7 @@ const warningAlerts = computed(() =>
         class="flex items-start gap-2.5 p-3 rounded-lg bg-destructive/10 border border-destructive/30"
       >
         <Icon
-          name="alert-triangle"
+          name="lucide:alert-triangle"
           class="h-4 w-4 text-destructive shrink-0 mt-0.5"
         />
         <div class="flex-1 min-w-0">
@@ -59,8 +59,8 @@ const warningAlerts = computed(() =>
             {{ alert.message }}
           </p>
           <p
-            class="text-sm font-medium text-destructive"
             v-if="alert.probability"
+            class="text-xs text-destructive/80 my-0.5"
           >
             {{ alert.probability }}% chance if high demand
           </p>
@@ -72,17 +72,14 @@ const warningAlerts = computed(() =>
         class="flex items-start gap-2 5 p-3 rounded-lg bg-warning/10 border border-warning/30"
       >
         <Icon
-          name="alert-triangle"
+          name="lucide:alert-triangle"
           class="h-4 w-4 text-warning shrink-0 mt-0.5"
         />
         <div class="flex-1 min-w-0">
           <p class="text-sm font-medium text-warning">
             {{ alert.message }}
           </p>
-          <p
-            v-if="alert.probability"
-            class="text-xs text-destructive/80 mt-0.5"
-          >
+          <p v-if="alert.probability" class="text-xs text-warning/80 mt-0.5">
             {{ alert.probability }}% chance of high demand
           </p>
         </div>
@@ -142,7 +139,7 @@ const warningAlerts = computed(() =>
         <UICard class="border-0 shadow-sm bg-card/50">
           <UICardContent class="p-3">
             <div class="flex items-center gap-2 mb-1.5">
-              <Icon name="lucide:star" class="h-3.5 w-3.5 text-emerald-500" />
+              <Icon name="lucide:star" class="h-3.5 w-3.5 text-yellow-500" />
               <p class="text-muted-foreground uppercase text-xs tracking-wider">
                 Avg Rating
               </p>
@@ -172,12 +169,12 @@ const warningAlerts = computed(() =>
         </UICard>
       </div>
       <UICard
-        class="border-00 shadow-lg bg-gradient-to-br from-gradient-primary/10 via-gradient-primary/5 to-transparent border-primary/20"
+        class="border-00 shadow-lg bg-linear-to-br from-emerald-500/10 via-emerald-500/5 to-transparent border-primary/20"
       >
         <UICardContent class="p-4">
           <div class="flex items-center gap-3">
             <div class="p-2.5 rounded-xl bg-gradient-primary/10">
-              <Icon name="users" class="h-5 w-5 text-gradient-primary" />
+              <Icon name="lucide:users" class="h-5 w-5 text-gradient-primary" />
             </div>
             <div class="flex-1 min-w-0">
               <h3 class="text-sm font-semibold text-foreground">

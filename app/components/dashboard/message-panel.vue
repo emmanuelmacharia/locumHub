@@ -102,6 +102,7 @@ defineProps<{ data: MessagingPanelProps }>();
               </UIAvatarFallback>
             </UIAvatar>
             <span
+              v-if="message.unread"
               class="-right-0.5 -top-0.5 absolute h-3 w-3 bg-emerald-500 rounded-full border-2 border-emerald-500"
             />
           </div>

@@ -292,6 +292,7 @@ const handleCalendarUpdate = (
           <form.Field name="startTime">
             <template #default="{ field }">
               <UISelect
+                :model-value="field.state.value"
                 @update:model-value="
                   (value) => {
                     field.handleChange(value as string);
@@ -316,6 +317,7 @@ const handleCalendarUpdate = (
           <form.Field name="endTime">
             <template #default="{ field }">
               <UISelect
+                :model-value="field.state.value"
                 @update:model-value="
                   (value) => {
                     field.handleChange(value as string);

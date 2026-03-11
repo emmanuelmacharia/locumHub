@@ -20,6 +20,14 @@ export interface MessagingPanelProps {
   onOpenMessage: (messageId: string) => void;
 }
 
+const formatTimestamp = (timestamp: string) =>
+  new Intl.DateTimeFormat("en-KE", {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(new Date(timestamp));
+
 const emptyStateConfig = {
   icon: "lucide:message-square",
   title: "No messages yet",
@@ -108,7 +116,7 @@ defineProps<{ data: MessagingPanelProps }>();
                 class="text-[10px] text-muted-foreground flex items-center gap-1 flex-shrink-0"
               >
                 <Icon name="lucide:clock" class="h-2.5 w-2.5" />
-                {{ message.timestamp }}
+                {{ formatTimestamp(message.timestamp) }}
               </span>
             </div>
             <span

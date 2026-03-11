@@ -274,9 +274,7 @@ const handleCalendarUpdate = (
           <template #default="{ field }">
             <div class="flex justify-center">
               <UICalendar
-                mode="single"
                 layout="month-and-year"
-                :week-starts-on="1"
                 :min-value="minDate"
                 :max-value="maxDate"
                 :model-value="dateToCalendarDate(field.state.value)"

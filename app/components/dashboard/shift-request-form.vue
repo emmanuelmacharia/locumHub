@@ -39,7 +39,7 @@ function handleOpenChange(nextOpen: boolean) {
               <div class="flex items-center gap-3">
                 <UILabel
                   for="urgent-mode"
-                  class="text-sm.text-muted-foreground"
+                  class="text-sm text-muted-foreground"
                 >
                   Urgent
                 </UILabel>
@@ -81,7 +81,7 @@ function handleOpenChange(nextOpen: boolean) {
               <div class="flex items-center gap-3">
                 <UILabel
                   for="urgent-mode"
-                  class="text-sm.text-muted-foreground"
+                  class="text-sm text-muted-foreground"
                 >
                   Urgent
                 </UILabel>

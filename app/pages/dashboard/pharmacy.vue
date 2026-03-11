@@ -205,7 +205,7 @@ const mockMessages: Message[] = [
   {
     id: "msg1",
     senderId: "user1",
-    recepientId: "user2",
+    recipientId: "user2",
     senderName: "Pharmacy One",
     senderImage: "https://example.com/pharmacy1.png",
     senderType: "pharmacy",
@@ -217,7 +217,7 @@ const mockMessages: Message[] = [
   {
     id: "msg2",
     senderId: "user2",
-    recepientId: "user1",
+    recipientId: "user1",
     senderName: "Dr. Locum",
     senderImage: "https://example.com/locum1.png",
     senderType: "locum",
@@ -228,7 +228,7 @@ const mockMessages: Message[] = [
   {
     id: "msg3",
     senderId: "user3",
-    recepientId: "user1",
+    recipientId: "user1",
     senderName: "Pharmacy Two",
     senderType: "pharmacy",
     preview: "Can you confirm your availability for next week?",

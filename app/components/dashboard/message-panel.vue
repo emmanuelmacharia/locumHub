@@ -2,7 +2,7 @@
 export interface Message {
   id: string;
   senderId: string;
-  recepientId: string;
+  recipientId: string;
   senderName: string;
   senderImage?: string;
   senderType: "pharmacy" | "locum";

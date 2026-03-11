@@ -16,8 +16,8 @@ export interface MessagingPanelProps {
   messages: Message[];
   unreadCount: number;
   className?: string;
-  onViewAll?: () => void;
-  onOpenMessage?: (messageId: string) => void;
+  onViewAll: () => void;
+  onOpenMessage: (messageId: string) => void;
 }
 
 const emptyStateConfig = {
@@ -77,6 +77,7 @@ defineProps<{ data: MessagingPanelProps }>();
               ? 'bg-emerald-500/5 border-emerald-500/20'
               : 'bg-card border-border'
           "
+          @click="data.onOpenMessage(message.id)"
         >
           <div class="relative">
             <UIAvatar class="h-10 w-10">

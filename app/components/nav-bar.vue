@@ -227,7 +227,9 @@ function closeMobile() {
                       class="flex items-center justify-between rounded-md px-3 py-2"
                     >
                       <span class="text-sm text-muted-foreground">Account</span>
-                      <UserButton class="hover:cursor-pointer" />
+                      <div class="hover:cursor-pointer inline-block">
+                        <UserButton />
+                      </div>
                     </div>
                   </SignedIn>
                 </div>
@@ -374,7 +376,9 @@ function closeMobile() {
                 <SignInButton class="hover:cursor-pointer font-semibold" />
               </SignedOut>
               <SignedIn>
-                <UserButton class="hover:cursor-pointer" />
+                <div class="hover:cursor-pointer inline-block">
+                  <UserButton />
+                </div>
               </SignedIn>
             </UINavigationMenuLink>
           </UINavigationMenuItem>

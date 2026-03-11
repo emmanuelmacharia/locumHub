@@ -1,6 +1,15 @@
 <script setup lang="ts">
+import type {
+  CoverageAlert,
+  DashboardStats,
+  InsightsPanelProps,
+} from "~/components/dashboard/insights-panel.vue";
 import type { Shift } from "~/components/dashboard/live-shift-tracker.vue";
 import type { FavouriteLocum } from "~/components/dashboard/locum-book-card.vue";
+import type {
+  Message,
+  MessagingPanelProps,
+} from "~/components/dashboard/message-panel.vue";
 
 definePageMeta({
   layout: "logged-in",
@@ -191,6 +200,98 @@ const mockFavourites: FavouriteLocum[] = [
     image: "https://randomuser.me/api/portraits/men/5.jpg",
   },
 ];
+
+const mockMessages: Message[] = [
+  {
+    id: "msg1",
+    senderId: "user1",
+    recipientId: "user2",
+    senderName: "Pharmacy One",
+    senderImage: "https://example.com/pharmacy1.png",
+    senderType: "pharmacy",
+    preview: "Your shift request has been approved.",
+    timestamp: "2026-03-05T09:15:00Z",
+    unread: true,
+    shiftContext: "Shift #1234",
+  },
+  {
+    id: "msg2",
+    senderId: "user2",
+    recipientId: "user1",
+    senderName: "Dr. Locum",
+    senderImage: "https://example.com/locum1.png",
+    senderType: "locum",
+    preview: "Thank you! Looking forward to working.",
+    timestamp: "2026-03-05T09:17:00Z",
+    unread: false,
+  },
+  {
+    id: "msg3",
+    senderId: "user3",
+    recipientId: "user1",
+    senderName: "Pharmacy Two",
+    senderType: "pharmacy",
+    preview: "Can you confirm your availability for next week?",
+    timestamp: "2026-03-04T16:30:00Z",
+    unread: true,
+  },
+];
+
+const mockMessagingPanelProps: MessagingPanelProps = {
+  messages: mockMessages,
+  unreadCount: mockMessages.filter((m) => m.unread).length,
+  className: "message-panel-mock",
+  onViewAll: () => {},
+  onOpenMessage: () => {},
+};
+
+const mockDashboardStats: DashboardStats = {
+  weeklySpend: 120000,
+  lastWeekSpend: 95000,
+  averageHourlyRate: 1500,
+  avgRatingThisMonth: 4.7,
+  repeatBookingRate: 65,
+  totalPlacements: 42,
+  activeRequests: 7,
+  unreadMessages: 3,
+  fillRate: 88,
+  avgTimeToFill: 2.5,
+  shiftsThisWeek: 25,
+  shiftsFilled: 22,
+};
+
+const mockCoverageAlerts: CoverageAlert[] = [
+  {
+    id: "1",
+    type: "coverage_risk",
+    message: "High risk of coverage gap at Pharmacy A",
+    severity: "critical",
+    locationId: "pharmacyA",
+    date: "2026-03-05",
+    probability: 80,
+  },
+  {
+    id: "2",
+    type: "compliance",
+    message: "Compliance document expiring soon for Pharmacy B",
+    severity: "warning",
+    locationId: "pharmacyB",
+    date: "2026-03-10",
+  },
+  {
+    id: "3",
+    type: "rate_change",
+    message: "Hourly rate increased for Pharmacy C",
+    severity: "info",
+    locationId: "pharmacyC",
+    date: "2026-03-01",
+  },
+];
+
+const mockInsightsPanelProps: InsightsPanelProps = {
+  stats: mockDashboardStats,
+  alerts: mockCoverageAlerts,
+};
 </script>
 
 <template>
@@ -276,7 +377,39 @@ const mockFavourites: FavouriteLocum[] = [
           />
         </section>
       </div>
+      <div class="space-y-10">
+        <section>
+          <DashboardMessagePanel :data="mockMessagingPanelProps" />
+        </section>
+        <UISeparator />
+        <section>
+          <h3 class="text-base font-semibold mb-4 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            Insights & Alerts
+          </h3>
+          <DashboardInsightsPanel :config="mockInsightsPanelProps" />
+        </section>
+      </div>
     </div>
+  </div>
+  <div
+    class="fixed bottom-0 left-0 right-0 p-4 bg-linear-to-t from-background via-background to-transparent lg:hidden"
+  >
+    <ClientOnly>
+      <DashboardShiftRequestForm :locations="mockLocations" />
+    </ClientOnly>
+  </div>
+  <div class="hidden lg:block fixed bottom-6 right-6">
+    <UIButton
+      as-child
+      size="lg"
+      class="gap-2 h-12 px-6 text-base font-semibold shadow-lg hover:shadow-lg transition-all bg-linear-to-r from-emerald-500 to-emerald-500/80 hover:from-emerald-500/90 hover:to-emerald-500/70"
+    >
+      <NuxtLink to="/dashboard/post-shift" prefetch-on="interaction">
+        <Icon name="lucide:plus" class="h-5 w-5" />
+        Request staff
+      </NuxtLink>
+    </UIButton>
   </div>
 </template>
 

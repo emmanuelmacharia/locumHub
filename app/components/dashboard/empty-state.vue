@@ -32,7 +32,7 @@ defineProps<{
       </div>
       <h3
         class="font-semibold text-foreground mb-2"
-        :class="config.variant ? 'text-lg' : 'text-base'"
+        :class="config.variant === 'default' ? 'text-lg' : 'text-base'"
       >
         {{ config.title }}
       </h3>

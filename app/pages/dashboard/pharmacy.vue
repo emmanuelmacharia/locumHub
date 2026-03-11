@@ -242,7 +242,7 @@ const mockMessagingPanelProps: MessagingPanelProps = {
   unreadCount: mockMessages.filter((m) => m.unread).length,
   className: "message-panel-mock",
   onViewAll: () => {},
-  onOpenMessage: (id: string) => {},
+  onOpenMessage: () => {},
 };
 
 const mockDashboardStats: DashboardStats = {

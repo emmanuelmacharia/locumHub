@@ -13,12 +13,12 @@ defineProps<{
 
 <template>
   <div
-    class="flex flex-col items-center justify-center text-center"
+    class="flex flex-col items-center justify-center text-center border rounded-lg"
     :class="config.variant === 'default' ? 'py-12 px-6' : 'py-8 px-4'"
   >
     <div class="relative mb-6">
       <div
-        class="absolute inset-0 bg-linear-to-br from-emerald-500/20 to-emerald-500/5 rounded-full blur-2xl scale-150"
+        class="absolute inset-0 bg-linear-to-br from-emerald-500/20 to-emerald-500/5 rounded-full blur-2xl scale-100"
       />
       <div
         class="relative flex items-center justify-center rounded-full bg-linear-to-br from-emerald-500/10 to-muted"

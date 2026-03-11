@@ -40,48 +40,50 @@ const warningAlerts = computed(() =>
 </script>
 
 <template>
-  <div
-    v-if="criticalAlerts.length > 0 || warningAlerts.length > 0"
-    class="space-y-4"
-  >
-    <div class="space-y-2">
+  <div class="space-y-4">
+    <div class="space-y-4">
       <div
-        v-for="alert in criticalAlerts"
-        :key="alert.id"
-        class="flex items-start gap-2.5 p-3 rounded-lg bg-destructive/10 border border-destructive/30"
+        v-if="criticalAlerts.length > 0 || warningAlerts.length > 0"
+        class="space-y-2"
       >
-        <Icon
-          name="lucide:alert-triangle"
-          class="h-4 w-4 text-destructive shrink-0 mt-0.5"
-        />
-        <div class="flex-1 min-w-0">
-          <p class="text-sm font-medium text-destructive">
-            {{ alert.message }}
-          </p>
-          <p
-            v-if="alert.probability"
-            class="text-xs text-destructive/80 my-0.5"
-          >
-            {{ alert.probability }}% chance if high demand
-          </p>
+        <div
+          v-for="alert in criticalAlerts"
+          :key="alert.id"
+          class="flex items-start gap-2.5 p-3 rounded-lg bg-destructive/10 border border-destructive/30"
+        >
+          <Icon
+            name="lucide:alert-triangle"
+            class="h-4 w-4 text-destructive shrink-0 mt-0.5"
+          />
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-destructive">
+              {{ alert.message }}
+            </p>
+            <p
+              v-if="alert.probability"
+              class="text-xs text-destructive/80 my-0.5"
+            >
+              {{ alert.probability }}% chance if high demand
+            </p>
+          </div>
         </div>
-      </div>
-      <div
-        v-for="alert in warningAlerts"
-        :key="alert.id"
-        class="flex items-start gap-2 5 p-3 rounded-lg bg-warning/10 border border-warning/30"
-      >
-        <Icon
-          name="lucide:alert-triangle"
-          class="h-4 w-4 text-warning shrink-0 mt-0.5"
-        />
-        <div class="flex-1 min-w-0">
-          <p class="text-sm font-medium text-warning">
-            {{ alert.message }}
-          </p>
-          <p v-if="alert.probability" class="text-xs text-warning/80 mt-0.5">
-            {{ alert.probability }}% chance of high demand
-          </p>
+        <div
+          v-for="alert in warningAlerts"
+          :key="alert.id"
+          class="flex items-start gap-2 5 p-3 rounded-lg bg-warning/10 border border-warning/30"
+        >
+          <Icon
+            name="lucide:alert-triangle"
+            class="h-4 w-4 text-warning shrink-0 mt-0.5"
+          />
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-warning">
+              {{ alert.message }}
+            </p>
+            <p v-if="alert.probability" class="text-xs text-warning/80 mt-0.5">
+              {{ alert.probability }}% chance of high demand
+            </p>
+          </div>
         </div>
       </div>
       <UICard class="border-0 shadow-sm bg-card/50">

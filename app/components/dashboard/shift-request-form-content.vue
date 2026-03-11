@@ -27,35 +27,42 @@ const currentStep = ref(0);
 const totalSteps = ref(3);
 
 const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
-const formSchema = z.object({
-  isUrgent: z.boolean().default(false),
-  locationId: z.string(),
-  date: z.date(),
-  startTime: z
-    .string()
-    .regex(timeRegex, "Invalid time format. Expected HH:MM (24-hour)"),
-  endTime: z
-    .string()
-    .regex(timeRegex, "Invalid time format. Expected HH:MM (24-hour)"),
-  description: z
-    .string()
-    .min(20, "A brief but detailed description is required")
-    .max(500, "Your shift description is too long. You need to summarize it"),
-  requirements: z.array(z.string()),
-  requiredSpecialization: z.array(z.string()),
-  saveAsTemplate: z.boolean().default(false),
-});
+const formSchema = z
+  .object({
+    isUrgent: z.boolean().default(false),
+    locationId: z.string().min(1, "Please select a location"),
+    date: z.date(),
+    startTime: z
+      .string()
+      .regex(timeRegex, "Invalid time format. Expected HH:MM (24-hour)"),
+    endTime: z
+      .string()
+      .regex(timeRegex, "Invalid time format. Expected HH:MM (24-hour)"),
+    description: z
+      .string()
+      .min(20, "A brief but detailed description is required")
+      .max(500, "Your shift description is too long. You need to summarize it"),
+    requirements: z.array(z.string()).min(1, "Select at least one requirement"),
+    requiredSpecialization: z
+      .array(z.string())
+      .min(1, "Select at least one specialization"),
+    saveAsTemplate: z.boolean().default(false),
+  })
+  .refine((data) => data.startTime < data.endTime, {
+    path: ["endTime"],
+    message: "End time must be after start time",
+  });
 
 type FormInput = z.input<typeof formSchema>;
 
 const form = useForm({
   defaultValues: {
-    isUrgent: false, // done
-    saveAsTemplate: false, // chill
-    locationId: "", // done
-    date: undefined as unknown as Date, // done
-    startTime: "", // done
-    endTime: "", // done
+    isUrgent: props.isUrgent,
+    saveAsTemplate: false,
+    locationId: "",
+    date: undefined as unknown as Date,
+    startTime: "",
+    endTime: "",
     description: "",
     requirements: [],
     requiredSpecialization: [],
